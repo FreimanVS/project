@@ -15,10 +15,13 @@ public class WorkingWithFiles {
     }
 
     public static void writeToFile(String what, File where) {
-        try(OutputStream outputStream = new FileOutputStream(where)) {
-            byte[] buffer = what.getBytes();
-            outputStream.write(buffer, 0, buffer.length);
-        } catch (Exception e) {
+        createNewFile(where);
+        try(OutputStream outputStream = new FileOutputStream(where);
+            Writer writer = new OutputStreamWriter(outputStream)) {
+            writer.write(what);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
