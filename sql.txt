@@ -1,0 +1,25 @@
+INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)
+VALUES ('login', 'password', 'fio', 'department', 'city', 123.45, 'phoneNumber', 'email');
+
+INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)
+VALUES ('login2', 'password2', 'fio2', 'department2', 'city2', 123.452, 'phoneNumber2', 'email2');
+
+INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)
+VALUES ('login3', 'password2', 'fio3', 'department3', 'city3', 123.453, 'phoneNumber3', 'email3');
+
+INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)
+VALUES ('login4', 'password4', 'fio4', 'department4', 'city4', 123.454, 'phoneNumber4', 'email4');
+
+INSERT INTO company.role(name) VALUES ('admin');
+INSERT INTO company.role(name) VALUES ('user');
+
+INSERT INTO company.employee_role(employeeId, roleId) VALUES (1, 1);
+INSERT INTO company.employee_role(employeeId, roleId) VALUES (2, 2);
+INSERT INTO company.employee_role(employeeId, roleId) VALUES (3, 1);
+
+INSERT INTO company.position(name) VALUES ('position');
+INSERT INTO company.position(name) VALUES ('position2');
+
+INSERT INTO company.employee_position(employeeId, positionId) VALUES (1, 1);
+INSERT INTO company.employee_position(employeeId, positionId) VALUES (2, 2);
+INSERT INTO company.employee_position(employeeId, positionId) VALUES (3, 1);
