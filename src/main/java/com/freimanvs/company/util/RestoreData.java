@@ -48,22 +48,28 @@ public class RestoreData {
     }
 
     public static void restoreJPA() {
+        System.out.println("FILLING DATABASE WITH DATA FROM pre_sql.txt," +
+                "sql.txt and jpa.txt files USING JDBC AND JPA...\n");
         try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
              Statement statement = connection.createStatement();
              Scanner data = new Scanner(FILESQL_JPA).useDelimiter("[\\s]+");
              Scanner tables = new Scanner(TABLES).useDelimiter(";[\\s]*")) {
 
+            System.out.println("CREATING TABLES BY JDPC...\n");
             while (tables.hasNext()) {
                 String sql = tables.next();
                 System.out.println(sql);
                 statement.executeUpdate(sql);
             }
+            System.out.println("========== THE TABLES ARE CREATED SUCCESSFULLY! ============\r\n");
+
 
             Session session = sessionFactory.openSession();
             EmployeeService employeeService = new EmployeeService(session);
             RoleService roleService = new RoleService(session);
             PositionService positionService = new PositionService(session);
 
+            System.out.println("\r\nFILLING TABLES WITH DATA BY JPA...\r\n");
             while (data.hasNext()) {
                 String entity = data.next();
                 if (entity.equals("Employee")) {
@@ -94,6 +100,8 @@ public class RestoreData {
                     break;
                 }
             }
+            System.out.println("========== TABLES ARE FILLED SUCCESSFULLY! ============\r\n");
+            System.out.println("THE SCHEMA 'company' IS READY TO USE!\r\n");
         } catch (Exception e) {
             e.printStackTrace();
         }

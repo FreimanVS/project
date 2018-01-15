@@ -26,12 +26,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("============================");
-        System.out.println("FILLING DATABASE WITH DATA FROM pre_sql.txt, sql.txt and jpa.txt files " +
-                "USING JDBC AND JPA");
-        System.out.println("==============================");
+        //preparing workplace
         RestoreData.restoreJPA();
-        System.out.println("The database is ready!");
+
         try {
 
             //Создать хранимую функцию (средствами JDBC или непосредственно в БД), возвращающую
@@ -59,7 +56,7 @@ public class Main {
                 createStatement.execute(queryDrop);
                 createStatement.execute(queryCreate);
                 createStatement.close();
-                System.out.println("A procedure created successfully!");
+                System.out.println("The procedure has been created successfully!");
 
                 System.out.println("Calling the new procedure...");
                 callStatement.registerOutParameter(1, Types.VARCHAR);
@@ -68,10 +65,10 @@ public class Main {
 
                 String result = callStatement.getString(1);
 
-                System.out.println("Done!");
+                System.out.println("Done!\r\n");
 //                System.out.println(result + " HAS THE BIGGEST SALARY");
                 WorkingWithFiles.writeToFile(result, OUTPUT_FILE);
-                System.out.println("YOU CAN SEE THE GUY WITH THE BIGGEST SALARY IN " + OUTPUT_FILE.getName());
+                System.out.println("YOU CAN SEE THE MAN WITH THE BIGGEST SALARY IN " + OUTPUT_FILE.getName());
 
                 callStatement.close();
 
@@ -85,7 +82,7 @@ public class Main {
             //сотрудника по убыванию.
 
             System.out.println();
-            System.out.println("========= GET ALL USERS DESC BY ID ============");
+            System.out.println("========= GET ALL USERS DESC BY ID ============\r\n");
             Transaction transaction = session.beginTransaction();
 
             String hql = "FROM Employee E ORDER BY E.id DESC";
@@ -96,7 +93,7 @@ public class Main {
             transaction.commit();
 
             WorkingWithFiles.writeToFile(sb.toString(), OUTPUT_RESULT);
-            System.out.println("You can also see the users in the result.txt file");
+            System.out.println("\r\nYou can also see the users in the RESULT.TXT file");
 
             // Также потребуется произвести изменение 2 строк данной таблицы,
             //подменив фамилию сотрудника, а также его должность
