@@ -39,9 +39,9 @@
       <version>${hibernate.version}</version>
     </dependency>
       <dependency>
-          <groupId>mysql</groupId>
-          <artifactId>mysql-connector-java</artifactId>
-          <version>${mysql-connector.version}</version>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connector.version}</version>
       </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
