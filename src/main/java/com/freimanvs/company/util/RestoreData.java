@@ -25,7 +25,117 @@ public class RestoreData {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+    private static void initFiles() {
+        WorkingWithFiles.writeToFile("INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)\n" +
+                "VALUES ('login', 'password', 'fio', 'department', 'city', 123.45, 'phoneNumber', 'email');\n" +
+                "\n" +
+                "INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)\n" +
+                "VALUES ('login2', 'password2', 'fio2', 'department2', 'city2', 123.452, 'phoneNumber2', 'email2');\n" +
+                "\n" +
+                "INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)\n" +
+                "VALUES ('login3', 'password2', 'fio3', 'department3', 'city3', 123.453, 'phoneNumber3', 'email3');\n" +
+                "\n" +
+                "INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)\n" +
+                "VALUES ('login4', 'password4', 'fio4', 'department4', 'city4', 123.454, 'phoneNumber4', 'email4');\n" +
+                "\n" +
+                "INSERT INTO company.role(name) VALUES ('admin');\n" +
+                "INSERT INTO company.role(name) VALUES ('user');\n" +
+                "\n" +
+                "INSERT INTO company.employee_role(employeeId, roleId) VALUES (1, 1);\n" +
+                "INSERT INTO company.employee_role(employeeId, roleId) VALUES (2, 2);\n" +
+                "INSERT INTO company.employee_role(employeeId, roleId) VALUES (3, 1);\n" +
+                "\n" +
+                "INSERT INTO company.position(name) VALUES ('position');\n" +
+                "INSERT INTO company.position(name) VALUES ('position2');\n" +
+                "\n" +
+                "INSERT INTO company.employee_position(employeeId, positionId) VALUES (1, 1);\n" +
+                "INSERT INTO company.employee_position(employeeId, positionId) VALUES (2, 2);\n" +
+                "INSERT INTO company.employee_position(employeeId, positionId) VALUES (3, 1);" ,FILESQL);
+
+        WorkingWithFiles.writeToFile("DROP TABLE IF EXISTS employee_position;\n" +
+                "DROP TABLE IF EXISTS employee_role;\n" +
+                "DROP TABLE IF EXISTS employee;\n" +
+                "DROP TABLE IF EXISTS position;\n" +
+                "DROP TABLE IF EXISTS role;\n" +
+                "\n" +
+                "CREATE TABLE IF NOT EXISTS company.employee (\n" +
+                "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                "login VARCHAR(100) NOT NULL,\n" +
+                "password VARCHAR(100) NOT NULL,\n" +
+                "fio VARCHAR(100) NOT NULL,\n" +
+                "department VARCHAR(100) NOT NULL,\n" +
+                "city VARCHAR(100) NOT NULL,\n" +
+                "salary DOUBLE NOT NULL,\n" +
+                "phoneNumber VARCHAR(50) NOT NULL,\n" +
+                "email VARCHAR(100) NOT NULL,\n" +
+                "PRIMARY KEY (id),\n" +
+                "CONSTRAINT uniqEmployee UNIQUE (login)\n" +
+                ")\n" +
+                "ENGINE = InnoDB\n" +
+                "DEFAULT CHARACTER SET = utf8\n" +
+                "COLLATE = utf8_general_ci;\n" +
+                "\n" +
+                "CREATE TABLE IF NOT EXISTS company.role (\n" +
+                "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                "name VARCHAR(100) NOT NULL,\n" +
+                "PRIMARY KEY (id),\n" +
+                "CONSTRAINT uniqRole UNIQUE (name)\n" +
+                ")\n" +
+                "ENGINE = InnoDB\n" +
+                "DEFAULT CHARACTER SET = utf8\n" +
+                "COLLATE = utf8_general_ci;\n" +
+                "\n" +
+                "CREATE TABLE IF NOT EXISTS company.employee_role (\n" +
+                "employeeId BIGINT NOT NULL,\n" +
+                "roleId BIGINT NOT NULL,\n" +
+                "PRIMARY KEY (employeeId, roleId),\n" +
+                "CONSTRAINT fk_employee_role_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
+                "CONSTRAINT fk_employee_role_roleId FOREIGN KEY (roleId) REFERENCES role(id)\n" +
+                ")\n" +
+                "ENGINE = InnoDB\n" +
+                "DEFAULT CHARACTER SET = utf8\n" +
+                "COLLATE = utf8_general_ci;\n" +
+                "\n" +
+                "CREATE TABLE IF NOT EXISTS company.position (\n" +
+                "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                "name VARCHAR(100) NOT NULL,\n" +
+                "PRIMARY KEY (id),\n" +
+                "CONSTRAINT uniqPosition UNIQUE (name)\n" +
+                ")\n" +
+                "ENGINE = InnoDB\n" +
+                "DEFAULT CHARACTER SET = utf8\n" +
+                "COLLATE = utf8_general_ci;\n" +
+                "\n" +
+                "CREATE TABLE IF NOT EXISTS company.employee_position (\n" +
+                "employeeId BIGINT NOT NULL,\n" +
+                "positionId BIGINT NOT NULL,\n" +
+                "PRIMARY KEY (employeeId, positionId),\n" +
+                "CONSTRAINT fk_employee_position_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
+                "CONSTRAINT fk_employee_position_positionId FOREIGN KEY (positionId) REFERENCES company.position(id)\n" +
+                ")\n" +
+                "ENGINE = InnoDB\n" +
+                "DEFAULT CHARACTER SET = utf8\n" +
+                "COLLATE = utf8_general_ci;", TABLES);
+        WorkingWithFiles.writeToFile("Role user\n" +
+                "Role admin\n" +
+                "Position worker\n" +
+                "Position HR\n" +
+                "Position Accounter\n" +
+                "Position Director\n" +
+                "Employee login1 password1 Petrosyan_A.A. Human_Resources Moscow 123,05 +71234567890 login1@company.com\n" +
+                "Employee login2 password2 Smirnova_B.C. Marketing Saint-Petersburg 342,5 +7192348128 login2@company.com\n" +
+                "Employee login3 password3 Evegniev_H.E. Research_and_Development Ekaterinburg 34147,0 +4872488234 login3@company.com\n" +
+                "Employee login4 password4 Durova_S.A. I.T. NizhniiNovgorod 183,25 +128347383 login4@company.com\n" +
+                "Employee login5 password5 Druzhnikov_I.A. Maintenance Saratov 3434347,0 +98234783 login5@company.com\n" +
+                "Employee login6 password6 Germanov_A.U. Sales Arhangelsk 342217,1 +823492374 login6@company.com\n" +
+                "Employee login7 password7 Vasiliev_I.I. Customer_Service Astana 9535656,2 +342348382 login7@company.com\n" +
+                "Employee login8 password8 Medkova_S.Z. Finance Minsk 323547,4 +23498239472 login8@company.com\n" +
+                "Employee login9 password9 Andropov_E.V. Dispatch_Department Berlin 34897,5 +2934829347 login9@company.com\n" +
+                "Employee login10 password10 Alferov_S.Z. Marketing New-York 34897,7 +237472341 login10@company.com", FILESQL_JPA);
+    }
+
     public static void restoreJDBC() {
+        initFiles();
         try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
              Statement statement = connection.createStatement();
              Scanner data = new Scanner(FILESQL).useDelimiter(";[\\s]*");
@@ -48,6 +158,7 @@ public class RestoreData {
     }
 
     public static void restoreJPA() {
+        initFiles();
         System.out.println("FILLING DATABASE WITH DATA FROM pre_sql.txt," +
                 "sql.txt and jpa.txt files USING JDBC AND JPA...\n");
         try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
@@ -70,34 +181,42 @@ public class RestoreData {
             PositionService positionService = new PositionService(session);
 
             System.out.println("\r\nFILLING TABLES WITH DATA BY JPA...\r\n");
+            label:
             while (data.hasNext()) {
                 String entity = data.next();
-                if (entity.equals("Employee")) {
-                    String login = data.next();
-                    String password = data.next();
-                    String fio = data.next();
-                    String department = data.next();
-                    String city = data.next();
-                    double salary = data.nextDouble();
-                    String phoneNumber = data.next();
-                    String email = data.next();
-                    Employee employee = new Employee(login, password, fio, department,
-                            city, salary, phoneNumber, email);
-                    long id = employeeService.add(employee);
-                    System.out.println(entity + " by id " + id + " has been added");
-                } else if (entity.equals("Role")) {
-                    String name = data.next();
-                    Role role = new Role(name);
-                    long id = roleService.add(role);
-                    System.out.println(entity + " by id " + id + " has been added");
-                } else if (entity.equals("Position")) {
-                    String name = data.next();
-                    Position position = new Position(name);
-                    long id = positionService.add(position);
-                    System.out.println(entity + " by id " + id + " has been added");
-                } else {
-                    System.out.println("A wrong entity: " + entity);
-                    break;
+                switch (entity) {
+                    case "Employee": {
+                        String login = data.next();
+                        String password = data.next();
+                        String fio = data.next();
+                        String department = data.next();
+                        String city = data.next();
+                        double salary = data.nextDouble();
+                        String phoneNumber = data.next();
+                        String email = data.next();
+                        Employee employee = new Employee(login, password, fio, department,
+                                city, salary, phoneNumber, email);
+                        long id = employeeService.add(employee);
+                        System.out.println(entity + " by id " + id + " has been added");
+                        break;
+                    }
+                    case "Role": {
+                        String name = data.next();
+                        Role role = new Role(name);
+                        long id = roleService.add(role);
+                        System.out.println(entity + " by id " + id + " has been added");
+                        break;
+                    }
+                    case "Position": {
+                        String name = data.next();
+                        Position position = new Position(name);
+                        long id = positionService.add(position);
+                        System.out.println(entity + " by id " + id + " has been added");
+                        break;
+                    }
+                    default:
+                        System.out.println("A wrong entity: " + entity);
+                        break label;
                 }
             }
             System.out.println("========== TABLES ARE FILLED SUCCESSFULLY! ============\r\n");
