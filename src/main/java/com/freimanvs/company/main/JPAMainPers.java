@@ -3,17 +3,19 @@ package com.freimanvs.company.main;
 import com.freimanvs.company.entities.Role;
 import com.freimanvs.company.service.RoleServicePers;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JPAMainPers {
     public static final String PERSISTENCE_UNIT_NAME = "jpa";
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    private static EntityManager em = emf.createEntityManager();
 
     public static void main(String[] args) {
         try {
             //role service
-            RoleServicePers roleService = new RoleServicePers(emf);
+            RoleServicePers roleService = new RoleServicePers(em);
 
             //a full list of roles
             System.out.println("=================== A FULL LIST OF ROLES ====================");
@@ -48,6 +50,7 @@ public class JPAMainPers {
             System.out.println("the new user has been deleted");
             roleService.getList().forEach(theRole -> System.out.print(theRole.getName() + " | "));
         } finally {
+            em.close();
             emf.close();
         }
     }
