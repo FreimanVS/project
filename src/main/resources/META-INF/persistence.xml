@@ -3,6 +3,10 @@
 
     <persistence-unit name="jpa" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <!--<non-jta-data-source>java:comp/env/jdbc/MySQLDS</non-jta-data-source>-->
+        <class>com.freimanvs.company.entities.Employee</class>
+        <class>com.freimanvs.company.entities.Role</class>
+        <class>com.freimanvs.company.entities.Position</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.connection.username" value="root" />
@@ -11,6 +15,8 @@
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/company?useSSL=false"/>
+            <property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
         </properties>
     </persistence-unit>
 </persistence>
