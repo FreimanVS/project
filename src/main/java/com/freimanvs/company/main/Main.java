@@ -18,9 +18,6 @@ import java.util.Set;
 
 public class Main {
     private static final SessionFactory SESSION_FACTORY = HibernateUtil.getSessionFactory();
-    private static Session session = SESSION_FACTORY.openSession();
-    private static EmployeeService employeeService = new EmployeeService(session);
-    private static PositionService positionService = new PositionService(session);
     private static final File OUTPUT_FILE = new File("./maxSalary.txt");
     private static final File OUTPUT_RESULT = new File("./result.txt");
 
@@ -28,6 +25,11 @@ public class Main {
 
         //preparing workplace
         RestoreData.restoreJPA();
+
+        //new session
+        Session session = SESSION_FACTORY.openSession();
+        EmployeeService employeeService = new EmployeeService(session);
+        PositionService positionService = new PositionService(session);
 
         try {
 
