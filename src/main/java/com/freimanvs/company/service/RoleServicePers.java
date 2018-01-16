@@ -14,21 +14,17 @@ import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class RoleServicePers implements Service<Role> {
-
-    private DAO<Role> dao = new RoleDAO();
-
-    private EntityManagerFactory emf;
+    private EntityManager em;
 
     public RoleServicePers() {
     }
 
-    public RoleServicePers(EntityManagerFactory emf) {
-        this.emf = emf;
+    public RoleServicePers(EntityManager em) {
+        this.em = em;
     }
 
     @Override
     public long add(Role obj) {
-        EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
@@ -43,7 +39,6 @@ public class RoleServicePers implements Service<Role> {
 
     @Override
     public List<Role> getList() {
-        EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
@@ -58,7 +53,6 @@ public class RoleServicePers implements Service<Role> {
 
     @Override
     public Role getById(long id) {
-        EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
@@ -73,7 +67,6 @@ public class RoleServicePers implements Service<Role> {
 
     @Override
     public void deleteById(long id) {
-        EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
@@ -86,7 +79,6 @@ public class RoleServicePers implements Service<Role> {
 
     @Override
     public void updateById(long id, Role obj) {
-        EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
