@@ -3,7 +3,11 @@ package com.freimanvs.company.entities;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -68,6 +72,7 @@ public class Employee {
         return id;
     }
 
+    @XmlAttribute(required = true)
     public void setId(long id) {
         this.id = id;
     }
@@ -76,6 +81,7 @@ public class Employee {
         return login;
     }
 
+    @XmlElement(required = true)
     public void setLogin(String login) {
         this.login = login;
     }
@@ -84,6 +90,7 @@ public class Employee {
         return password;
     }
 
+    @XmlElement()
     public void setPassword(String password) {
         this.password = password;
     }
@@ -92,6 +99,7 @@ public class Employee {
         return fio;
     }
 
+    @XmlElement(required = true)
     public void setFio(String fio) {
         this.fio = fio;
     }
@@ -100,6 +108,7 @@ public class Employee {
         return department;
     }
 
+    @XmlElement(required = true)
     public void setDepartment(String department) {
         this.department = department;
     }
@@ -108,6 +117,7 @@ public class Employee {
         return city;
     }
 
+    @XmlElement(required = true)
     public void setCity(String city) {
         this.city = city;
     }
@@ -116,6 +126,7 @@ public class Employee {
         return salary;
     }
 
+    @XmlElement()
     public void setSalary(double salary) {
         this.salary = salary;
     }
@@ -124,6 +135,7 @@ public class Employee {
         return phoneNumber;
     }
 
+    @XmlElement(required = true)
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -132,6 +144,7 @@ public class Employee {
         return email;
     }
 
+    @XmlElement(required = true)
     public void setEmail(String email) {
         this.email = email;
     }
