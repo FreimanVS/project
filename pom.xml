@@ -53,21 +53,21 @@
       <artifactId>hibernate-c3p0</artifactId>
       <version>${hibernate.version}</version>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>javassist</groupId>
       <artifactId>javassist</artifactId>
       <version>3.12.1.GA</version>
-    </dependency>
-    <dependency>
+    </dependency>-->
+    <!--<dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-taglibs</artifactId>
       <version>${spring-security.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.1.1</version>
-    </dependency>
+    </dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>commons-logging</groupId>-->
+      <!--<artifactId>commons-logging</artifactId>-->
+      <!--<version>1.1.1</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>ru.otus.resource</groupId>
       <artifactId>ObjectResourceFactory</artifactId>
@@ -75,12 +75,18 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/src/main/resources/xml-resource-factory.jar</systemPath>
     </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.freimanvs.resources</groupId>-->
+      <!--<artifactId>XmlToObjFactory</artifactId>-->
+      <!--<version>1.0</version>-->
+      <!--<scope>system</scope>-->
+      <!--<systemPath>${project.basedir}/src/main/resources/xml-to-obj-factory.jar</systemPath>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>com.freimanvs.resources</groupId>
-      <artifactId>XmlToObjFactory</artifactId>
+      <artifactId>xml-to-obj-factory</artifactId>
       <version>1.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/src/main/resources/xml-to-obj-factory.jar</systemPath>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 

@@ -6,16 +6,17 @@ import com.freimanvs.company.dao.RoleDAO;
 import com.freimanvs.company.entities.Employee;
 import com.freimanvs.company.entities.Position;
 import com.freimanvs.company.entities.Role;
+import com.freimanvs.company.security.Encode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
 public class EmployeeService implements Service<Employee> {
     private Session session;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     public EmployeeService(Session session) {
         this.session = session;
@@ -25,7 +26,8 @@ public class EmployeeService implements Service<Employee> {
     public long add(Employee obj) {
         Transaction transaction = session.beginTransaction();
         try {
-            obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
+//            obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
+            obj.setPassword(Encode.sha(obj.getPassword()));
             Role user = new RoleDAO(session).getById(1L);
             obj.getRoles().add(user);
 
