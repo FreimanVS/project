@@ -11,7 +11,11 @@ public class MyAppServletContextListener implements ServletContextListener{
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
-        HibernateUtil.getSessionFactory().close();
+        try {
+            HibernateUtil.getSessionFactory().close();
+        } catch (Exception e) {
+            throw new RuntimeException("hibernate factory was not closed");
+        }
     }
 
     @Override
