@@ -38,11 +38,19 @@
       <artifactId>hibernate-entitymanager</artifactId>
       <version>${hibernate.version}</version>
     </dependency>
-      <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>${mysql-connector.version}</version>
-      </dependency>
+    <!-- DataBases -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql-connector.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.195</version>
+      <!--<scope>test</scope>-->
+    </dependency>
+
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
@@ -87,6 +95,27 @@
       <artifactId>xml-to-obj-factory</artifactId>
       <version>1.0</version>
       <scope>compile</scope>
+    </dependency>
+    <!-- JSON libraries  -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>LATEST</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.json.bind</groupId>
+      <artifactId>javax.json.bind-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse</groupId>
+      <artifactId>yasson</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.json</artifactId>
+      <version>1.1</version>
     </dependency>
   </dependencies>
 

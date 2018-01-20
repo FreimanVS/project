@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+  <xs:element name="company" type="company"/>
+
   <xs:element name="employee" type="employee"/>
+
+  <xs:complexType name="company">
+    <xs:sequence>
+      <xs:element name="list" type="employee" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
 
   <xs:complexType name="employee">
     <xs:sequence>
@@ -12,27 +20,9 @@
       <xs:element name="login" type="xs:string"/>
       <xs:element name="password" type="xs:string" minOccurs="0"/>
       <xs:element name="phoneNumber" type="xs:string"/>
-      <xs:element name="positions" type="position" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="roles" type="role" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="salary" type="xs:double"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:long" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="position">
-    <xs:sequence>
-      <xs:element name="empls" type="employee" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="id" type="xs:long"/>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="role">
-    <xs:sequence>
-      <xs:element name="empls" type="employee" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="id" type="xs:long"/>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
   </xs:complexType>
 </xs:schema>
 

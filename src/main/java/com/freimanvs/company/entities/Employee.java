@@ -1,5 +1,6 @@
 package com.freimanvs.company.entities;
 
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -81,6 +82,16 @@ public class Employee {
         return login;
     }
 
+
+    @XmlElement(required = true)
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
+
+    public String getFio() {
+        return fio;
+    }
+
     @XmlElement(required = true)
     public void setLogin(String login) {
         this.login = login;
@@ -95,14 +106,6 @@ public class Employee {
         this.password = password;
     }
 
-    public String getFio() {
-        return fio;
-    }
-
-    @XmlElement(required = true)
-    public void setFio(String fio) {
-        this.fio = fio;
-    }
 
     public String getDepartment() {
         return department;
@@ -153,6 +156,7 @@ public class Employee {
         return positions;
     }
 
+    @XmlElement
     public void setPositions(Set<Position> positions) {
         this.positions = positions;
     }
@@ -161,6 +165,7 @@ public class Employee {
         return roles;
     }
 
+    @XmlElement
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }

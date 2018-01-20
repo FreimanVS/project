@@ -2,12 +2,11 @@ package com.freimanvs.company.servlets;
 
 import com.freimanvs.company.entities.Employee;
 import com.freimanvs.company.entities.Position;
-import com.freimanvs.company.main.Main;
 import com.freimanvs.company.service.EmployeeService;
 import com.freimanvs.company.service.PositionService;
 import com.freimanvs.company.util.HibernateUtil;
 import com.freimanvs.company.util.RestoreData;
-import com.freimanvs.company.util.WorkingWithFiles;
+import com.freimanvs.company.util.FileManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -77,7 +76,7 @@ public class Servlet extends HttpServlet {
 
                 System.out.println("Done!\r\n");
 //                System.out.println(result + " HAS THE BIGGEST SALARY");
-                WorkingWithFiles.writeToFile(result, OUTPUT_FILE);
+                FileManager.writeToFile(result, OUTPUT_FILE);
                 System.out.println("YOU CAN SEE THE MAN WITH THE BIGGEST SALARY IN " + OUTPUT_FILE.getName());
 
                 callStatement.close();
@@ -102,7 +101,7 @@ public class Servlet extends HttpServlet {
 
             transaction.commit();
 
-            WorkingWithFiles.writeToFile(sb.toString(), OUTPUT_RESULT);
+            FileManager.writeToFile(sb.toString(), OUTPUT_RESULT);
             System.out.println("\r\nYou can also see the users in the RESULT.TXT file");
 
             // Также потребуется произвести изменение 2 строк данной таблицы,

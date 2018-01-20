@@ -1,6 +1,8 @@
 package com.freimanvs.company.servlets;
 
+import com.freimanvs.company.entities.Employee;
 import com.freimanvs.company.entities.Role;
+import com.freimanvs.company.util.RestoreData;
 
 import javax.persistence.*;
 import javax.servlet.ServletException;
@@ -19,11 +21,15 @@ public class JPAServlet extends HttpServlet {
     private  static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //initialization
+//        RestoreData.restoreJDBC();
+
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         try {
-            Query q = em.createQuery("from Role");
-            List<Role> result = q.getResultList();
+            Query q = em.createQuery("from Employee");
+            List<Employee> result = q.getResultList();
             try (PrintWriter pw = response.getWriter()){
                 result.forEach(pw::println);
             }

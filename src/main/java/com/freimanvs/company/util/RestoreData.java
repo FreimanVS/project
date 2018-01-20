@@ -8,7 +8,10 @@ import com.freimanvs.company.service.PositionService;
 import com.freimanvs.company.service.RoleService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,16 +20,15 @@ import java.util.Scanner;
 
 public class RestoreData {
     private static final String URL = "jdbc:mysql://localhost/company?useSSL=false";
+//    private static final String URL = "jdbc:h2:~/test";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "pass";
     private static final File FILESQL = new File("./sql.txt");
     private static final File TABLES = new File("./pre_sql.txt");
     private static final File FILESQL_JPA = new File("./jpa.txt");
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     private static void initFiles() {
-        WorkingWithFiles.writeToFile("INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)\n" +
+        FileManager.writeToFile("INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)\n" +
                 "VALUES ('login', 'password', 'fio', 'department', 'city', 123.45, 'phoneNumber', 'email');\n" +
                 "\n" +
                 "INSERT INTO company.employee(login, password, fio, department, city, salary, phoneNumber, email)\n" +
@@ -52,11 +54,13 @@ public class RestoreData {
                 "INSERT INTO company.employee_position(employeeId, positionId) VALUES (2, 2);\n" +
                 "INSERT INTO company.employee_position(employeeId, positionId) VALUES (3, 1);" ,FILESQL);
 
-        WorkingWithFiles.writeToFile("DROP TABLE IF EXISTS employee_position;\n" +
-                "DROP TABLE IF EXISTS employee_role;\n" +
-                "DROP TABLE IF EXISTS employee;\n" +
-                "DROP TABLE IF EXISTS position;\n" +
-                "DROP TABLE IF EXISTS role;\n" +
+        FileManager.writeToFile(
+                "CREATE SCHEMA IF NOT EXISTS company;\n" +
+                "DROP TABLE IF EXISTS company.employee_position;\n" +
+                "DROP TABLE IF EXISTS company.employee_role;\n" +
+                "DROP TABLE IF EXISTS company.employee;\n" +
+                "DROP TABLE IF EXISTS company.position;\n" +
+                "DROP TABLE IF EXISTS company.role;\n" +
                 "\n" +
                 "CREATE TABLE IF NOT EXISTS company.employee (\n" +
                 "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
@@ -70,20 +74,22 @@ public class RestoreData {
                 "email VARCHAR(100) NOT NULL,\n" +
                 "PRIMARY KEY (id),\n" +
                 "CONSTRAINT uniqEmployee UNIQUE (login)\n" +
-                ")\n" +
-                "ENGINE = InnoDB\n" +
-                "DEFAULT CHARACTER SET = utf8\n" +
-                "COLLATE = utf8_general_ci;\n" +
+                ")" +
+//                "\nENGINE = InnoDB\n" +
+//                "DEFAULT CHARACTER SET = utf8\n" +
+//                "COLLATE = utf8_general_ci" +
+                ";\n" +
                 "\n" +
                 "CREATE TABLE IF NOT EXISTS company.role (\n" +
                 "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
                 "name VARCHAR(100) NOT NULL,\n" +
                 "PRIMARY KEY (id),\n" +
                 "CONSTRAINT uniqRole UNIQUE (name)\n" +
-                ")\n" +
-                "ENGINE = InnoDB\n" +
-                "DEFAULT CHARACTER SET = utf8\n" +
-                "COLLATE = utf8_general_ci;\n" +
+                ")" +
+//                "\nENGINE = InnoDB\n" +
+//                "DEFAULT CHARACTER SET = utf8\n" +
+//                "COLLATE = utf8_general_ci" +
+                ";\n" +
                 "\n" +
                 "CREATE TABLE IF NOT EXISTS company.employee_role (\n" +
                 "employeeId BIGINT NOT NULL,\n" +
@@ -91,20 +97,22 @@ public class RestoreData {
                 "PRIMARY KEY (employeeId, roleId),\n" +
                 "CONSTRAINT fk_employee_role_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
                 "CONSTRAINT fk_employee_role_roleId FOREIGN KEY (roleId) REFERENCES role(id)\n" +
-                ")\n" +
-                "ENGINE = InnoDB\n" +
-                "DEFAULT CHARACTER SET = utf8\n" +
-                "COLLATE = utf8_general_ci;\n" +
+                ")" +
+//                "\nENGINE = InnoDB\n" +
+//                "DEFAULT CHARACTER SET = utf8\n" +
+//                "COLLATE = utf8_general_ci" +
+                ";\n" +
                 "\n" +
                 "CREATE TABLE IF NOT EXISTS company.position (\n" +
                 "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
                 "name VARCHAR(100) NOT NULL,\n" +
                 "PRIMARY KEY (id),\n" +
                 "CONSTRAINT uniqPosition UNIQUE (name)\n" +
-                ")\n" +
-                "ENGINE = InnoDB\n" +
-                "DEFAULT CHARACTER SET = utf8\n" +
-                "COLLATE = utf8_general_ci;\n" +
+                ")" +
+//                "\nENGINE = InnoDB\n" +
+//                "DEFAULT CHARACTER SET = utf8\n" +
+//                "COLLATE = utf8_general_ci" +
+                ";\n" +
                 "\n" +
                 "CREATE TABLE IF NOT EXISTS company.employee_position (\n" +
                 "employeeId BIGINT NOT NULL,\n" +
@@ -112,11 +120,12 @@ public class RestoreData {
                 "PRIMARY KEY (employeeId, positionId),\n" +
                 "CONSTRAINT fk_employee_position_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
                 "CONSTRAINT fk_employee_position_positionId FOREIGN KEY (positionId) REFERENCES company.position(id)\n" +
-                ")\n" +
-                "ENGINE = InnoDB\n" +
-                "DEFAULT CHARACTER SET = utf8\n" +
-                "COLLATE = utf8_general_ci;", TABLES);
-        WorkingWithFiles.writeToFile("Role user\n" +
+                ")" +
+//                "\nENGINE = InnoDB\n" +
+//                "DEFAULT CHARACTER SET = utf8\n" +
+//                "COLLATE = utf8_general_ci" +
+                ";", TABLES);
+        FileManager.writeToFile("Role user\n" +
                 "Role admin\n" +
                 "Position worker\n" +
                 "Position HR\n" +
@@ -152,6 +161,9 @@ public class RestoreData {
                 System.out.println(sql);
                 statement.executeUpdate(sql);
             }
+
+            System.out.println("========== TABLES ARE FILLED SUCCESSFULLY! ============\r\n");
+            System.out.println("THE SCHEMA 'company' IS READY TO USE!\r\n");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -161,6 +173,8 @@ public class RestoreData {
         initFiles();
         System.out.println("FILLING DATABASE WITH DATA FROM pre_sql.txt," +
                 "sql.txt and jpa.txt files USING JDBC AND JPA...\n");
+
+        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         try (Connection connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
              Statement statement = connection.createStatement();
              Scanner data = new Scanner(FILESQL_JPA).useDelimiter("[\\s]+");
@@ -181,7 +195,7 @@ public class RestoreData {
             PositionService positionService = new PositionService(session);
 
             System.out.println("\r\nFILLING TABLES WITH DATA BY JPA...\r\n");
-            label:
+
             while (data.hasNext()) {
                 String entity = data.next();
                 switch (entity) {
@@ -216,17 +230,20 @@ public class RestoreData {
                     }
                     default:
                         System.out.println("A wrong entity: " + entity);
-                        break label;
+                        break;
                 }
             }
             System.out.println("========== TABLES ARE FILLED SUCCESSFULLY! ============\r\n");
             System.out.println("THE SCHEMA 'company' IS READY TO USE!\r\n");
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            sessionFactory.close();
         }
     }
 
     public static void main(String[] args) {
-        restoreJPA();
+//        restoreJPA();
+        restoreJDBC();
     }
 }

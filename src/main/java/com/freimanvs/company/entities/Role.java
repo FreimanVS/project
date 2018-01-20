@@ -1,13 +1,19 @@
 package com.freimanvs.company.entities;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashSet;
 import java.util.Set;
 
+@XmlRootElement
 @Entity
-@Table(name = "role")
+@Table(name = "role", schema = "company")
 public class Role {
 
+    @JsonbTransient
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
@@ -16,6 +22,7 @@ public class Role {
     @Column(name = "name")
     private String name;
 
+    @JsonbTransient
     @ManyToMany(mappedBy = "roles")
     private Set<Employee> empls = new HashSet<>();
 
@@ -30,6 +37,7 @@ public class Role {
         return id;
     }
 
+    @XmlTransient
     public void setId(long id) {
         this.id = id;
     }
@@ -38,6 +46,7 @@ public class Role {
         return name;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
@@ -46,6 +55,7 @@ public class Role {
         return empls;
     }
 
+    @XmlTransient
     public void setEmpls(Set<Employee> empls) {
         this.empls = empls;
     }
