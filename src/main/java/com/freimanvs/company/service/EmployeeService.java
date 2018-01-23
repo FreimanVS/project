@@ -1,5 +1,6 @@
 package com.freimanvs.company.service;
 
+import com.freimanvs.company.dao.DAO;
 import com.freimanvs.company.dao.EmployeeDAO;
 import com.freimanvs.company.dao.PositionDAO;
 import com.freimanvs.company.dao.RoleDAO;
@@ -18,8 +19,11 @@ public class EmployeeService implements Service<Employee> {
 
 //    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+    private DAO<Employee> employeeDAO;
+
     public EmployeeService(Session session) {
         this.session = session;
+        employeeDAO = new EmployeeDAO(session);
     }
 
     @Override
@@ -34,7 +38,7 @@ public class EmployeeService implements Service<Employee> {
             Position worker = new PositionDAO(session).getById(1L);
             obj.getPositions().add(worker);
 
-            long id = new EmployeeDAO(session).add(obj);
+            long id = employeeDAO.add(obj);
             transaction.commit();
             return id;
         } catch (Exception e) {
@@ -47,7 +51,7 @@ public class EmployeeService implements Service<Employee> {
     public List<Employee> getList() {
         Transaction transaction = session.beginTransaction();
         try {
-            List<Employee> list = new EmployeeDAO(session).getList();
+            List<Employee> list = employeeDAO.getList();
             transaction.commit();
             return list;
         } catch (Exception e) {
@@ -60,7 +64,7 @@ public class EmployeeService implements Service<Employee> {
     public Employee getById(long id) {
         Transaction transaction = session.beginTransaction();
         try {
-            Employee pos = new EmployeeDAO(session).getById(id);
+            Employee pos = employeeDAO.getById(id);
             transaction.commit();
             return pos;
         } catch (Exception e) {
@@ -73,7 +77,7 @@ public class EmployeeService implements Service<Employee> {
     public void deleteById(long id) {
         Transaction transaction = session.beginTransaction();
         try {
-            new EmployeeDAO(session).deleteById(id);
+            employeeDAO.deleteById(id);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -84,7 +88,7 @@ public class EmployeeService implements Service<Employee> {
     public void updateById(long id, Employee obj) {
         Transaction transaction = session.beginTransaction();
         try {
-            new EmployeeDAO(session).updateById(id, obj);
+            employeeDAO.updateById(id, obj);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();

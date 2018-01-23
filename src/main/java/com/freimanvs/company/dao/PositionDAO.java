@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class PositionDAO implements DAO<Position> {
+
     private Session session;
 
     public PositionDAO() {

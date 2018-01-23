@@ -243,7 +243,7 @@ public class RestoreData {
     }
 
     public static void main(String[] args) {
-//        restoreJPA();
-        restoreJDBC();
+        restoreJPA();
+//        restoreJDBC();
     }
 }

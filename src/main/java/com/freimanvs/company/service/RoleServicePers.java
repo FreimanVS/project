@@ -14,13 +14,17 @@ import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class RoleServicePers implements Service<Role> {
+
     private EntityManager em;
 
-    public RoleServicePers() {
-    }
+    private DAO<Role> roleDAOPers;
 
     public RoleServicePers(EntityManager em) {
         this.em = em;
+        roleDAOPers = new RoleDAOPers(em);
+    }
+
+    public RoleServicePers() {
     }
 
     @Override
@@ -28,7 +32,7 @@ public class RoleServicePers implements Service<Role> {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
-            long id = new RoleDAOPers(em).add(obj);
+            long id = roleDAOPers.add(obj);
             transaction.commit();
             return id;
         } catch (Exception e) {
@@ -42,7 +46,7 @@ public class RoleServicePers implements Service<Role> {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
-            List<Role> list = new RoleDAOPers(em).getList();
+            List<Role> list = roleDAOPers.getList();
             transaction.commit();
             return list;
         } catch (Exception e) {
@@ -56,7 +60,7 @@ public class RoleServicePers implements Service<Role> {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
-            Role role = new RoleDAOPers(em).getById(id);
+            Role role = roleDAOPers.getById(id);
             transaction.commit();
             return role;
         } catch (Exception e) {
@@ -70,7 +74,7 @@ public class RoleServicePers implements Service<Role> {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
-            new RoleDAOPers(em).deleteById(id);
+            roleDAOPers.deleteById(id);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -82,7 +86,7 @@ public class RoleServicePers implements Service<Role> {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try {
-            new RoleDAOPers(em).updateById(id, obj);
+            roleDAOPers.updateById(id, obj);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();

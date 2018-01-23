@@ -1,5 +1,6 @@
 package com.freimanvs.company.service;
 
+import com.freimanvs.company.dao.DAO;
 import com.freimanvs.company.dao.PositionDAO;
 import com.freimanvs.company.entities.Position;
 import org.hibernate.Session;
@@ -9,17 +10,24 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class PositionService implements Service<Position> {
+
     private Session session;
+
+    private DAO<Position> positionDAO;
 
     public PositionService(Session session) {
         this.session = session;
+        positionDAO = new PositionDAO(session);
+    }
+
+    public PositionService() {
     }
 
     @Override
     public long add(Position obj) {
         Transaction transaction = session.beginTransaction();
         try {
-            long id = new PositionDAO(session).add(obj);
+            long id = positionDAO.add(obj);
             transaction.commit();
             return id;
         } catch (Exception e) {
@@ -32,7 +40,7 @@ public class PositionService implements Service<Position> {
     public List<Position> getList() {
         Transaction transaction = session.beginTransaction();
         try {
-            List<Position> list = new PositionDAO(session).getList();
+            List<Position> list = positionDAO.getList();
             transaction.commit();
             return list;
         } catch (Exception e) {
@@ -45,7 +53,7 @@ public class PositionService implements Service<Position> {
     public Position getById(long id) {
         Transaction transaction = session.beginTransaction();
         try {
-            Position pos = new PositionDAO(session).getById(id);
+            Position pos = positionDAO.getById(id);
             transaction.commit();
             return pos;
         } catch (Exception e) {
@@ -58,7 +66,7 @@ public class PositionService implements Service<Position> {
     public void deleteById(long id) {
         Transaction transaction = session.beginTransaction();
         try {
-            new PositionDAO(session).deleteById(id);
+            positionDAO.deleteById(id);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -69,7 +77,7 @@ public class PositionService implements Service<Position> {
     public void updateById(long id, Position obj) {
         Transaction transaction = session.beginTransaction();
         try {
-            new PositionDAO(session).updateById(id, obj);
+            positionDAO.updateById(id, obj);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
