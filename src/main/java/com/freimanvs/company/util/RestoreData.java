@@ -10,8 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +18,7 @@ import java.util.Scanner;
 
 public class RestoreData {
     private static final String URL = "jdbc:mysql://localhost/company?useSSL=false";
-//    private static final String URL = "jdbc:h2:~/test";
+    //    private static final String URL = "jdbc:h2:~/test";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "pass";
     private static final File FILESQL = new File("./sql.txt");
@@ -56,91 +54,94 @@ public class RestoreData {
 
         FileManager.writeToFile(
                 "CREATE SCHEMA IF NOT EXISTS company;\n" +
-                "DROP TABLE IF EXISTS company.employee_position;\n" +
-                "DROP TABLE IF EXISTS company.employee_role;\n" +
-                "DROP TABLE IF EXISTS company.employee;\n" +
-                "DROP TABLE IF EXISTS company.position;\n" +
-                "DROP TABLE IF EXISTS company.role;\n" +
-                "\n" +
-                "CREATE TABLE IF NOT EXISTS company.employee (\n" +
-                "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
-                "login VARCHAR(100) NOT NULL,\n" +
-                "password VARCHAR(100) NOT NULL,\n" +
-                "fio VARCHAR(100) NOT NULL,\n" +
-                "department VARCHAR(100) NOT NULL,\n" +
-                "city VARCHAR(100) NOT NULL,\n" +
-                "salary DOUBLE NOT NULL,\n" +
-                "phoneNumber VARCHAR(50) NOT NULL,\n" +
-                "email VARCHAR(100) NOT NULL,\n" +
-                "PRIMARY KEY (id),\n" +
-                "CONSTRAINT uniqEmployee UNIQUE (login)\n" +
-                ")" +
+                        "USE company;\n" +
+                        "DROP TABLE IF EXISTS company.employee_position;\n" +
+                        "DROP TABLE IF EXISTS company.employee_role;\n" +
+                        "DROP TABLE IF EXISTS company.employee;\n" +
+                        "DROP TABLE IF EXISTS company.position;\n" +
+                        "DROP TABLE IF EXISTS company.role;\n" +
+                        "\n" +
+                        "CREATE TABLE IF NOT EXISTS company.employee (\n" +
+                        "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                        "login VARCHAR(100) NOT NULL,\n" +
+                        "password VARCHAR(100) NOT NULL,\n" +
+                        "fio VARCHAR(100) NOT NULL,\n" +
+                        "department VARCHAR(100) NOT NULL,\n" +
+                        "city VARCHAR(100) NOT NULL,\n" +
+                        "salary DOUBLE NOT NULL,\n" +
+                        "phoneNumber VARCHAR(50) NOT NULL,\n" +
+                        "email VARCHAR(100) NOT NULL,\n" +
+                        "age INTEGER NOT NULL,\n" +
+                        "PRIMARY KEY (id),\n" +
+                        "CONSTRAINT uniqEmployee UNIQUE (login)\n" +
+                        ")" +
 //                "\nENGINE = InnoDB\n" +
 //                "DEFAULT CHARACTER SET = utf8\n" +
 //                "COLLATE = utf8_general_ci" +
-                ";\n" +
-                "\n" +
-                "CREATE TABLE IF NOT EXISTS company.role (\n" +
-                "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
-                "name VARCHAR(100) NOT NULL,\n" +
-                "PRIMARY KEY (id),\n" +
-                "CONSTRAINT uniqRole UNIQUE (name)\n" +
-                ")" +
+                        ";\n" +
+                        "\n" +
+                        "CREATE TABLE IF NOT EXISTS company.role (\n" +
+                        "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                        "name VARCHAR(100) NOT NULL,\n" +
+                        "PRIMARY KEY (id),\n" +
+                        "CONSTRAINT uniqRole UNIQUE (name)\n" +
+                        ")" +
 //                "\nENGINE = InnoDB\n" +
 //                "DEFAULT CHARACTER SET = utf8\n" +
 //                "COLLATE = utf8_general_ci" +
-                ";\n" +
-                "\n" +
-                "CREATE TABLE IF NOT EXISTS company.employee_role (\n" +
-                "employeeId BIGINT NOT NULL,\n" +
-                "roleId BIGINT NOT NULL,\n" +
-                "PRIMARY KEY (employeeId, roleId),\n" +
-                "CONSTRAINT fk_employee_role_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
-                "CONSTRAINT fk_employee_role_roleId FOREIGN KEY (roleId) REFERENCES role(id)\n" +
-                ")" +
+                        ";\n" +
+                        "\n" +
+                        "CREATE TABLE IF NOT EXISTS company.employee_role (\n" +
+                        "employeeId BIGINT NOT NULL,\n" +
+                        "roleId BIGINT NOT NULL,\n" +
+                        "PRIMARY KEY (employeeId, roleId),\n" +
+                        "CONSTRAINT fk_employee_role_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
+                        "CONSTRAINT fk_employee_role_roleId FOREIGN KEY (roleId) REFERENCES role(id)\n" +
+                        ")" +
 //                "\nENGINE = InnoDB\n" +
 //                "DEFAULT CHARACTER SET = utf8\n" +
 //                "COLLATE = utf8_general_ci" +
-                ";\n" +
-                "\n" +
-                "CREATE TABLE IF NOT EXISTS company.position (\n" +
-                "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
-                "name VARCHAR(100) NOT NULL,\n" +
-                "PRIMARY KEY (id),\n" +
-                "CONSTRAINT uniqPosition UNIQUE (name)\n" +
-                ")" +
+                        ";\n" +
+                        "\n" +
+                        "CREATE TABLE IF NOT EXISTS company.position (\n" +
+                        "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                        "name VARCHAR(100) NOT NULL,\n" +
+                        "PRIMARY KEY (id),\n" +
+                        "CONSTRAINT uniqPosition UNIQUE (name)\n" +
+                        ")" +
 //                "\nENGINE = InnoDB\n" +
 //                "DEFAULT CHARACTER SET = utf8\n" +
 //                "COLLATE = utf8_general_ci" +
-                ";\n" +
-                "\n" +
-                "CREATE TABLE IF NOT EXISTS company.employee_position (\n" +
-                "employeeId BIGINT NOT NULL,\n" +
-                "positionId BIGINT NOT NULL,\n" +
-                "PRIMARY KEY (employeeId, positionId),\n" +
-                "CONSTRAINT fk_employee_position_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
-                "CONSTRAINT fk_employee_position_positionId FOREIGN KEY (positionId) REFERENCES company.position(id)\n" +
-                ")" +
+                        ";\n" +
+                        "\n" +
+                        "CREATE TABLE IF NOT EXISTS company.employee_position (\n" +
+                        "employeeId BIGINT NOT NULL,\n" +
+                        "positionId BIGINT NOT NULL,\n" +
+                        "PRIMARY KEY (employeeId, positionId),\n" +
+                        "CONSTRAINT fk_employee_position_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
+                        "CONSTRAINT fk_employee_position_positionId FOREIGN KEY (positionId) REFERENCES company.position(id)\n" +
+                        ")" +
 //                "\nENGINE = InnoDB\n" +
 //                "DEFAULT CHARACTER SET = utf8\n" +
 //                "COLLATE = utf8_general_ci" +
-                ";", TABLES);
+                        ";", TABLES);
         FileManager.writeToFile("Role user\n" +
                 "Role admin\n" +
                 "Position worker\n" +
                 "Position HR\n" +
                 "Position Accounter\n" +
                 "Position Director\n" +
-                "Employee login1 password1 Petrosyan_A.A. Human_Resources Moscow 123,05 +71234567890 login1@company.com\n" +
-                "Employee login2 password2 Smirnova_B.C. Marketing Saint-Petersburg 342,5 +7192348128 login2@company.com\n" +
-                "Employee login3 password3 Evegniev_H.E. Research_and_Development Ekaterinburg 34147,0 +4872488234 login3@company.com\n" +
-                "Employee login4 password4 Durova_S.A. I.T. NizhniiNovgorod 183,25 +128347383 login4@company.com\n" +
-                "Employee login5 password5 Druzhnikov_I.A. Maintenance Saratov 3434347,0 +98234783 login5@company.com\n" +
-                "Employee login6 password6 Germanov_A.U. Sales Arhangelsk 342217,1 +823492374 login6@company.com\n" +
-                "Employee login7 password7 Vasiliev_I.I. Customer_Service Astana 9535656,2 +342348382 login7@company.com\n" +
-                "Employee login8 password8 Medkova_S.Z. Finance Minsk 323547,4 +23498239472 login8@company.com\n" +
-                "Employee login9 password9 Andropov_E.V. Dispatch_Department Berlin 34897,5 +2934829347 login9@company.com\n" +
-                "Employee login10 password10 Alferov_S.Z. Marketing New-York 34897,7 +237472341 login10@company.com", FILESQL_JPA);
+                "Employee login1 password1 Petrosyan_A.A. Human_Resources Moscow 123,05 +71234567890 login1@company.com 20\n" +
+                "Employee login2 password2 Smirnova_B.C. Marketing Saint-Petersburg 342,5 +7192348128 login2@company.com 21\n" +
+                "Employee login3 password3 Evegniev_H.E. Research_and_Development Ekaterinburg 34147,0 +4872488234 login3@company.com 22\n" +
+                "Employee login4 password4 Durova_S.A. I.T. NizhniiNovgorod 183,25 +128347383 login4@company.com 23\n" +
+                "Employee login5 password5 Druzhnikov_I.A. Maintenance Saratov 3434347,0 +98234783 login5@company.com 24\n" +
+                "Employee login6 password6 Germanov_A.U. Sales Arhangelsk 342217,1 +823492374 login6@company.com 25\n" +
+                "Employee login7 password7 Vasiliev_I.I. Customer_Service Astana 9535656,2 +342348382 login7@company.com 26\n" +
+                "Employee login8 password8 Medkova_S.Z. Finance Minsk 323547,4 +23498239472 login8@company.com 27\n" +
+                "Employee login9 password9 Andropov_E.V. Dispatch_Department Berlin 34897,5 +2934829347 login9@company.com 28\n" +
+                "Employee login10 password10 Alferov_S.Z. Marketing New-York 34897,7 +237472341 login10@company.com 29\n" +
+                "Employee admin admin GennadiY_I.V. Admin Ivanovo 50000,0 +73723482347 admin@company.com 30", FILESQL_JPA);
     }
 
     public static void restoreJDBC() {
@@ -208,8 +209,9 @@ public class RestoreData {
                         double salary = data.nextDouble();
                         String phoneNumber = data.next();
                         String email = data.next();
+                        int age = data.nextInt();
                         Employee employee = new Employee(login, password, fio, department,
-                                city, salary, phoneNumber, email);
+                                city, salary, phoneNumber, email, age);
                         long id = employeeService.add(employee);
                         System.out.println(entity + " by id " + id + " has been added");
                         break;

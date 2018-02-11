@@ -15,6 +15,11 @@ public class RoleService implements Service<Role> {
 
     private DAO<Role> roleDAO;
 
+    public RoleService() {
+        session = HibernateUtil.getSessionFactory().openSession();
+        roleDAO = new RoleDAO(session);
+    }
+
     public RoleService(Session session) {
         this.session = session;
         roleDAO = new RoleDAO(session);

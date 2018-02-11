@@ -2,6 +2,7 @@ package com.freimanvs.company.dao;
 
 import com.freimanvs.company.entities.Position;
 import com.freimanvs.company.entities.Role;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -27,7 +28,9 @@ public class PositionDAO implements DAO<Position> {
     @Override
     public List<Position> getList() {
         Query<Position> query = session.createQuery("from Position", Position.class);
-        return query.getResultList();
+        List<Position> list = query.getResultList();
+        list.forEach(Hibernate::initialize);
+        return list;
     }
 
     @Override
@@ -38,6 +41,7 @@ public class PositionDAO implements DAO<Position> {
     @Override
     public void deleteById(long id) {
         Position objFromDB = session.byId(Position.class).load(id);
+        Hibernate.initialize(objFromDB);
         session.delete(objFromDB);
     }
 

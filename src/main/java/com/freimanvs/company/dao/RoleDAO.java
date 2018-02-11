@@ -1,6 +1,7 @@
 package com.freimanvs.company.dao;
 
 import com.freimanvs.company.entities.Role;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -26,7 +27,9 @@ public class RoleDAO implements DAO<Role> {
     @Override
     public List<Role> getList() {
         Query<Role> query = session.createQuery("from Role", Role.class);
-        return query.getResultList();
+        List<Role> list = query.getResultList();
+        list.forEach(Hibernate::initialize);
+        return list;
     }
 
     @Override
@@ -37,6 +40,7 @@ public class RoleDAO implements DAO<Role> {
     @Override
     public void deleteById(long id) {
         Role objFromDB = session.byId(Role.class).load(id);
+        Hibernate.initialize(objFromDB);
         session.delete(objFromDB);
     }
 

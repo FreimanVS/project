@@ -2,16 +2,18 @@ package com.freimanvs.company.entities;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @XmlRootElement
 @Entity
 @Table(name = "role", schema = "company")
-public class Role {
+public class Role implements Serializable {
 
     @JsonbTransient
     @Id
@@ -37,7 +39,8 @@ public class Role {
         return id;
     }
 
-    @XmlTransient
+//    @XmlTransient
+    @XmlAttribute
     public void setId(long id) {
         this.id = id;
     }

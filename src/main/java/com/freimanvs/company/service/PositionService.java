@@ -3,6 +3,7 @@ package com.freimanvs.company.service;
 import com.freimanvs.company.dao.DAO;
 import com.freimanvs.company.dao.PositionDAO;
 import com.freimanvs.company.entities.Position;
+import com.freimanvs.company.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,12 +16,14 @@ public class PositionService implements Service<Position> {
 
     private DAO<Position> positionDAO;
 
-    public PositionService(Session session) {
-        this.session = session;
+    public PositionService() {
+        session = HibernateUtil.getSessionFactory().openSession();
         positionDAO = new PositionDAO(session);
     }
 
-    public PositionService() {
+    public PositionService(Session session) {
+        this.session = session;
+        positionDAO = new PositionDAO(session);
     }
 
     @Override

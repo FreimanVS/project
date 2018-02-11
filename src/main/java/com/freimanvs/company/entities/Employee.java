@@ -1,6 +1,7 @@
 package com.freimanvs.company.entities;
 
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Entity
 @Table(name = "employee")
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -42,6 +43,9 @@ public class Employee {
     @Column(name="email")
     private String email;
 
+    @Column(name="age")
+    private int age;
+
     @ManyToMany()
     @JoinTable(name = "employee_position", joinColumns = {
             @JoinColumn(name = "employeeId")},
@@ -67,6 +71,19 @@ public class Employee {
         this.salary = salary;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Employee(String login, String password, String fio, String department, String city, double salary,
+                    String phoneNumber, String email, int age) {
+        this.login = login;
+        this.password = password;
+        this.fio = fio;
+        this.department = department;
+        this.city = city;
+        this.salary = salary;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.age = age;
     }
 
     public long getId() {
@@ -150,6 +167,14 @@ public class Employee {
     @XmlElement(required = true)
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public Set<Position> getPositions() {

@@ -21,7 +21,7 @@ public class FileManager {
         try {
             JAXBContext jCOntext = JAXBContext.newInstance(obj.getClass());
             Marshaller marshallObj = jCOntext.createMarshaller();
-            marshallObj.setProperty("jaxb.formatted.output", true);
+            marshallObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshallObj.marshal(obj, Files.newOutputStream(path));
         } catch (JAXBException e) {
             e.printStackTrace();

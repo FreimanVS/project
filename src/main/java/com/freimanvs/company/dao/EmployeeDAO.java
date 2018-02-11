@@ -1,6 +1,7 @@
 package com.freimanvs.company.dao;
 
 import com.freimanvs.company.entities.Employee;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -25,7 +26,9 @@ public class EmployeeDAO implements DAO<Employee> {
     @Override
     public List<Employee> getList() {
         Query<Employee> query = session.createQuery("from Employee", Employee.class);
-        return query.getResultList();
+        List<Employee> list = query.getResultList();
+        list.forEach(Hibernate::initialize);
+        return list;
     }
 
     @Override
@@ -36,6 +39,7 @@ public class EmployeeDAO implements DAO<Employee> {
     @Override
     public void deleteById(long id) {
         Employee objFromDB = session.byId(Employee.class).load(id);
+        Hibernate.initialize(objFromDB);
         session.delete(objFromDB);
     }
 
@@ -50,6 +54,7 @@ public class EmployeeDAO implements DAO<Employee> {
         objFromDB.setSalary(obj.getSalary());
         objFromDB.setPhoneNumber(obj.getPhoneNumber());
         objFromDB.setEmail(obj.getEmail());
+        objFromDB.setAge(obj.getAge());
         session.flush();
     }
 }
