@@ -1,4 +1,4 @@
-package jsp;
+package com.freimanvs.company.jsp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

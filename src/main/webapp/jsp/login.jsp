@@ -23,9 +23,7 @@
                 <input name="login" type="text" placeholder="Имя пользователя" required="required" size="25"
                        minlength="5" maxlength="15" autofocus/>
                 <input name="password" type="password" placeholder="Пароль" required="required" size="25"
-                       maxlength="15"
-                       <%--pattern="(?=^.{5,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"--%>
-                       title="пароль должен содержать заглавные, строчные буквы, цифру, специальный символ. Минимальное количество знаков 5"/>
+                       minlength="5" maxlength="15"/>
                 <button type="submit">Войти</button>
             </form>
         </article>

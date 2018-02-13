@@ -1,4 +1,4 @@
-package listeners;
+package com.freimanvs.company.listeners;
 
 import com.freimanvs.company.util.HibernateUtil;
 import com.freimanvs.company.util.InitDataBase;
@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
 @WebListener
-public class MyServletContextListener implements ServletContextListener{
+public class MyServletContextListener implements ServletContextListener {
 
     private static final String TEST_DATA_FILE_LOCATION = "DB_XML_location";
 

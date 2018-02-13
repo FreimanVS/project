@@ -1,10 +1,10 @@
-package filters;
+package com.freimanvs.company.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/*"}, filterName = "EncodingFilter")
+@WebFilter(urlPatterns = {"/*"}, filterName = "EncodingFilter", asyncSupported = true)
 public class EncodingFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

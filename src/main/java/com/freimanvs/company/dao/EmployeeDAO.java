@@ -27,19 +27,24 @@ public class EmployeeDAO implements DAO<Employee> {
     public List<Employee> getList() {
         Query<Employee> query = session.createQuery("from Employee", Employee.class);
         List<Employee> list = query.getResultList();
-        list.forEach(Hibernate::initialize);
+
+        if (list != null && !list.isEmpty())
+            list.forEach(EmployeeDAO::initialize);
+
         return list;
     }
 
     @Override
     public Employee getById(long id) {
-        return session.get(Employee.class, id);
+        Employee emp = session.get(Employee.class, id);
+        initialize(emp);
+        return emp;
     }
 
     @Override
     public void deleteById(long id) {
         Employee objFromDB = session.byId(Employee.class).load(id);
-        Hibernate.initialize(objFromDB);
+        initialize(objFromDB);
         session.delete(objFromDB);
     }
 
@@ -56,5 +61,11 @@ public class EmployeeDAO implements DAO<Employee> {
         objFromDB.setEmail(obj.getEmail());
         objFromDB.setAge(obj.getAge());
         session.flush();
+    }
+
+    public static void initialize(Employee e) {
+        Hibernate.initialize(e);
+        e.getPositions().forEach(Hibernate::initialize);
+        e.getRoles().forEach(Hibernate::initialize);
     }
 }

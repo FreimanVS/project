@@ -1,4 +1,4 @@
-package listeners;
+package com.freimanvs.company.listeners;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequestAttributeEvent;

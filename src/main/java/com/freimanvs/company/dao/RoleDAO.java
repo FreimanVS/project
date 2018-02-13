@@ -28,19 +28,24 @@ public class RoleDAO implements DAO<Role> {
     public List<Role> getList() {
         Query<Role> query = session.createQuery("from Role", Role.class);
         List<Role> list = query.getResultList();
-        list.forEach(Hibernate::initialize);
+
+        if (list != null && !list.isEmpty())
+            list.forEach(RoleDAO::initialize);
+
         return list;
     }
 
     @Override
     public Role getById(long id) {
-        return session.get(Role.class, id);
+        Role role = session.get(Role.class, id);
+        initialize(role);
+        return role;
     }
 
     @Override
     public void deleteById(long id) {
         Role objFromDB = session.byId(Role.class).load(id);
-        Hibernate.initialize(objFromDB);
+        initialize(objFromDB);
         session.delete(objFromDB);
     }
 
@@ -50,5 +55,10 @@ public class RoleDAO implements DAO<Role> {
         objFromDB.setName(obj.getName());
         objFromDB.setEmpls(obj.getEmpls());
         session.flush();
+    }
+
+    public static void initialize(Role r) {
+        Hibernate.initialize(r);
+        r.getEmpls().forEach(Hibernate::initialize);
     }
 }

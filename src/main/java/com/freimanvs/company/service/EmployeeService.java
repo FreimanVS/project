@@ -37,18 +37,26 @@ public class EmployeeService implements Service<Employee> {
             //encode the password
             obj.setPassword(Encode.sha(obj.getPassword()));
 
-            //add a role
+            Role user = new RoleDAO(session).getById(1L);
+
+            //if admin
             if (obj.getLogin().equals("admin")) {
                 Role admin = new RoleDAO(session).getById(2L);
-                obj.getRoles().add(admin);
-            } else {
-                Role user = new RoleDAO(session).getById(1L);
                 obj.getRoles().add(user);
+                obj.getRoles().add(admin);
+                Position accounter = new PositionDAO(session).getById(3L);
+                Position director = new PositionDAO(session).getById(4L);
+                obj.getPositions().add(accounter);
+                obj.getPositions().add(director);
             }
 
-            //add a worker position
-            Position worker = new PositionDAO(session).getById(1L);
-            obj.getPositions().add(worker);
+            //others
+            else {
+                //add a worker position
+                Position worker = new PositionDAO(session).getById(1L);
+                obj.getPositions().add(worker);
+                obj.getRoles().add(user);
+            }
 
             long id = employeeDAO.add(obj);
             transaction.commit();

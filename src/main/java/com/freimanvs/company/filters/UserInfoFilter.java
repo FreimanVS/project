@@ -1,4 +1,4 @@
-package filters;
+package com.freimanvs.company.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
-@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = {"/*"}, asyncSupported = true)
 public class UserInfoFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

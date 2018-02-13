@@ -1,4 +1,4 @@
-package jsp;
+package com.freimanvs.company.jsp;
 
 import com.freimanvs.company.entities.Employee;
 import com.freimanvs.company.security.Encode;
@@ -16,7 +16,7 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/auth"})
 public class AuthServlet extends HttpServlet {
 
-    Service<Employee> employeeService = new EmployeeService();
+    private Service<Employee> employeeService = new EmployeeService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

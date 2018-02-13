@@ -29,19 +29,24 @@ public class PositionDAO implements DAO<Position> {
     public List<Position> getList() {
         Query<Position> query = session.createQuery("from Position", Position.class);
         List<Position> list = query.getResultList();
-        list.forEach(Hibernate::initialize);
+
+        if (list != null && !list.isEmpty())
+            list.forEach(PositionDAO::initialize);
+
         return list;
     }
 
     @Override
     public Position getById(long id) {
-        return session.get(Position.class, id);
+        Position pos = session.get(Position.class, id);
+        initialize(pos);
+        return pos;
     }
 
     @Override
     public void deleteById(long id) {
         Position objFromDB = session.byId(Position.class).load(id);
-        Hibernate.initialize(objFromDB);
+        initialize(objFromDB);
         session.delete(objFromDB);
     }
 
@@ -51,5 +56,10 @@ public class PositionDAO implements DAO<Position> {
         objFromDB.setName(obj.getName());
         objFromDB.setEmpls(obj.getEmpls());
         session.flush();
+    }
+
+    public static void initialize(Position p) {
+        Hibernate.initialize(p);
+        p.getEmpls().forEach(Hibernate::initialize);
     }
 }
