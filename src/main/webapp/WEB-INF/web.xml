@@ -28,11 +28,6 @@
     </jsp-property-group>
   </jsp-config>
 
-
-
-
-
-
    <!-- <resource-ref>
         <description>
             Resource reference to a factory for java.sql.Connection

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="userInfo" uri="/userInfo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -17,6 +18,9 @@
 </header>
 <main>
     <section>
+        <c:if test="${sessionScope.login ne null }">
+            <c:out value="Hello, ${sessionScope.login}!" escapeXml="true"></c:out>
+        </c:if>
         <article>
             <h2>ВХОД</h2>
             <div style="color:red;text-align: center";>${error}</div>
