@@ -26,6 +26,7 @@
         <mapping class="com.freimanvs.company.entities.Employee" />
         <mapping class="com.freimanvs.company.entities.Role" />
         <mapping class="com.freimanvs.company.entities.Position" />
+        <mapping class="com.freimanvs.company.analytics.model.Analytics" />
         <!--<mapping package="com.freimanvs.company"/>-->
     </session-factory>
 </hibernate-configuration>

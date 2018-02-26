@@ -81,6 +81,20 @@ public class InitDataBase {
                     "                CONSTRAINT fk_employee_position_employeeId FOREIGN KEY (employeeId) REFERENCES employee(id),\n" +
                     "                CONSTRAINT fk_employee_position_positionId FOREIGN KEY (positionId) REFERENCES company.position(id)\n" +
                     "        );").executeUpdate();
+
+            session.createNativeQuery("CREATE TABLE IF NOT EXISTS company.analytics (\n" +
+                    "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                    "marker_name VARCHAR(100) NULL,\n" +
+                    "jsp_name VARCHAR(100) NULL,\n" +
+                    "ip VARCHAR(100) NULL,\n" +
+                    "browser_info VARCHAR(10000) NULL,\n" +
+                    "client_time DATETIME NULL,\n" +
+                    "server_time DATETIME NULL,\n" +
+                    "login VARCHAR(100) NULL,\n" +
+                    "cookie VARCHAR(10000) NULL,\n" +
+                    "prev_id BIGINT NULL,\n" +
+                    "PRIMARY KEY (id)\n" +
+                    ");").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -170,6 +184,7 @@ public class InitDataBase {
             session.createNativeQuery("DROP TABLE IF EXISTS company.employee;").executeUpdate();
             session.createNativeQuery("DROP TABLE IF EXISTS company.position;").executeUpdate();
             session.createNativeQuery("DROP TABLE IF EXISTS company.role;").executeUpdate();
+            session.createNativeQuery("DROP TABLE IF EXISTS company.analytics;").executeUpdate();
 
             transaction.commit();
 
@@ -192,12 +207,10 @@ public class InitDataBase {
     private static void removePosition() {
         PositionService positionService = new PositionService(session);
         positionService.getList().forEach(p -> positionService.deleteById(p.getId()));
-
     }
 
     private static void removeEmployee() {
         EmployeeService employeeService = new EmployeeService(session);
         employeeService.getList().forEach(e -> employeeService.deleteById(e.getId()));
-
     }
 }

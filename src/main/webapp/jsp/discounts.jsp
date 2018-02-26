@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="userInfo" uri="/userInfo" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -12,7 +13,7 @@
 </head>
 <body>
 <header>
-    <jsp:include page="parts/header.jsp" />
+    <%@ include file="parts/header.jsp"%>
 </header>
 <main>
     <section>
@@ -38,10 +39,11 @@
     </section>
 </main>
 <aside>
-    <jsp:include page="parts/aside.jsp" />
+    <%@ include file="parts/aside.jsp"%>
 </aside>
 <footer>
-    <jsp:include page="parts/footer.jsp" />
+    <%@ include file="parts/footer.jsp"%>
+    <userInfo:userInfo></userInfo:userInfo>
 </footer>
 </body>
 </html>

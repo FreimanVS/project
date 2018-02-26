@@ -8,6 +8,9 @@ $(document).ready(function() {
         },
         success: function(data) {
             $("#curs").html(data);
+        },
+        error: function () {
+
         }
     });
 

@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-
     <section>
         <section id="social_media"><a href="https://vk.com/"><img src="https://pp.userapi.com/c837721/v837721567/5ce2a/oNTd2QBCi5Y.jpg"
                                                                   alt="vk" style="width:42px;height:42px;border:0;"></a>

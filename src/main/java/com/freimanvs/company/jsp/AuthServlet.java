@@ -33,6 +33,7 @@ public class AuthServlet extends HttpServlet {
         }
 
         if (exists) {
+            req.getSession().setAttribute("login", login);
             req.getRequestDispatcher("/jsp/data-base.jsp").forward(req, resp);
         } else {
             req.setAttribute("error", "Неверный логин либо пароль");

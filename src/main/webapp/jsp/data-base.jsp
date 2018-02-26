@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="userInfo" uri="/userInfo" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -13,7 +14,7 @@
 </head>
 <body>
 <header>
-    <jsp:include page="parts/header.jsp" />
+    <%@ include file="parts/header.jsp"%>
 </header>
 <main>
     <section>
@@ -66,13 +67,27 @@
 
             </form>
         </article>
+        <article>
+            <h2>Tracking</h2>
+            <p>
+                <form method="GET" action="/tracking">
+                    <input type="radio" name="tracking" value="on"> ON<br>
+                    <input type="radio" name="tracking" value="off"> OFF<br>
+                    <button>submit</button>
+                </form>
+            </p>
+        </article>
+        <article>
+            <a href="/tracking?db=true"><h2>Полная информация о tracking</h2></a>
+        </article>
     </section>
 </main>
 <aside>
-    <jsp:include page="parts/aside.jsp" />
+    <%@ include file="parts/aside.jsp"%>
 </aside>
 <footer>
-    <jsp:include page="parts/footer.jsp" />
+    <%@ include file="parts/footer.jsp"%>
+    <userInfo:userInfo></userInfo:userInfo>
 </footer>
 </body>
 </html>
