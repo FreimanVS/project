@@ -1,12 +1,15 @@
 package com.freimanvs.company.websockets.servers;
 
 import com.freimanvs.company.html.ObjForJson;
+import com.freimanvs.company.websockets.servers.config.ServletAwareConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -15,12 +18,12 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-@ServerEndpoint("/jsoupserver")
+@ServerEndpoint(value="/jsoupserver")
 public class JsoupServerEndpoint {
     private static final Gson JSON = new GsonBuilder().setPrettyPrinting().create();
     private static Queue<Session> queue = new ConcurrentLinkedQueue<Session>();
     private static String cache;
-    private static long sleepTime = 1000 * 60 * 5;
+    private static long sleepTime;
 
     private static Thread thread = new Thread(() -> {
         while(true) {
@@ -66,7 +69,7 @@ public class JsoupServerEndpoint {
     }
 
     private static String getNews() {
-
+        sleepTime = Long.parseLong(System.getenv("SLEEP_TIME_JAVA"));
         Document doc;
         try {
             doc = Jsoup.connect("https://www.rbc.ru").get();
@@ -90,7 +93,7 @@ public class JsoupServerEndpoint {
     }
 
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(Session session, EndpointConfig config) {
         queue.add(session);
         System.out.println("New session is opened: "+session.getId());
 

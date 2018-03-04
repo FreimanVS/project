@@ -2,11 +2,14 @@ package com.freimanvs.company.websockets.servers;
 
 import com.freimanvs.company.analytics.model.Analytics;
 import com.freimanvs.company.util.HibernateUtil;
+import com.freimanvs.company.websockets.servers.config.ServletAwareConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -17,11 +20,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @ServerEndpoint(value = "/trackingserver")
 public class TrackingServerEndpoint {
-
     private static final Gson JSON = new GsonBuilder().setPrettyPrinting().create();
-    private static Queue<Session> queue = new ConcurrentLinkedQueue<Session>();
+    private static Queue<Session> queue = new ConcurrentLinkedQueue<>();
     private static String cache;
-    private static long sleepTime =  1000 * 60 * 5;
+    private static long sleepTime;
 
     private static Thread thread = new Thread(() -> {
         while(true) {
@@ -67,9 +69,10 @@ public class TrackingServerEndpoint {
     }
 
     private static String getTrackingDB() {
-
+        sleepTime = Long.parseLong(System.getenv("SLEEP_TIME_JAVA"));
         org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
+
 
         List<Analytics> list = null;
 
@@ -108,7 +111,7 @@ public class TrackingServerEndpoint {
     }
 
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(Session session, EndpointConfig config) {
         queue.add(session);
         System.out.println("New session is opened: "+session.getId());
 

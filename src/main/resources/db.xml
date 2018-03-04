@@ -179,17 +179,17 @@
         <login>admin</login>
         <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
         <phoneNumber>+73723482347</phoneNumber>
-        <positions id="3">
-            <name>Accounter</name>
-        </positions>
         <positions id="4">
             <name>Director</name>
         </positions>
-        <roles id="1">
-            <name>user</name>
-        </roles>
+        <positions id="3">
+            <name>Accounter</name>
+        </positions>
         <roles id="2">
             <name>admin</name>
+        </roles>
+        <roles id="1">
+            <name>user</name>
         </roles>
         <salary>50000.0</salary>
     </employee>

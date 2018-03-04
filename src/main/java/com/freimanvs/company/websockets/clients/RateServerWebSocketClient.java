@@ -25,7 +25,6 @@ public class RateServerWebSocketClient {
     public static void main(String[] args) throws Exception {
         Session session = null;
         try {
-            //Tyrus is plugged via ServiceLoader API. See notes above
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
             session = container.connectToServer(RateServerWebSocketClient.class, URI.create("ws://localhost:8080/rateserver"));
             wait4TerminateSignal();

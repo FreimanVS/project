@@ -22,19 +22,18 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @ServerEndpoint(value = "/rateserver", configurator=ServletAwareConfig.class)
 public class RateServerEndpoint {
-
     private static EndpointConfig config;
     private static Queue<Session> queue = new ConcurrentLinkedQueue<Session>();
-
     private static String cache;
-    private static long sleepTime =  1000 * 60 * 5;
+    private static long sleepTime;
+
     private static Thread rateThread = new Thread(() -> {
         while(true) {
             try {
                 if(queue != null) {
                     ArrayList<Session> closedSessions = new ArrayList<>();
-
                     String result = getRate();
+                    System.out.println("SLEEP_TIME: " + sleepTime);
                     if (!result.equals(cache)) {
                         for (Session session : queue) {
                             if(!session.isOpen()) {
@@ -72,6 +71,7 @@ public class RateServerEndpoint {
     }
 
     private static String getRate() {
+        sleepTime = Long.parseLong(System.getenv("SLEEP_TIME_JAVA"));
         HttpSession httpSession = (HttpSession) config.getUserProperties().get("httpSession");
         ServletContext servletContext = httpSession.getServletContext();
 
