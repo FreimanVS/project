@@ -17,5 +17,6 @@
             <li><a href="<%= request.getContextPath() %>/discounts">СКИДКИ</a></li>
             <li><a href="<%= request.getContextPath() %>/admin">АДМИНСКАЯ</a></li>
             <li><a href="<%= request.getContextPath() %>/contact">КОНТАКТЫ</a></li>
+            <li><a href="<%= request.getContextPath() %>/chat">ЧАТ</a></li>
         </ul>
     </nav>

@@ -54,7 +54,7 @@
         </article>
         <article>
             <h2>User info</h2>
-            <p><userInfo:userInfo></userInfo:userInfo></p>
+            <p><userInfo:userInfo /></p>
         </article>
     </section>
 </main>

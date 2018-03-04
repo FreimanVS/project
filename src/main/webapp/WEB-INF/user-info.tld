@@ -11,7 +11,8 @@
     <tag>
         <name>userInfo</name>
         <tag-class>com.freimanvs.company.analytics.tags.UserInfoTag</tag-class>
-        <body-content>tagdependent</body-content>
+        <!--<body-content>tagdependent</body-content>-->
+        <body-content>empty</body-content>
     </tag>
 
     <!-- Invoke 'Generate' action to add tags or functions -->

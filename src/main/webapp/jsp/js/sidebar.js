@@ -1,19 +1,40 @@
 $(document).ready(function() {
-    $.ajax({
-        url: "/xslt",
-        type: "GET",
-        data: ({}),
-        dataType: "html",
-        beforeSend: function() {
-        },
-        success: function(data) {
-            $("#curs").html(data);
-        },
-        error: function () {
+    //rate on ajax
+    // $.ajax({
+    //     url: "/xslt",
+    //     type: "GET",
+    //     data: ({}),
+    //     dataType: "html",
+    //     beforeSend: function() {
+    //     },
+    //     success: function(data) {
+    //         $("#curs").html(data);
+    //     },
+    //     error: function () {
+    //
+    //     }
+    // });
 
+    // rate on websocket
+    var wsocket;
+
+    function onMessage(evt) {
+        var jsonarr = JSON.parse(evt.data).valute;
+
+        if (jsonarr.length != 0) {
+
+            var appendJson = "<ul style='list-style-type:none;'>";
+            for (var i = 0; i < jsonarr.length; i++) {
+                appendJson = appendJson + "<li>" + jsonarr[i].charcode + " <span style='padding-left: 0.5em'>"
+                    + jsonarr[i].value + "</span></li></br>";
+            }
+            appendJson = appendJson + "</ul>";
+
+            $("#curs").html(appendJson);
         }
-    });
+    }
 
+    //geolocation
     function displayLocation(latitude,longitude){
         var request = new XMLHttpRequest();
 
@@ -63,13 +84,39 @@ $(document).ready(function() {
 
     navigator.geolocation.getCurrentPosition(successCallback,errorCallback,options);
 
-    $.getJSON( "/jsoup", function( data ) {
-        var appendJson = "<ul style='list-style-type:none;'>";
-        for (var i = 0; i < data.length; i++) {
-            appendJson = appendJson + "<li>" + data[i].name + "</li></br>";
-        }
-        appendJson = appendJson + "</ul>";
-        $("#news").html(appendJson);
+    //news on ajax
+    // $.getJSON( "/jsoup", function( data ) {
+    //     var appendJson = "<ul style='list-style-type:none;'>";
+    //     for (var i = 0; i < data.length; i++) {
+    //         appendJson = appendJson + "<li>" + data[i].name + "</li></br>";
+    //     }
+    //     appendJson = appendJson + "</ul>";
+    //     $("#news").html(appendJson);
+    //
+    // });
 
-    });
+    //news on websocket
+    var wsocket2;
+    function onMessage2(evt) {
+        var jsonarr = JSON.parse(evt.data);
+        if (jsonarr.length != 0) {
+            var appendJson = "<ul style='list-style-type:none;'>";
+
+            for (var i = 0; i < jsonarr.length; i++) {
+                appendJson = appendJson + "<li>" + jsonarr[i].name + "</li></br>";
+            }
+            appendJson = appendJson + "</ul>";
+            $("#news").html(appendJson);
+        }
+    }
+
+    function connect() {
+        wsocket = new WebSocket("ws://localhost:8080/rateserver");
+        wsocket.onmessage = onMessage;
+
+        wsocket2 = new WebSocket("ws://localhost:8080/jsoupserver");
+        wsocket2.onmessage = onMessage2;
+    }
+
+    connect();
 });

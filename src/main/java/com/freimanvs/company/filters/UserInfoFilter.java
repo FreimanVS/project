@@ -22,19 +22,29 @@ public class UserInfoFilter implements Filter {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse resp = (HttpServletResponse) response;
 
-            if (req.getCookies() == null || Arrays.stream(req.getCookies()).noneMatch(
-                    cookie -> cookie.getName().equals("browser-version") && cookie.getValue().equals("ok"))) {
+            //not to filter web sockets
+            if (req.getRequestURI().equals("/jsoupserver")
+                    || req.getRequestURI().equals("/rateserver")
+                    || req.getRequestURI().equals("/trackingserver")) {
 
-                String userAgent = req.getHeader("User-Agent");
-
-                if (browserIsUpToDate(userAgent))
-                    req.getRequestDispatcher(req.getContextPath() + "/jsp/up-to-date.jsp").forward(request, response);
-                else {
-                    resp.addCookie(new Cookie("browser-version", "ok"));
-                    chain.doFilter(request, response);
-                }
-            } else
                 chain.doFilter(request, response);
+
+            } else {
+
+                if (req.getCookies() == null || Arrays.stream(req.getCookies()).noneMatch(
+                        cookie -> cookie.getName().equals("browser-version") && cookie.getValue().equals("ok"))) {
+
+                    String userAgent = req.getHeader("User-Agent");
+
+                    if (browserIsUpToDate(userAgent))
+                        req.getRequestDispatcher(req.getContextPath() + "/jsp/up-to-date.jsp").forward(request, response);
+                    else {
+                        resp.addCookie(new Cookie("browser-version", "ok"));
+                        chain.doFilter(request, response);
+                    }
+                } else
+                    chain.doFilter(request, response);
+            }
         }
     }
 

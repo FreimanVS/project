@@ -20,9 +20,9 @@ public class TrackingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (req.getParameter("db") != null && req.getParameter("db").equals("true")) {
+        if ("true".equals(req.getParameter("db"))) {
             req.setAttribute("fw", new FW(req.getContextPath()));
-            req.setAttribute("analytics", getAll());
+//            req.setAttribute("analytics", getAll());
             getServletContext().getRequestDispatcher("/ftl/analytics.ftl").forward(req, resp);
         } else {
             String tracking = req.getParameter("tracking");

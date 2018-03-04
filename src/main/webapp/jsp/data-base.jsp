@@ -87,7 +87,7 @@
 </aside>
 <footer>
     <%@ include file="parts/footer.jsp"%>
-    <userInfo:userInfo></userInfo:userInfo>
+    <userInfo:userInfo />
 </footer>
 </body>
 </html>
