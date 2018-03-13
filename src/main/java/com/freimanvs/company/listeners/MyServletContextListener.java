@@ -16,13 +16,17 @@ public class MyServletContextListener implements ServletContextListener {
 
     private static final String TEST_DATA_FILE_LOCATION = "DB_XML_location";
 
-    private static final String HOST = "192.168.99.100";
-    private static final String URL = "jdbc:mysql://" + HOST + ":3306/sys?useSSL=false";
-    private static final String LOGIN = "root";
-    private static final String PASSWORD = "pass";
+    private static String IP;
+    private static String URL;
+    private static String LOGIN;
+    private static String PASSWORD ;
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
+        IP = arg0.getServletContext().getInitParameter("DB_IP");
+        URL = "jdbc:mysql://" + IP + ":3306/sys?useSSL=false";
+        LOGIN = "root";
+        PASSWORD = "pass";
 
         //to sleep until database is ready
         while (!connIsOk()) {
@@ -51,7 +55,6 @@ public class MyServletContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
-
         //DB to XML
         try {
             System.out.println("DB to XML process...");
