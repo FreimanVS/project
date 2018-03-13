@@ -1,3 +1,7 @@
+var ip = location.hostname;
+var port = location.port;
+var contextPath = $('#contextPathHolder').attr('data-contextPath');
+
 function validAge(age) {
     return age.match(/^[1-9][\d]{0,2}$/);
 }
@@ -19,7 +23,7 @@ function validEmail(email) {
 }
 
 function getAll() {
-    $.getJSON( "/employees", function(data) {
+    $.getJSON(contextPath + "/employees", function(data) {
         var appendJson ="<table><caption><b>РАБОТНИКИ</b></caption>" +
             "<thead><tr>" +
             "<th>id</th>" +
@@ -196,7 +200,7 @@ function getAll() {
             var json_employee = JSON.stringify(employee);
 
             $.ajax({
-                url: "/employees",
+                url: contextPath + "/employees",
                 type: "POST",
                 data: json_employee,
                 dataType: "JSON",
@@ -219,7 +223,7 @@ function getAll() {
             }
             var id = this.value;
             $.ajax({
-                url: "/employees?id=" + id,
+                url: contextPath + "/employees?id=" + id,
                 type: "DELETE",
                 data: ({}),
                 dataType: "html",
@@ -316,7 +320,7 @@ function getAll() {
             var json_data = JSON.stringify(this_data);
 
             $.ajax({
-                url: "/employees?id=" + id,
+                url: contextPath + "/employees?id=" + id,
                 type: "PUT",
                 data: json_data,
                 dataType: "JSON",

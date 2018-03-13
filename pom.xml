@@ -92,19 +92,19 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/src/main/resources/xml-resource-factory.jar</systemPath>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>com.freimanvs.resources</groupId>-->
-      <!--<artifactId>XmlToObjFactory</artifactId>-->
-      <!--<version>1.0</version>-->
-      <!--<scope>system</scope>-->
-      <!--<systemPath>${project.basedir}/src/main/resources/xml-to-obj-factory.jar</systemPath>-->
-    <!--</dependency>-->
     <dependency>
       <groupId>com.freimanvs.resources</groupId>
-      <artifactId>xml-to-obj-factory</artifactId>
+      <artifactId>XmlToObjFactory</artifactId>
       <version>1.0</version>
-      <scope>compile</scope>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/xml-to-obj-factory.jar</systemPath>
     </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.freimanvs.resources</groupId>-->
+      <!--<artifactId>xml-to-obj-factory</artifactId>-->
+      <!--<version>1.0</version>-->
+      <!--<scope>compile</scope>-->
+    <!--</dependency>-->
     <!-- JSON libraries  -->
     <dependency>
       <groupId>com.google.code.gson</groupId>

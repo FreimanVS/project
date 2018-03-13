@@ -12,6 +12,6 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(req.getContextPath() + "/jsp/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
     }
 }

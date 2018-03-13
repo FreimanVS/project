@@ -22,9 +22,10 @@ public class UserInfoTag extends BodyTagSupport {
             JspWriter jspWriter = pageContext.getOut();
             try {
                 jspWriter.println("<script>\n" +
+                        "var contextPath = $('#contextPathHolder').attr('data-contextPath');" +
                         "                $(function () {\n" +
                         "                    $.ajax({\n" +
-                        "                        url: \"/analytics?time=\" + + new Date()" +
+                        "                        url: contextPath + \"/analytics?time=\" + + new Date()" +
                         " + \"&jsp=" + jspName + "\",\n" +
                         "                        type: \"GET\",\n" +
                         "                        data: ({}),\n" +

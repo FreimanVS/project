@@ -1,3 +1,5 @@
+var contextPath = $('#contextPathHolder').attr('data-contextPath');
+
 function makeRequestWithPromise(method, url) {
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
@@ -26,7 +28,7 @@ $(document).ready(function() {
     var scriptElement = document.getElementById('scriptText');
     scriptElement.addEventListener('blur', function(){
 
-        makeRequestWithPromise('GET', '/js?text=' + scriptElement.value)
+        makeRequestWithPromise('GET', contextPath + '/js?text=' + scriptElement.value)
             .then(function (datums) {
                 $('#nashornResult').val(datums);
             })

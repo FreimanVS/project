@@ -1,4 +1,7 @@
-var ws = new WebSocket("ws://localhost:8080/chatserver");
+var ip = location.hostname;
+var port = location.port;
+var contextPath = $('#contextPathHolder').attr('data-contextPath');
+var ws = new WebSocket("ws://" + ip + ":" + port + contextPath + "/chatserver");
 
 function init() {
     ws.onopen = function(event) {

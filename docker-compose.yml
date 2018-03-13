@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    image: "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: "pass"
+      MYSQL_DATABASE: "company"
+    ports:
+      - "3306:3306"
+  web:
+    build: .
+    ports:
+      - "8081:8080"
+    links:
+      - "db"

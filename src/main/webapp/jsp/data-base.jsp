@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" media="all" type="text/css" href="<%= request.getContextPath() %>/jsp/css/style.css" />
+    <link id="contextPathHolder" data-contextPath="${pageContext.request.contextPath}"/>
     <title>База данных</title>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
     <script src="<%= request.getContextPath() %>/jsp/js/sidebar.js" type="text/javascript"></script>
@@ -24,7 +25,7 @@
         </article>
         <article>
             <h2>ПОИСК</h2>
-            <form action="/search" method="POST">
+            <form action="${pageContext.request.contextPath}/search" method="POST">
                 <label for="search1">Login: </label>
                 <input id="search1" name="login" type="text"/>
 
@@ -70,7 +71,7 @@
         <article>
             <h2>Tracking</h2>
             <p>
-                <form method="GET" action="/tracking">
+                <form method="GET" action="${pageContext.request.contextPath}/tracking">
                     <input type="radio" name="tracking" value="on"> ON<br>
                     <input type="radio" name="tracking" value="off"> OFF<br>
                     <button>submit</button>
@@ -78,7 +79,7 @@
             </p>
         </article>
         <article>
-            <a href="/tracking?db=true"><h2>Полная информация о tracking</h2></a>
+            <a href="${pageContext.request.contextPath}/tracking?db=true"><h2>Полная информация о tracking</h2></a>
         </article>
     </section>
 </main>

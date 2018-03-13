@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ContactServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(req.getContextPath() + "/jsp/contact.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/contact.jsp").forward(req, resp);
 
     }
 }

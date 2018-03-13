@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" media="all" type="text/css" href="<%= request.getContextPath() %>/jsp/css/style.css" />
+    <link id="contextPathHolder" data-contextPath="${pageContext.request.contextPath}"/>
     <title>Вход</title>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
     <script src="<%= request.getContextPath() %>/jsp/js/sidebar.js" type="text/javascript"></script>
@@ -24,7 +25,7 @@
         <article>
             <h2>ВХОД</h2>
             <div style="color:red;text-align: center";>${error}</div>
-            <form action="/auth" method="POST">
+            <form action="${pageContext.request.contextPath}/auth" method="POST">
                 <input name="login" type="text" placeholder="Имя пользователя" required="required" size="25"
                        minlength="5" maxlength="15" autofocus/>
                 <input name="password" type="password" placeholder="Пароль" required="required" size="25"

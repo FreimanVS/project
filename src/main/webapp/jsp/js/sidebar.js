@@ -1,7 +1,11 @@
+var ip = location.hostname;
+var port = location.port;
+var contextPath = $('#contextPathHolder').attr('data-contextPath');
+
 $(document).ready(function() {
     //rate on ajax
     // $.ajax({
-    //     url: "/xslt",
+    //     url: contextPath + "/xslt",
     //     type: "GET",
     //     data: ({}),
     //     dataType: "html",
@@ -85,7 +89,7 @@ $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(successCallback,errorCallback,options);
 
     //news on ajax
-    // $.getJSON( "/jsoup", function( data ) {
+    // $.getJSON(contextPath + "/jsoup", function( data ) {
     //     var appendJson = "<ul style='list-style-type:none;'>";
     //     for (var i = 0; i < data.length; i++) {
     //         appendJson = appendJson + "<li>" + data[i].name + "</li></br>";
@@ -111,10 +115,10 @@ $(document).ready(function() {
     }
 
     function connect() {
-        wsocket = new WebSocket("ws://localhost:8080/rateserver");
+        wsocket = new WebSocket("ws://" + ip + ":" + port + contextPath + "/rateserver");
         wsocket.onmessage = onMessage;
 
-        wsocket2 = new WebSocket("ws://localhost:8080/jsoupserver");
+        wsocket2 = new WebSocket("ws://" + ip + ":" + port + contextPath + "/jsoupserver");
         wsocket2.onmessage = onMessage2;
     }
 

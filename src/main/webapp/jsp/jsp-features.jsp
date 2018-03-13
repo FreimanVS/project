@@ -9,6 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" media="all" type="text/css" href="${pageContext.request.contextPath}/jsp/css/style.css" />
+    <link id="contextPathHolder" data-contextPath="${pageContext.request.contextPath}"/>
     <title>JPS features</title>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/jsp/js/sidebar.js" type="text/javascript"></script>

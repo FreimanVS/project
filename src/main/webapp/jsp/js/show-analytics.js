@@ -1,3 +1,7 @@
+var ip = location.hostname;
+var port = location.port;
+var contextPath = $('#contextPathHolder').attr('data-contextPath');
+
 $(document).ready(function() {
     var wsocket2;
     function onMessage2(evt) {
@@ -47,7 +51,7 @@ $(document).ready(function() {
     }
 
     function connect() {
-        wsocket2 = new WebSocket("ws://localhost:8080/trackingserver");
+        wsocket2 = new WebSocket("ws://" + ip + ":" + port + contextPath + "/trackingserver");
         wsocket2.onmessage = onMessage2;
     }
     connect();

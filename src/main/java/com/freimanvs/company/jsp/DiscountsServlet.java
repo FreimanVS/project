@@ -11,7 +11,7 @@ import java.io.IOException;
 public class DiscountsServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(req.getContextPath() + "/jsp/discounts.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/discounts.jsp").forward(req, resp);
 
     }
 }
