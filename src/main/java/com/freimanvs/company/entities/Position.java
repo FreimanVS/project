@@ -28,7 +28,7 @@ public class Position implements Serializable {
 
     @ApiParam(value = "name", required = true)
     @NotBlank
-    @Size(min = 3)
+    @Size(min = 2)
     @Column(name="name")
     private String name;
 

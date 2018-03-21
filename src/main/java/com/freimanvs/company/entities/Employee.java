@@ -48,7 +48,7 @@ public class Employee implements Serializable {
 
     @ApiParam(value = "department", required = true)
     @NotBlank
-    @Size(min = 5)
+    @Size(min = 2)
     @Column(name="department")
     private String department;
 
