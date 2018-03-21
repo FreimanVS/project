@@ -30,6 +30,24 @@
                 <textarea id="nashornResult" style="height:400px;width:600px;" disabled></textarea>
             </p>
         </article>
+        <article>
+            <h2>SWAGGER</h2>
+            <p>
+                <a href="${pageContext.request.contextPath}/jsp/swagger.html">to a swagger page</a>
+            </p>
+        </article>
+        <article>
+            <h2>PAYMENTS</h2>
+            <p>
+                <a href="${pageContext.request.contextPath}/jsp/calculate.jsp">to a payment page</a>
+            </p>
+        </article>
+        <article>
+            <h2>COMPARE JERSEY TO SERVLET</h2>
+            <p>
+                <a href="${pageContext.request.contextPath}/compare">click to find out the result</a>
+            </p>
+        </article>
     </section>
 </main>
 <aside>

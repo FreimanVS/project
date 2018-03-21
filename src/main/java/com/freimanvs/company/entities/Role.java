@@ -1,7 +1,11 @@
 package com.freimanvs.company.entities;
 
+import io.swagger.annotations.ApiParam;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,12 +19,16 @@ import java.util.Set;
 @Table(name = "role", schema = "company")
 public class Role implements Serializable {
 
-    @JsonbTransient
+    @ApiParam(value = "id")
+//    @JsonbTransient
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
 
+    @ApiParam(value = "name", required = true)
+    @NotBlank
+    @Size(min = 3)
     @Column(name = "name")
     private String name;
 

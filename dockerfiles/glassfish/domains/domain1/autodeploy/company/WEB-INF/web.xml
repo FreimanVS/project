@@ -11,14 +11,15 @@
 
   <context-param>
     <param-name>DB_XML_location</param-name>
-    <param-value>file:///K:/Otus/project-masterREST/src/main/resources/db.xml</param-value>
+    <!--<param-value>file:///K:/Otus/project/src/main/resources/db.xml</param-value>-->
     <!--<param-value>file:///usr/local/tomcat/webapps/company/WEB-INF/classes/db.xml</param-value>-->
+	<param-value>file:///glassfish5/glassfish/domains/domain1/autodeploy/company/WEB-INF/classes/db.xml</param-value>
   </context-param>
 
   <context-param>
     <param-name>DB_IP</param-name>
-    <param-value>localhost</param-value>
-    <!--<param-value>192.168.99.100</param-value>-->
+    <!--<param-value>localhost</param-value>-->
+    <param-value>db</param-value>
   </context-param>
 
   <session-config>
@@ -34,20 +35,6 @@
       <page-encoding>UTF-8</page-encoding>
     </jsp-property-group>
   </jsp-config>
-
-  <!-- <servlet>
-        <servlet-name>Jersey REST Service</servlet-name>
-        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.freimanvs.company.rest</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Jersey REST Service</servlet-name>
-        <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>-->
 
    <!-- <resource-ref>
         <description>

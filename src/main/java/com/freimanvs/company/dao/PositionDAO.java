@@ -53,6 +53,7 @@ public class PositionDAO implements DAO<Position> {
     @Override
     public void updateById(long id, Position obj) {
         Position objFromDB = session.byId(Position.class).load(id);
+        initialize(objFromDB);
         objFromDB.setName(obj.getName());
         objFromDB.setEmpls(obj.getEmpls());
         session.flush();

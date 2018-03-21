@@ -52,6 +52,7 @@ public class RoleDAO implements DAO<Role> {
     @Override
     public void updateById(long id, Role obj) {
         Role objFromDB = session.byId(Role.class).load(id);
+        initialize(objFromDB);
         objFromDB.setName(obj.getName());
         objFromDB.setEmpls(obj.getEmpls());
         session.flush();

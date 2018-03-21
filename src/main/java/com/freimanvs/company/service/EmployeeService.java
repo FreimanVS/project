@@ -13,7 +13,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class EmployeeService implements Service<Employee> {
     private Session session;
@@ -37,26 +40,26 @@ public class EmployeeService implements Service<Employee> {
             //encode the password
             obj.setPassword(Encode.sha(obj.getPassword()));
 
-            Role user = new RoleDAO(session).getById(1L);
-
-            //if admin
-            if (obj.getLogin().equals("admin")) {
-                Role admin = new RoleDAO(session).getById(2L);
-                obj.getRoles().add(user);
-                obj.getRoles().add(admin);
-                Position accounter = new PositionDAO(session).getById(3L);
-                Position director = new PositionDAO(session).getById(4L);
-                obj.getPositions().add(accounter);
-                obj.getPositions().add(director);
-            }
-
-            //others
-            else {
-                //add a worker position
-                Position worker = new PositionDAO(session).getById(1L);
-                obj.getPositions().add(worker);
-                obj.getRoles().add(user);
-            }
+//            Role user = new RoleDAO(session).getById(1L);
+//
+//            //if admin
+//            if (obj.getLogin().equals("admin")) {
+//                Role admin = new RoleDAO(session).getById(2L);
+//                obj.getRoles().add(user);
+//                obj.getRoles().add(admin);
+//                Position accounter = new PositionDAO(session).getById(3L);
+//                Position director = new PositionDAO(session).getById(4L);
+//                obj.getPositions().add(accounter);
+//                obj.getPositions().add(director);
+//            }
+//
+//            //others
+//            else {
+//                //add a worker position
+//                Position worker = new PositionDAO(session).getById(1L);
+//                obj.getPositions().add(worker);
+//                obj.getRoles().add(user);
+//            }
 
             long id = employeeDAO.add(obj);
             transaction.commit();
@@ -108,6 +111,7 @@ public class EmployeeService implements Service<Employee> {
     public void updateById(long id, Employee obj) {
         Transaction transaction = session.beginTransaction();
         try {
+            obj.setPassword(Encode.sha(obj.getPassword()));
             employeeDAO.updateById(id, obj);
             transaction.commit();
         } catch (Exception e) {

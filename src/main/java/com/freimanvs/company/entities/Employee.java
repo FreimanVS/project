@@ -1,10 +1,18 @@
 package com.freimanvs.company.entities;
 
 
+import io.swagger.annotations.ApiParam;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,44 +22,71 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "employee")
 public class Employee implements Serializable {
 
+    @ApiParam(value = "id")
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
 
+    @ApiParam(value = "login", required = true)
+    @NotBlank
+    @Size(min = 5)
     @Column(name="login")
     private String login;
 
+    @ApiParam(value = "password", required = true)
+    @NotBlank
+    @Size(min = 5)
     @Column(name="password")
     private String password;
 
+    @ApiParam(value = "fio", required = true)
+    @NotBlank
+    @Size(min = 5)
     @Column(name="fio")
     private String fio;
 
+    @ApiParam(value = "department", required = true)
+    @NotBlank
+    @Size(min = 5)
     @Column(name="department")
     private String department;
 
+    @ApiParam(value = "city", required = true)
+    @NotBlank
+    @Size(min = 5)
     @Column(name="city")
     private String city;
 
+    @ApiParam(value = "salary", required = true)
+    @Min(value = 0)
     @Column(name="salary")
     private double salary;
 
+    @ApiParam(value = "phoneNumber", required = true)
+    @Pattern(regexp = "^[+][1-9][\\d]{5,10}$", message = "{employee.phoneNumber.pattern}")
     @Column(name="phoneNumber")
     private String phoneNumber;
 
+    @ApiParam(value = "email", required = true)
+    @Email
     @Column(name="email")
     private String email;
 
+    @ApiParam(value = "age", required = true)
+    @Min(18)
+    @Max(80)
     @Column(name="age")
     private int age;
 
+    @ApiParam(value = "positions", required = true)
     @ManyToMany()
     @JoinTable(name = "employee_position", joinColumns = {
             @JoinColumn(name = "employeeId")},
             inverseJoinColumns = {@JoinColumn(name = "positionId")})
     private Set<Position> positions = new HashSet<>();
 
+    @ApiParam(value = "roles", required = true)
     @ManyToMany()
     @JoinTable(name = "employee_role", joinColumns = {
             @JoinColumn(name = "employeeId")},
