@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Api(tags = "Differential Payment Service Swagger-generated API", produces = MediaType.TEXT_HTML)
-@Path("/bank/v1")
+@Path("/bank/v1/calculations")
 public class DifferentialPaymentService implements Calculator {
 
     @ApiOperation(value = "calcuate")
@@ -17,6 +17,7 @@ public class DifferentialPaymentService implements Calculator {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
+	@Path("/1")
     @Override
     public Response calculate(@ApiParam(value = "количество периодов оплаты", required = true)
                                   @FormParam("t") int t,

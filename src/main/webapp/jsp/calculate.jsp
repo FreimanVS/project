@@ -20,7 +20,7 @@
         <article>
             <h2>дифференцированный платеж</h2>
             <p>
-            <form action="${pageContext.request.contextPath}/api/bank/v1" method="POST">
+            <form action="${pageContext.request.contextPath}/api/bank/v1/calculations/1" method="POST">
                 <div>
                     <input name="t" type="number" placeholder="количество периодов оплаты"/>
                 </div>
@@ -36,7 +36,7 @@
 
             <h2>аннуитетный платеж</h2>
             <p>
-            <form action="${pageContext.request.contextPath}/api/bank/v2" method="POST">
+            <form action="${pageContext.request.contextPath}/api/bank/v2/calculations/1" method="POST">
                 <div>
                     <input name="t" type="number" placeholder="количество периодов оплаты"/>
                 </div>
