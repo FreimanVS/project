@@ -51,6 +51,30 @@
             </p>
         </article>
 
+        <article>
+            <h2>налог на прибыль</h2>
+            <p>
+            <form action="${pageContext.request.contextPath}/taxcalc" method="POST">
+                <div>
+                    <input name="d0" type="number" placeholder="доходы (от реализации и внереализационные) нарастающим итогом с начала года"/>
+                </div>
+                <div>
+                    <input name="r0" type="number" placeholder=" расходы (связанные с производством и реализацией и внереализационные)"/>
+                </div>
+                <div>
+                    <input name="ns" type="number" placeholder="- налоговая ставка отчетного периода (год)"/>
+                </div>
+                <input type="submit" value="сосчитать"/>
+            </form>
+            </p>
+        </article>
+
+        <article>
+            <h2>Информация о зарплатах</h2>
+            <p>
+                <a href="${pageContext.request.contextPath}/salary">to a salary info page</a>
+            </p>
+        </article>
     </section>
 </main>
 <aside>

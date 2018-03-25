@@ -17,6 +17,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@NamedStoredProcedureQuery(
+        name="with_max_salary",
+        procedureName="with_max_salary",
+        resultClasses = { Employee.class }
+)
+
 @XmlRootElement
 @Entity
 @Table(name = "employee")

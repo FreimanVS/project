@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @ServerEndpoint(value="/jsoupserver")
 public class JsoupServerEndpoint {
     private static final Gson JSON = new GsonBuilder().setPrettyPrinting().create();
-    private static Queue<Session> queue = new ConcurrentLinkedQueue<Session>();
+    private static Queue<Session> queue = new ConcurrentLinkedQueue<>();
     private static String cache;
     private static long sleepTime;
 

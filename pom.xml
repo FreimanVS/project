@@ -264,6 +264,43 @@
           <warSourceDirectory>src/main/webapp</warSourceDirectory>
         </configuration>
       </plugin>
+
+      <!-- usage of jax-ws maven plugin-->
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.mojo</groupId>-->
+        <!--<artifactId>jaxws-maven-plugin</artifactId>-->
+        <!--<version>1.12</version>-->
+        <!--<executions>-->
+          <!--<execution>-->
+            <!--<id>wsimport-from-jdk</id>-->
+            <!--<goals>-->
+              <!--<goal>wsimport</goal>-->
+            <!--</goals>-->
+          <!--</execution>-->
+        <!--</executions>-->
+        <!--<configuration>-->
+          <!--&lt;!&ndash; using wsdl from an url &ndash;&gt;-->
+          <!--<wsdlUrls>-->
+            <!--<wsdlUrl>-->
+              <!--&lt;!&ndash;http://localhost:8080/company/TaxCalculatorService?wsdl&ndash;&gt;-->
+              <!--http://www.webservicex.net/globalweather.asmx?WSDL-->
+            <!--</wsdlUrl>-->
+          <!--</wsdlUrls>-->
+          <!--&lt;!&ndash; or using wsdls file directory &ndash;&gt;-->
+          <!--&lt;!&ndash; <wsdlDirectory>src/wsdl</wsdlDirectory> &ndash;&gt;-->
+          <!--&lt;!&ndash; which wsdl file &ndash;&gt;-->
+          <!--&lt;!&ndash; <wsdlFiles> &ndash;&gt;-->
+          <!--&lt;!&ndash; <wsdlFile>myWSDL.wsdl</wsdlFile> &ndash;&gt;-->
+          <!--&lt;!&ndash;</wsdlFiles> &ndash;&gt;-->
+          <!--&lt;!&ndash; Keep generated files &ndash;&gt;-->
+          <!--<keep>true</keep>-->
+          <!--&lt;!&ndash; Package name &ndash;&gt;-->
+          <!--<packageName>com.freimanvs.company.soapjaxws.cities.fromwsdl</packageName>-->
+          <!--&lt;!&ndash; generated source files destination&ndash;&gt;-->
+          <!--<sourceDestDir>src/main/java/</sourceDestDir>-->
+          <!--<sei/>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
     </plugins>
   </build>
 </project>

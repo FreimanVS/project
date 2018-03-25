@@ -110,6 +110,7 @@ public class InitDataBase {
         List<Position> positions = company.getPositions();
 
         createTables();
+        createProcedures();
 
         roles.forEach(InitDataBase::initRole);
         positions.forEach(InitDataBase::initPosition);
@@ -176,7 +177,33 @@ public class InitDataBase {
         }
     }
 
-    public static void clearSchema() {
+    private static void createProcedures() {
+        Transaction transaction = session.beginTransaction();
+        try {
+            String queryDrop = "DROP procedure IF EXISTS company.with_max_salary;";
+            String queryCreate = "CREATE PROCEDURE company.with_max_salary()" +
+                    "BEGIN " +
+                    "SELECT * FROM company.employee " +
+                    "WHERE salary = (SELECT MAX(salary) FROM company.employee);" +
+                    "END";
+            session.createNativeQuery(queryDrop).executeUpdate();
+            session.createNativeQuery(queryCreate).executeUpdate();
+
+            queryDrop = "DROP procedure IF EXISTS company.avg_salary;";
+            queryCreate = "CREATE PROCEDURE company.avg_salary()" +
+                    "BEGIN " +
+                    "SELECT AVG(salary) FROM company.employee;" +
+                    "END";
+            session.createNativeQuery(queryDrop).executeUpdate();
+            session.createNativeQuery(queryCreate).executeUpdate();
+
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        }
+    }
+
+    private static void clearSchema() {
         Transaction transaction = session.beginTransaction();
         try {
             session.createNativeQuery("DROP TABLE IF EXISTS company.employee_position;").executeUpdate();
@@ -185,6 +212,9 @@ public class InitDataBase {
             session.createNativeQuery("DROP TABLE IF EXISTS company.position;").executeUpdate();
             session.createNativeQuery("DROP TABLE IF EXISTS company.role;").executeUpdate();
             session.createNativeQuery("DROP TABLE IF EXISTS company.analytics;").executeUpdate();
+
+            session.createNativeQuery("DROP PROCEDURE IF EXISTS company.with_max_salary;").executeUpdate();
+            session.createNativeQuery("DROP PROCEDURE IF EXISTS company.avg_salary;").executeUpdate();
 
             transaction.commit();
 

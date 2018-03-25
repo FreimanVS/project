@@ -11,7 +11,7 @@
 
   <context-param>
     <param-name>DB_XML_location</param-name>
-    <param-value>file:///K:/Otus/project-masterREST/src/main/resources/db.xml</param-value>
+    <param-value>file:///K:/Otus/project-master/src/main/resources/db.xml</param-value>
     <!--<param-value>file:///usr/local/tomcat/webapps/company/WEB-INF/classes/db.xml</param-value>-->
   </context-param>
 

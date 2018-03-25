@@ -2,6 +2,8 @@ package com.freimanvs.company.rest;
 
 import com.freimanvs.company.rest.exception.MyExceptionMapper;
 import com.freimanvs.company.rest.exception.RuntimeExceptionMapper;
+import com.freimanvs.company.soapjaxws.cities.CitiesRestService;
+import com.freimanvs.company.soapjaxws.geolocation.GeoIPRestService;
 
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
@@ -40,5 +42,7 @@ public class RestApplication extends Application {
         resources.add(EmployeeRest.class);
         resources.add(PositionRest.class);
         resources.add(RoleRest.class);
+        resources.add(GeoIPRestService.class);
+        resources.add(CitiesRestService.class);
     }
 }
