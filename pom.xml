@@ -283,7 +283,7 @@
           <!--<wsdlUrls>-->
             <!--<wsdlUrl>-->
               <!--&lt;!&ndash;http://localhost:8080/company/TaxCalculatorService?wsdl&ndash;&gt;-->
-              <!--http://www.webservicex.net/globalweather.asmx?WSDL-->
+              <!--http://localhost:8080/company/SalaryService?WSDL-->
             <!--</wsdlUrl>-->
           <!--</wsdlUrls>-->
           <!--&lt;!&ndash; or using wsdls file directory &ndash;&gt;-->
@@ -295,7 +295,7 @@
           <!--&lt;!&ndash; Keep generated files &ndash;&gt;-->
           <!--<keep>true</keep>-->
           <!--&lt;!&ndash; Package name &ndash;&gt;-->
-          <!--<packageName>com.freimanvs.company.soapjaxws.cities.fromwsdl</packageName>-->
+          <!--<packageName>com.freimanvs.company.soapjaxws.database.fromwsdl</packageName>-->
           <!--&lt;!&ndash; generated source files destination&ndash;&gt;-->
           <!--<sourceDestDir>src/main/java/</sourceDestDir>-->
           <!--<sei/>-->

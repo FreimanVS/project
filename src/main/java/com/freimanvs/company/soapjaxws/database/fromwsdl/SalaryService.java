@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "SalaryService", targetNamespace = "http://database.soapjaxws.company.freimanvs.com/", wsdlLocation = "http://localhost:8080/company/SalaryService?wsdl")
+@WebServiceClient(name = "SalaryService", targetNamespace = "http://database.soapjaxws.company.freimanvs.com/", wsdlLocation = "http://localhost:8080/company/SalaryService?WSDL")
 public class SalaryService
     extends Service
 {
@@ -30,9 +30,9 @@ public class SalaryService
         try {
             URL baseUrl;
             baseUrl = com.freimanvs.company.soapjaxws.database.fromwsdl.SalaryService.class.getResource(".");
-            url = new URL(baseUrl, "http://localhost:8080/company/SalaryService?wsdl");
+            url = new URL(baseUrl, "http://localhost:8080/company/SalaryService?WSDL");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8080/company/SalaryService?wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8080/company/SalaryService?WSDL', retrying as a local file");
             logger.warning(e.getMessage());
         }
         SALARYSERVICE_WSDL_LOCATION = url;
@@ -53,11 +53,11 @@ public class SalaryService
     /**
      * 
      * @return
-     *     returns Salary
+     *     returns SalaryPort
      */
-    @WebEndpoint(name = "SalaryPort")
-    public Salary getSalaryPort() {
-        return super.getPort(new QName("http://database.soapjaxws.company.freimanvs.com/", "SalaryPort"), Salary.class);
+    @WebEndpoint(name = "SalaryPortPort")
+    public SalaryPort getSalaryPortPort() {
+        return super.getPort(new QName("http://database.soapjaxws.company.freimanvs.com/", "SalaryPortPort"), SalaryPort.class);
     }
 
     /**
@@ -65,11 +65,11 @@ public class SalaryService
      * @param features
      *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return
-     *     returns Salary
+     *     returns SalaryPort
      */
-    @WebEndpoint(name = "SalaryPort")
-    public Salary getSalaryPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://database.soapjaxws.company.freimanvs.com/", "SalaryPort"), Salary.class, features);
+    @WebEndpoint(name = "SalaryPortPort")
+    public SalaryPort getSalaryPortPort(WebServiceFeature... features) {
+        return super.getPort(new QName("http://database.soapjaxws.company.freimanvs.com/", "SalaryPortPort"), SalaryPort.class, features);
     }
 
 }

@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "TaxCalculatorService", targetNamespace = "http://bank.soapjaxws.company.freimanvs.com/", wsdlLocation = "http://localhost:8080/company/TaxCalculatorService?wsdl")
+@WebServiceClient(name = "TaxCalculatorService", targetNamespace = "http://bank.soapjaxws.company.freimanvs.com/", wsdlLocation = "http://localhost:8080/company/TaxCalculatorService?WSDL")
 public class TaxCalculatorService
     extends Service
 {
@@ -30,9 +30,9 @@ public class TaxCalculatorService
         try {
             URL baseUrl;
             baseUrl = com.freimanvs.company.soapjaxws.bank.fromwsdl.TaxCalculatorService.class.getResource(".");
-            url = new URL(baseUrl, "http://localhost:8080/company/TaxCalculatorService?wsdl");
+            url = new URL(baseUrl, "http://localhost:8080/company/TaxCalculatorService?WSDL");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8080/company/TaxCalculatorService?wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8080/company/TaxCalculatorService?WSDL', retrying as a local file");
             logger.warning(e.getMessage());
         }
         TAXCALCULATORSERVICE_WSDL_LOCATION = url;
@@ -53,11 +53,11 @@ public class TaxCalculatorService
     /**
      * 
      * @return
-     *     returns TaxCalculator
+     *     returns TaxCalculatorPort
      */
-    @WebEndpoint(name = "TaxCalculatorPort")
-    public TaxCalculator getTaxCalculatorPort() {
-        return super.getPort(new QName("http://bank.soapjaxws.company.freimanvs.com/", "TaxCalculatorPort"), TaxCalculator.class);
+    @WebEndpoint(name = "TaxCalculatorPortPort")
+    public TaxCalculatorPort getTaxCalculatorPortPort() {
+        return super.getPort(new QName("http://bank.soapjaxws.company.freimanvs.com/", "TaxCalculatorPortPort"), TaxCalculatorPort.class);
     }
 
     /**
@@ -65,11 +65,11 @@ public class TaxCalculatorService
      * @param features
      *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return
-     *     returns TaxCalculator
+     *     returns TaxCalculatorPort
      */
-    @WebEndpoint(name = "TaxCalculatorPort")
-    public TaxCalculator getTaxCalculatorPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://bank.soapjaxws.company.freimanvs.com/", "TaxCalculatorPort"), TaxCalculator.class, features);
+    @WebEndpoint(name = "TaxCalculatorPortPort")
+    public TaxCalculatorPort getTaxCalculatorPortPort(WebServiceFeature... features) {
+        return super.getPort(new QName("http://bank.soapjaxws.company.freimanvs.com/", "TaxCalculatorPortPort"), TaxCalculatorPort.class, features);
     }
 
 }

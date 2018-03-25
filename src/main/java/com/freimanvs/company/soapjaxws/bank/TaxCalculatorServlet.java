@@ -1,6 +1,7 @@
 package com.freimanvs.company.soapjaxws.bank;
 
-import com.freimanvs.company.soapjaxws.bank.fromwsdl.TaxCalculator;
+
+import com.freimanvs.company.soapjaxws.bank.fromwsdl.TaxCalculatorPort;
 import com.freimanvs.company.soapjaxws.bank.fromwsdl.TaxCalculatorService;
 
 import javax.servlet.ServletException;
@@ -15,9 +16,6 @@ import java.net.URL;
 @WebServlet("/taxcalc")
 public class TaxCalculatorServlet extends HttpServlet {
 
-//    @WebServiceRef
-//    private TaxCalculatorService service;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String host = req.getLocalAddr().contains("0:0:0:0:0:0:1") ? "localhost" : req.getLocalAddr();
@@ -30,8 +28,8 @@ public class TaxCalculatorServlet extends HttpServlet {
         double r0 = Double.parseDouble(req.getParameter("r0"));
         double ns = Double.parseDouble(req.getParameter("ns"));
 
-        TaxCalculator taxCalculatorClient = taxCalculatorService.getTaxCalculatorPort();
-        double result = taxCalculatorClient.exec(d0, r0, ns);
+        TaxCalculatorPort taxCalculatorPortPort = taxCalculatorService.getTaxCalculatorPortPort();
+        double result = taxCalculatorPortPort.exec(d0, r0, ns);
 
         try (PrintWriter pw = resp.getWriter()) {
             pw.printf("Result is %.0f", result);

@@ -1,6 +1,7 @@
 package com.freimanvs.company.soapjaxws.database;
 
-import com.freimanvs.company.soapjaxws.database.fromwsdl.Salary;
+
+import com.freimanvs.company.soapjaxws.database.fromwsdl.SalaryPort;
 import com.freimanvs.company.soapjaxws.database.fromwsdl.SalaryService;
 
 import java.net.MalformedURLException;
@@ -14,9 +15,9 @@ public class SalaryClient {
         URL url = new URL("http://" + HOST + ":" + PORT + "/company/SalaryService?wsdl");
 
         SalaryService salaryService = new SalaryService(url);
-        Salary salaryClient = salaryService.getSalaryPort();
-        double avg = salaryClient.avg();
-        double max = salaryClient.max();
+        SalaryPort salaryPortPort = salaryService.getSalaryPortPort();
+        double avg = salaryPortPort.avg();
+        double max = salaryPortPort.max();
         System.out.printf("Average salary is %.1f\r\nMax salary is %.1f", avg, max);
     }
 }

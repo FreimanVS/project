@@ -9,16 +9,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.ws.WebServiceRef;
 
 @Path("/v1/geoIP")
 public class GeoIPRestService {
+
+    @WebServiceRef
+    private GeoIPService service;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     public Response get() {
 
-        GeoIPService geoIPService = new GeoIPService();
-        GeoIPServiceSoap geoIPServiceSoap = geoIPService.getGeoIPServiceSoap();
+        GeoIPServiceSoap geoIPServiceSoap = service.getGeoIPServiceSoap();
         GeoIP geoIPContext = geoIPServiceSoap.getGeoIPContext();
 
         String result = String.format("{\"country\": \"%s\", \"ip\": \"%s\"}",

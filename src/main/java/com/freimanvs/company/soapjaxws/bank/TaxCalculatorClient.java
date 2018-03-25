@@ -1,6 +1,6 @@
 package com.freimanvs.company.soapjaxws.bank;
 
-import com.freimanvs.company.soapjaxws.bank.fromwsdl.TaxCalculator;
+import com.freimanvs.company.soapjaxws.bank.fromwsdl.TaxCalculatorPort;
 import com.freimanvs.company.soapjaxws.bank.fromwsdl.TaxCalculatorService;
 
 import java.net.MalformedURLException;
@@ -18,8 +18,8 @@ public class TaxCalculatorClient {
         URL url = new URL("http://" + HOST + ":" + PORT + "/company/TaxCalculatorService?wsdl");
 
         TaxCalculatorService taxCalculatorService = new TaxCalculatorService(url);
-        TaxCalculator taxCalculatorClient = taxCalculatorService.getTaxCalculatorPort();
-        double result = taxCalculatorClient.exec(d0, r0, ns);
+        TaxCalculatorPort taxCalculatorPortPort = taxCalculatorService.getTaxCalculatorPortPort();
+        double result = taxCalculatorPortPort.exec(d0, r0, ns);
         System.out.printf("Result is %.0f", result);
     }
 }

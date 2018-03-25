@@ -9,8 +9,9 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import java.util.List;
 
-@WebService
-public class Salary {
+@WebService(serviceName = "SalaryService", name = "SalaryPort",
+        endpointInterface = "com.freimanvs.company.soapjaxws.database.SalaryPort")
+public class SalaryService implements SalaryPort {
 
     @WebMethod
     @WebResult

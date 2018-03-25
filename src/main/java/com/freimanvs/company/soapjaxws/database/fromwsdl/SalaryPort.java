@@ -15,11 +15,11 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.1
  * 
  */
-@WebService(name = "Salary", targetNamespace = "http://database.soapjaxws.company.freimanvs.com/")
+@WebService(name = "SalaryPort", targetNamespace = "http://database.soapjaxws.company.freimanvs.com/")
 @XmlSeeAlso({
     ObjectFactory.class
 })
-public interface Salary {
+public interface SalaryPort {
 
 
     /**

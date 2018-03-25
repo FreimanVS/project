@@ -16,11 +16,11 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.1
  * 
  */
-@WebService(name = "TaxCalculator", targetNamespace = "http://bank.soapjaxws.company.freimanvs.com/")
+@WebService(name = "TaxCalculatorPort", targetNamespace = "http://bank.soapjaxws.company.freimanvs.com/")
 @XmlSeeAlso({
     ObjectFactory.class
 })
-public interface TaxCalculator {
+public interface TaxCalculatorPort {
 
 
     /**
