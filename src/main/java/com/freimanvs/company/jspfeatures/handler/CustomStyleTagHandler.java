@@ -3,7 +3,6 @@ package com.freimanvs.company.jspfeatures.handler;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.io.Reader;
 

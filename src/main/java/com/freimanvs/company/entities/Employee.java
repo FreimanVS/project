@@ -6,8 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -25,7 +24,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name = "employee")
+@Table(name = "employee", schema = "company",
+        uniqueConstraints={
+                @UniqueConstraint(columnNames={"login"})
+        })
 public class Employee implements Serializable {
 
     @ApiParam(value = "id")
@@ -37,7 +39,7 @@ public class Employee implements Serializable {
     @ApiParam(value = "login", required = true)
     @NotBlank
     @Size(min = 5)
-    @Column(name="login")
+    @Column(name="login", unique = true)
     private String login;
 
     @ApiParam(value = "password", required = true)
@@ -86,14 +88,14 @@ public class Employee implements Serializable {
     private int age;
 
     @ApiParam(value = "positions", required = true)
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name = "employee_position", joinColumns = {
             @JoinColumn(name = "employeeId")},
             inverseJoinColumns = {@JoinColumn(name = "positionId")})
     private Set<Position> positions = new HashSet<>();
 
     @ApiParam(value = "roles", required = true)
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name = "employee_role", joinColumns = {
             @JoinColumn(name = "employeeId")},
             inverseJoinColumns = {@JoinColumn(name = "roleId")})

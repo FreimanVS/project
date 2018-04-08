@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 @WebFilter(urlPatterns = {"/*"}, asyncSupported = true)
 public class UserInfoFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 

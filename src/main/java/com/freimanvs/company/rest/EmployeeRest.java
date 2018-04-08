@@ -1,10 +1,10 @@
 package com.freimanvs.company.rest;
 
 import com.freimanvs.company.entities.Employee;
-import com.freimanvs.company.service.EmployeeService;
-import com.freimanvs.company.service.Service;
+import com.freimanvs.company.service.interfaces.EmployeeServicePersInterface;
 import io.swagger.annotations.*;
 
+import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.List;
@@ -26,7 +26,6 @@ import java.util.List;
                 @Tag(name = "Employee Resource Swagger-generated API",
                         description = "Description Example")
         },
-//        host = "localhost:8080",
         basePath = "/company/api",
         schemes = {SwaggerDefinition.Scheme.HTTP},
         externalDocs = @ExternalDocs(
@@ -35,7 +34,8 @@ import java.util.List;
 @Api(tags = "Employee Resource Swagger-generated API", produces = MediaType.APPLICATION_JSON)
 public class EmployeeRest implements RestCrud<Employee> {
 
-    private Service<Employee> employeeService = new EmployeeService();
+    @EJB
+    EmployeeServicePersInterface employeeService;
 
     @Context
     UriInfo info;

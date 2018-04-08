@@ -4,7 +4,7 @@
   <groupId>company</groupId>
   <artifactId>company</artifactId>
   <packaging>war</packaging>
-  <version>1.0</version>
+  <version>2.0</version>
   <name>company Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
@@ -189,17 +189,6 @@
       <!--<artifactId>jax-rs-ri</artifactId>-->
       <!--<version>2.0-rc1</version>-->
     <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.glassfish.jersey.core</groupId>-->
-      <!--<artifactId>jersey-server</artifactId>-->
-      <!--<version>2.25.1</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>javax</groupId>-->
-      <!--<artifactId>javaee-api</artifactId>-->
-      <!--<version>8.0</version>-->
-      <!--<scope>provided</scope>-->
-    <!--</dependency>-->
 
     <dependency>
         <groupId>org.glassfish.jersey.core</groupId>
@@ -223,17 +212,6 @@
     </dependency>
 
     <!--<dependency>-->
-      <!--<groupId>com.sun.jersey</groupId>-->
-      <!--<artifactId>jersey-server</artifactId>-->
-      <!--<version>1.19.4</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>com.sun.jersey</groupId>-->
-      <!--<artifactId>jersey-json</artifactId>-->
-      <!--<version>1.19.4</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
       <!--<groupId>org.glassfish.jersey.media</groupId>-->
       <!--<artifactId>jersey-media-json-jackson</artifactId>-->
       <!--<version>2.3.1</version>-->
@@ -242,6 +220,13 @@
       <groupId>io.swagger</groupId>
       <artifactId>swagger-jersey-jaxrs</artifactId>
       <version>1.5.18</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>8.0</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -264,6 +249,16 @@
           <warSourceDirectory>src/main/webapp</warSourceDirectory>
         </configuration>
       </plugin>
+
+      <!--EJB Plugin-->
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-ejb-plugin</artifactId>-->
+        <!--<version>2.4</version>-->
+        <!--<configuration>-->
+          <!--<ejbVersion>3.2</ejbVersion>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
 
       <!-- usage of jax-ws maven plugin-->
       <!--<plugin>-->

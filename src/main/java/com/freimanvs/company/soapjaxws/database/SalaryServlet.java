@@ -23,7 +23,6 @@ public class SalaryServlet extends HttpServlet {
         URL url = new URL("http://" + host + ":" + port + "/company/SalaryService?wsdl");
 
         SalaryService salaryService = new SalaryService(url);
-
         SalaryPort salaryPortPort = salaryService.getSalaryPortPort();
         double avg = salaryPortPort.avg();
         double max = salaryPortPort.max();

@@ -1,14 +1,11 @@
 package com.freimanvs.company.jsp;
 
-import com.freimanvs.company.dao.EmployeeDAO;
 import com.freimanvs.company.entities.Employee;
-import com.freimanvs.company.service.EmployeeService;
-import com.freimanvs.company.service.Service;
-import com.freimanvs.company.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import com.freimanvs.company.jsp.beans.interfaces.SearchBean;
 
+import javax.annotation.Resource;
+import javax.ejb.EJB;
+import javax.enterprise.concurrent.ManagedScheduledExecutorService;
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,21 +15,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = {"/search"}, name = "searchServlet", asyncSupported = true)
 public class SearchServlet extends HttpServlet {
 
-//    Service<Employee> employeeService = new EmployeeService();
+    @EJB
+    private SearchBean searchBean;
 
-    private ScheduledExecutorService scheduledExecutorService;
+    @Resource
+    private ManagedScheduledExecutorService scheduledExecutorService;
 
     @Override
     public void init() throws ServletException {
-        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         super.init();
     }
 
@@ -42,15 +37,15 @@ public class SearchServlet extends HttpServlet {
         final AsyncContext asyncContext = req.startAsync();
 
         scheduledExecutorService.schedule(() -> {
-                        search(asyncContext);
-                        return null;
+                    search(asyncContext);
+                    return null;
                 },
                 0,
                 TimeUnit.MILLISECONDS);
 
     }
 
-    private void search(final AsyncContext context) throws ServletException, IOException {
+    public void search(final AsyncContext context) throws ServletException, IOException {
 
         HttpServletRequest req = (HttpServletRequest)context.getRequest();
         HttpServletResponse resp = (HttpServletResponse)context.getResponse();
@@ -85,14 +80,7 @@ public class SearchServlet extends HttpServlet {
             int ageFrom = ageFromString.equals("") ? 1 : Integer.parseInt(ageFromString);
             int ageTo = ageToString.equals("") ? 999 : Integer.parseInt(ageToString);
 
-//            List<Employee> list = employeeService.getList().stream().filter(e -> e.getLogin().contains(login)
-//                    && e.getFio().contains(fio)
-//                    && e.getPositions().stream().anyMatch(position -> position.getName().contains(pos))
-//                    && e.getCity().contains(city)
-//                    && e.getAge() >= ageFrom && e.getAge() <= ageTo)
-//                    .collect(Collectors.toList());
-
-            List<Employee> list = getBy(login, fio, pos, city, ageFrom, ageTo);
+            List<Employee> list = searchBean.getBy(login, fio, pos, city, ageFrom, ageTo);
 
             if (list != null && !list.isEmpty()) {
                 resultTable.append("<table><caption><b>РАБОТНИКИ</b></caption>" +
@@ -155,55 +143,8 @@ public class SearchServlet extends HttpServlet {
         context.complete();
     }
 
-    private List<Employee> getBy(String login, String fio, String position, String city,
-                                 int ageFrom, int ageTo) {
-
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        List<Employee> list = null;
-        Transaction transaction = session.beginTransaction();
-        try {
-            Query<Employee> query = session.createQuery("select DISTINCT e from Employee e join e.positions p"
-                    +" WHERE e.login LIKE :login"
-                    + " AND e.fio LIKE :fio"
-                    + " AND p.name LIKE :positions"
-                    + " AND e.city LIKE :city"
-                    + " AND e.age >= :ageFrom"
-                    + " AND e.age <= :ageTo")
-                    .setParameter("login", "%"+login+"%")
-                    .setParameter("fio", "%"+fio+"%")
-                    .setParameter("positions", "%"+position+"%")
-                    .setParameter("city", "%"+city+"%")
-                    .setParameter("ageFrom", ageFrom)
-                    .setParameter("ageTo", ageTo);
-            list = query.list();
-
-            if (list != null && !list.isEmpty()) {
-                list.forEach(EmployeeDAO::initialize);
-            }
-
-            transaction.commit();
-        } catch (Exception e) {
-            transaction.rollback();
-            e.printStackTrace();
-        }
-
-        return list;
-    }
-
     @Override
     public void destroy() {
-
-        System.out.println("Closing scheduledExecutorService...");
-        scheduledExecutorService.shutdownNow();
-        System.out.println("ScheduledExecutorService is closed!");
-//        try {
-//            scheduledExecutorService.awaitTermination(10, TimeUnit.SECONDS);
-//            System.out.println("ScheduledExecutorService is closed!");
-//        } catch (InterruptedException e) {
-//            System.out.println("ERROR: scheduledExecutorService was not closed!");
-//            e.printStackTrace();
-//        }
         super.destroy();
     }
 }

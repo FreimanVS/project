@@ -1,7 +1,9 @@
 package com.freimanvs.company.rest;
 
+import com.freimanvs.company.rest.beans.interfaces.CalculateDifferentialBean;
 import io.swagger.annotations.*;
 
+import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -9,6 +11,9 @@ import javax.ws.rs.core.Response;
 @Api(tags = "Differential Payment Service Swagger-generated API", produces = MediaType.TEXT_HTML)
 @Path("/bank/v1/calculations")
 public class DifferentialPaymentService implements Calculator {
+
+    @EJB
+    CalculateDifferentialBean calculateDifferentialBean;
 
     @ApiOperation(value = "calcuate")
     @ApiResponses({
@@ -26,13 +31,7 @@ public class DifferentialPaymentService implements Calculator {
                               @ApiParam(value = "процентная ставка, начисляемая на задолженность за период", required = true)
                                   @FormParam("st") double st) {
 
-        st = st / 100 / 12;
-        StringBuilder result = new StringBuilder();
-        for (int i = 1; i <= t; i++) {
-            double answer = kr / t + kr * (t - i + 1) * st / t;
-            result.append(String.format("<div>%10.4f / %d + %10.4f * (%d - %d + 1) * %10.4f / %d = %10.1f</div>",
-                    kr, t, kr, t, i, st, t, answer));
-        }
-        return Response.status(200).entity(result.toString()).build();
+
+        return Response.status(200).entity(calculateDifferentialBean.calculate(t, kr, st)).build();
     }
 }

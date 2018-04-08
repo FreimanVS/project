@@ -1,10 +1,10 @@
 package com.freimanvs.company.jsp;
 
 import com.freimanvs.company.entities.Employee;
-import com.freimanvs.company.security.Encode;
-import com.freimanvs.company.service.EmployeeService;
-import com.freimanvs.company.service.Service;
+import com.freimanvs.company.security.beans.interfaces.SecurityBean;
+import com.freimanvs.company.service.interfaces.EmployeeServicePersInterface;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +16,11 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/auth"})
 public class AuthServlet extends HttpServlet {
 
-    private Service<Employee> employeeService = new EmployeeService();
+    @EJB
+    private EmployeeServicePersInterface employeeService;
+
+    @EJB
+    private SecurityBean securityBean;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,12 +29,8 @@ public class AuthServlet extends HttpServlet {
 
         List<Employee> employees = employeeService.getList();
 
-        boolean exists = false;
-
-        if (employees != null) {
-            exists = employees.stream().anyMatch(e -> e.getLogin().equals(login)
-                        && e.getPassword().equals(Encode.sha(password)));
-        }
+        boolean exists = employees != null && employees.stream().anyMatch(e -> e.getLogin().equals(login)
+                && e.getPassword().equals(securityBean.encodeSha(password)));
 
         if (exists) {
             req.getSession().setAttribute("login", login);

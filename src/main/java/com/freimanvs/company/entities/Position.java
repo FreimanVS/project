@@ -12,11 +12,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @XmlRootElement
 @Entity
-@Table(name = "position")
+@Table(name = "position", schema = "company")
 public class Position implements Serializable {
 
     @ApiParam(value = "id")
@@ -69,6 +70,20 @@ public class Position implements Serializable {
     @XmlTransient
     public void setEmpls(Set<Employee> empls) {
         this.empls = empls;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return Objects.equals(name, position.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name);
     }
 
     @Override

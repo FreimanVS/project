@@ -1,8 +1,8 @@
 package com.freimanvs.company.listeners;
 
-import com.freimanvs.company.util.HibernateUtil;
-import com.freimanvs.company.util.InitDataBase;
+import com.freimanvs.company.util.interfaces.DbXMLBean;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -21,6 +21,9 @@ public class MyServletContextListener implements ServletContextListener {
     private static String LOGIN;
     private static String PASSWORD ;
 
+    @EJB
+    private DbXMLBean dbXMLBean;
+
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
         IP = arg0.getServletContext().getInitParameter("DB_IP");
@@ -28,7 +31,7 @@ public class MyServletContextListener implements ServletContextListener {
         LOGIN = "root";
         PASSWORD = "pass";
 
-        //to sleep until database is ready
+        //to sleep until a database is ready
         while (!connIsOk()) {
             System.out.printf("DB is not ready yet or incorrect data:\r\n" +
                     "ULR: %s\r\n" +
@@ -40,12 +43,12 @@ public class MyServletContextListener implements ServletContextListener {
                 e.printStackTrace();
             }
         }
-
+//
         //XML to DB
         try {
             System.out.println("XML to DB process...");
             String uri = arg0.getServletContext().getInitParameter(TEST_DATA_FILE_LOCATION);
-            InitDataBase.xmlToDB(Paths.get(new URI(uri)));
+            dbXMLBean.xmlToDB(Paths.get(new URI(uri)));
             System.out.println("XML to DB has been completed!");
         } catch (URISyntaxException e) {
             System.out.println("XML to DB ERROR!");
@@ -59,23 +62,11 @@ public class MyServletContextListener implements ServletContextListener {
         try {
             System.out.println("DB to XML process...");
             String uri = arg0.getServletContext().getInitParameter(TEST_DATA_FILE_LOCATION);
-            InitDataBase.dbToXml(Paths.get(new URI(uri)));
+            dbXMLBean.dbToXml(Paths.get(new URI(uri)));
             System.out.println("DB to XML has been completed!");
         } catch (URISyntaxException e) {
             System.out.println("DB to XML ERROR!");
             e.printStackTrace();
-        }
-
-        //close the hibernate factory
-        try {
-            if (HibernateUtil.getSessionFactory().isOpen()) {
-                System.out.println("Closing the hibernate factory...");
-                HibernateUtil.getSessionFactory().close();
-                System.out.println("The hibernate factory is closed");
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("hibernate factory was not closed");
         }
     }
 

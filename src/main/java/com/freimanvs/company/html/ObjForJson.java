@@ -1,6 +1,8 @@
 package com.freimanvs.company.html;
 
-public class ObjForJson {
+import java.io.Serializable;
+
+public class ObjForJson implements Serializable {
     public String name;
 
     public ObjForJson() {

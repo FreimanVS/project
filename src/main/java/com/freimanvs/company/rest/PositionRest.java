@@ -1,10 +1,10 @@
 package com.freimanvs.company.rest;
 
 import com.freimanvs.company.entities.Position;
-import com.freimanvs.company.service.PositionService;
-import com.freimanvs.company.service.Service;
+import com.freimanvs.company.service.interfaces.PositionServicePersInterface;
 import io.swagger.annotations.*;
 
+import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -29,7 +29,6 @@ import java.util.List;
                 @Tag(name = "Position Resource Swagger-generated API",
                         description = "Description Example")
         },
-//        host = "localhost:8080",
         basePath = "/company/api",
         schemes = {SwaggerDefinition.Scheme.HTTP},
         externalDocs = @ExternalDocs(
@@ -38,7 +37,8 @@ import java.util.List;
 @Api(tags = "Position Resource Swagger-generated API", produces = MediaType.APPLICATION_JSON)
 public class PositionRest implements RestCrud<Position> {
 
-    private Service<Position> positionService = new PositionService();
+    @EJB
+    PositionServicePersInterface positionService;
 
     @Context
     UriInfo info;

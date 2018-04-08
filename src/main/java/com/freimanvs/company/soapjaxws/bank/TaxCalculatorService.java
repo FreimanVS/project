@@ -1,7 +1,10 @@
 package com.freimanvs.company.soapjaxws.bank;
 
+import com.freimanvs.company.soapjaxws.bank.beans.interfaces.TaxCalculatorBean;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -10,6 +13,9 @@ import javax.jws.WebService;
 @WebService(serviceName = "TaxCalculatorService", name = "TaxCalculatorPort",
         endpointInterface = "com.freimanvs.company.soapjaxws.bank.TaxCalculatorPort")
 public class TaxCalculatorService implements TaxCalculatorPort {
+
+    @EJB
+    private TaxCalculatorBean taxCalculatorBean;
 
     @PostConstruct
     public void postConstruct() {
@@ -22,7 +28,7 @@ public class TaxCalculatorService implements TaxCalculatorPort {
                        @WebParam double r0,
                        @WebParam double ns) {
 
-        return (d0 - r0) * ns / 100;
+        return taxCalculatorBean.calculate();
     }
 
     @PreDestroy

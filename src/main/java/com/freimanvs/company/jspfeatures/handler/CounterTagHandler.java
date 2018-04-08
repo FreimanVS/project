@@ -6,7 +6,6 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class CounterTagHandler extends SimpleTagSupport {
 

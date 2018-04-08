@@ -1,12 +1,9 @@
 package com.freimanvs.company.servlets;
 
 import com.freimanvs.company.entities.Employee;
-import com.freimanvs.company.service.EmployeeService;
-import com.freimanvs.company.service.Service;
-import com.freimanvs.company.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import com.freimanvs.company.service.interfaces.EmployeeServicePersInterface;
 
+import javax.ejb.EJB;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.servlet.ServletException;
@@ -22,7 +19,9 @@ import java.util.List;
 @WebServlet("/employees")
 public class EmployeeServlet extends HttpServlet {
 
-    private Service<Employee> employeeService = new EmployeeService();
+    @EJB
+    EmployeeServicePersInterface employeeService;
+
     private static final Jsonb JSONB = JsonbBuilder.create();
 
     public EmployeeServlet() {
@@ -79,8 +78,7 @@ public class EmployeeServlet extends HttpServlet {
             return;
         }
 
-        try (InputStream is = req.getInputStream();
-            PrintWriter pw = resp.getWriter()) {
+        try (InputStream is = req.getInputStream()) {
             StringBuilder json = new StringBuilder();
             while (is.available() != 0) {
                 json.append((char)is.read());
@@ -112,8 +110,7 @@ public class EmployeeServlet extends HttpServlet {
             notFound(resp);
         } else {
 
-            try (InputStream is = req.getInputStream();
-                 PrintWriter pw = resp.getWriter()) {
+            try (InputStream is = req.getInputStream()) {
                 StringBuilder json = new StringBuilder();
                 while (is.available() != 0) {
                     json.append((char) is.read());

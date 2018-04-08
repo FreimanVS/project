@@ -1,11 +1,12 @@
 package com.freimanvs.company.analytics.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "analytics")
-public class Analytics {
+public class Analytics implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

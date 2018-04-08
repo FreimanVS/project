@@ -2,10 +2,11 @@ package com.freimanvs.company.websockets.models;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.List;
 
 @XmlRootElement
-public class Valcurs {
+public class Valcurs implements Serializable {
 
     List<Valute> valute;
 

@@ -2,9 +2,10 @@ package com.freimanvs.company.websockets.models;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @XmlRootElement
-public class Valute {
+public class Valute implements Serializable {
 
     private String charcode;
 

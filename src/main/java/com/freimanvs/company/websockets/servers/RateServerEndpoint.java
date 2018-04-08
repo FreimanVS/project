@@ -1,9 +1,10 @@
 package com.freimanvs.company.websockets.servers;
 
-import com.freimanvs.company.util.FileManager;
+import com.freimanvs.company.util.interfaces.FileManagerBean;
 import com.freimanvs.company.websockets.models.Valcurs;
 import com.freimanvs.company.websockets.servers.config.ServletAwareConfig;
 
+import javax.ejb.*;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
@@ -22,18 +23,22 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 @ServerEndpoint(value = "/rateserver", configurator=ServletAwareConfig.class)
 public class RateServerEndpoint {
+
+    @EJB
+    private FileManagerBean fileManagerBean;
+
     private static EndpointConfig config;
     private static Queue<Session> queue = new ConcurrentLinkedQueue<Session>();
     private static String cache;
     private static long sleepTime;
 
-    private static Thread rateThread = new Thread(() -> {
+    private Thread rateThread = new Thread(() -> {
         while(true) {
             try {
                 if(queue != null) {
                     ArrayList<Session> closedSessions = new ArrayList<>();
                     String result = getRate();
-                    System.out.println("SLEEP_TIME: " + sleepTime);
+                    System.out.println("VALUTE RATE, SLEEP_TIME: " + sleepTime);
                     if (!result.equals(cache)) {
                         for (Session session : queue) {
                             if(!session.isOpen()) {
@@ -63,14 +68,14 @@ public class RateServerEndpoint {
     });
 
     private static boolean on = false;
-    private synchronized static void start() {
+    private synchronized void start() {
         if (!on) {
             rateThread.start();
             on = true;
         }
     }
 
-    private static String getRate() {
+    private String getRate() {
         sleepTime = Long.parseLong(System.getenv("SLEEP_TIME_JAVA"));
         HttpSession httpSession = (HttpSession) config.getUserProperties().get("httpSession");
         ServletContext servletContext = httpSession.getServletContext();
@@ -86,7 +91,7 @@ public class RateServerEndpoint {
 
             transformer.transform(xmlsource, new StreamResult(new File("./result.txt")));
 
-            return FileManager.xmlToJSON("./result.txt", Valcurs.class);
+            return fileManagerBean.xmlToJSON("./result.txt", Valcurs.class);
         } catch (IOException | TransformerException e) {
             e.printStackTrace();
             return "error";

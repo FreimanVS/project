@@ -28,8 +28,8 @@ public class Role implements Serializable {
 
     @ApiParam(value = "name", required = true)
     @NotBlank
-    @Size(min = 3)
-    @Column(name = "name")
+    @Size(min = 2)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @JsonbTransient

@@ -1,7 +1,9 @@
 package com.freimanvs.company.rest;
 
+import com.freimanvs.company.rest.beans.interfaces.CalculateAnnuityBean;
 import io.swagger.annotations.*;
 
+import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -9,6 +11,9 @@ import javax.ws.rs.core.Response;
 @Api(tags = "Annuity Payment Service Swagger-generated API", produces = MediaType.TEXT_HTML)
 @Path("/bank/v2/calculations")
 public class AnnuityPaymentService implements Calculator {
+
+    @EJB
+    CalculateAnnuityBean calculateAnnuityBean;
 
     @ApiOperation(value = "calcuate")
     @ApiResponses({
@@ -26,11 +31,6 @@ public class AnnuityPaymentService implements Calculator {
                               @ApiParam(value = "процентная ставка, начисляемая на задолженность за период", required = true)
                                 @FormParam("st") double st) {
 
-        st = st / 100 / 12;
-        double pl = kr * st / (1 - 1 / Math.pow ((1 + st), t));
-        String result = String.format("<div>%10.4f * %10.4f / (1 - 1 / (1 + %10.4f) ^ %d) = %10.0f</div>",
-                kr, st, st, t, pl);
-
-        return Response.status(200).entity(result).build();
+        return Response.status(200).entity(calculateAnnuityBean.calculate(t, kr, st)).build();
     }
 }

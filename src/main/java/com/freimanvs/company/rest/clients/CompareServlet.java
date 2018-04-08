@@ -1,5 +1,9 @@
 package com.freimanvs.company.rest.clients;
 
+
+import com.freimanvs.company.rest.clients.beans.interfaces.CompareServletToJerseyBean;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +14,10 @@ import java.io.PrintWriter;
 
 @WebServlet("/compare")
 public class CompareServlet extends HttpServlet {
+
+    @EJB
+    private CompareServletToJerseyBean compareServletToJerseyBean;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (PrintWriter pw = resp.getWriter()) {
@@ -19,7 +27,7 @@ public class CompareServlet extends HttpServlet {
             }
             String port = String.valueOf(req.getLocalPort());
             String contextPath = req.getContextPath();
-            pw.println(CompareServletToJersey.compare(host, port, contextPath));
+            pw.println(compareServletToJerseyBean.compare(host, port, contextPath));
         }
     }
 }
