@@ -32,8 +32,9 @@ public class RateServerEndpoint {
     private static String cache;
     private static long sleepTime;
 
+    private volatile boolean close = false;
     private Thread rateThread = new Thread(() -> {
-        while(true) {
+        while(!close) {
             try {
                 if(queue != null) {
                     ArrayList<Session> closedSessions = new ArrayList<>();
@@ -121,12 +122,14 @@ public class RateServerEndpoint {
     @OnError
     public void onError(Session session, Throwable t) {
         queue.remove(session);
+        close = true;
         System.err.println("Error on session " + session.getId() + ": " + t.getLocalizedMessage());
     }
 
     @OnClose
     public void onClose(Session session) {
         queue.remove(session);
+        close = true;
         System.out.println("New session is closed: "+session.getId());
     }
 }
