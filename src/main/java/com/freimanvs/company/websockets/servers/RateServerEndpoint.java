@@ -28,13 +28,12 @@ public class RateServerEndpoint {
     private FileManagerBean fileManagerBean;
 
     private static EndpointConfig config;
-    private static Queue<Session> queue = new ConcurrentLinkedQueue<Session>();
+    private static Queue<Session> queue = new ConcurrentLinkedQueue<>();
     private static String cache;
     private static long sleepTime;
 
-    private volatile boolean close = false;
     private Thread rateThread = new Thread(() -> {
-        while(!close) {
+        while(true) {
             try {
                 if(queue != null) {
                     ArrayList<Session> closedSessions = new ArrayList<>();
@@ -122,14 +121,12 @@ public class RateServerEndpoint {
     @OnError
     public void onError(Session session, Throwable t) {
         queue.remove(session);
-        close = true;
         System.err.println("Error on session " + session.getId() + ": " + t.getLocalizedMessage());
     }
 
     @OnClose
     public void onClose(Session session) {
         queue.remove(session);
-        close = true;
         System.out.println("New session is closed: "+session.getId());
     }
 }

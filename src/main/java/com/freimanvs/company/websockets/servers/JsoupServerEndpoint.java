@@ -35,14 +35,14 @@ public class JsoupServerEndpoint {
     @OnError
     public void onError(Session session, Throwable t) {
         newsBean.getQueue().remove(session);
-        newsBean.closeTimers();
+//        newsBean.closeTimers();
         System.err.println("Error on session " + session.getId() + ": " + t.getLocalizedMessage());
     }
 
     @OnClose
     public void onClose(Session session) {
         newsBean.getQueue().remove(session);
-        newsBean.closeTimers();
+//        newsBean.closeTimers();
         System.out.println("New session is closed: "+session.getId());
     }
 }

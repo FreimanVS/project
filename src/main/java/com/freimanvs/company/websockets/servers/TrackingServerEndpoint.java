@@ -36,14 +36,14 @@ public class TrackingServerEndpoint {
     @OnError
     public void onError(Session session, Throwable t) {
         trackingBean.getQueue().remove(session);
-        trackingBean.closeTimers();
+//        trackingBean.closeTimers();
         System.err.println("Error on session " + session.getId() + ": " + t.getLocalizedMessage());
     }
 
     @OnClose
     public void onClose(Session session) {
         trackingBean.getQueue().remove(session);
-        trackingBean.closeTimers();
+//        trackingBean.closeTimers();
         System.out.println("New session is closed: "+session.getId());
     }
 }
