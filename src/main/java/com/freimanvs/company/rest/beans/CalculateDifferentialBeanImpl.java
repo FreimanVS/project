@@ -3,8 +3,10 @@ package com.freimanvs.company.rest.beans;
 import com.freimanvs.company.rest.beans.interfaces.CalculateDifferentialBean;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.Dependent;
 
-@Stateless
+//@Stateless
+@Dependent
 public class CalculateDifferentialBeanImpl implements CalculateDifferentialBean {
 
     @Override

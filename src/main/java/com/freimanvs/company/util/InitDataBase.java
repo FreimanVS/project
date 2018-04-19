@@ -11,6 +11,7 @@ import com.freimanvs.company.util.interfaces.DbXMLBean;
 import com.freimanvs.company.util.interfaces.FileManagerBean;
 
 import javax.ejb.*;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.nio.file.Path;
@@ -25,16 +26,21 @@ public class InitDataBase implements DbXMLBean {
     @PersistenceContext(unitName = "mysqlejb")
     private EntityManager em;
 
-    @EJB
+//    @EJB
+    @Inject
     private FileManagerBean fileManagerBean;
 
-    @EJB
+//    @EJB
+    @Inject
+//    @EmployeeService(value = EmployeeServiceEnum.PERS)
     private EmployeeServicePersInterface employeeService;
 
-    @EJB
+//    @EJB
+    @Inject
     private RoleServicePersInterface roleService;
 
-    @EJB
+//    @EJB
+    @Inject
     private PositionServicePersInterface positionService;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -123,6 +129,12 @@ public class InitDataBase implements DbXMLBean {
                     "prev_id BIGINT NULL,\n" +
                     "PRIMARY KEY (id)\n" +
                     ");").executeUpdate();
+
+        em.createNativeQuery("CREATE TABLE IF NOT EXISTS company.performance (\n" +
+                "                id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                "                name VARCHAR(500) NULL,\n" +
+                "                ms BIGINT NULL,\n" +
+                "                PRIMARY KEY (id));").executeUpdate();
     }
 
     private void save(Path xmlpath) {
@@ -168,6 +180,7 @@ public class InitDataBase implements DbXMLBean {
         em.createNativeQuery("DROP TABLE IF EXISTS company.position;").executeUpdate();
         em.createNativeQuery("DROP TABLE IF EXISTS company.role;").executeUpdate();
         em.createNativeQuery("DROP TABLE IF EXISTS company.analytics;").executeUpdate();
+        em.createNativeQuery("DROP TABLE IF EXISTS company.performance;").executeUpdate();
 
         em.createNativeQuery("DROP PROCEDURE IF EXISTS company.with_max_salary;").executeUpdate();
         em.createNativeQuery("DROP PROCEDURE IF EXISTS company.avg_salary;").executeUpdate();

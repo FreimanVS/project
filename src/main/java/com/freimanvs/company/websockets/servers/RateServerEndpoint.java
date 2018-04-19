@@ -5,6 +5,7 @@ import com.freimanvs.company.websockets.models.Valcurs;
 import com.freimanvs.company.websockets.servers.config.ServletAwareConfig;
 
 import javax.ejb.*;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
@@ -24,7 +25,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @ServerEndpoint(value = "/rateserver", configurator=ServletAwareConfig.class)
 public class RateServerEndpoint {
 
-    @EJB
+//    @EJB
+    @Inject
     private FileManagerBean fileManagerBean;
 
     private static EndpointConfig config;

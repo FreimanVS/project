@@ -4,6 +4,7 @@ import com.freimanvs.company.entities.Employee;
 import com.freimanvs.company.service.interfaces.EmployeeServicePersInterface;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.servlet.ServletException;
@@ -19,8 +20,10 @@ import java.util.List;
 @WebServlet("/employees")
 public class EmployeeServlet extends HttpServlet {
 
-    @EJB
-    EmployeeServicePersInterface employeeService;
+//    @EJB
+    @Inject
+//    @EmployeeService(value = EmployeeServiceEnum.PERS)
+    private EmployeeServicePersInterface employeeService;
 
     private static final Jsonb JSONB = JsonbBuilder.create();
 

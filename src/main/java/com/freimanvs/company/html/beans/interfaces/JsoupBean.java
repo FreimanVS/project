@@ -5,7 +5,7 @@ import com.freimanvs.company.html.ObjForJson;
 import javax.ejb.Remote;
 import java.util.List;
 
-@Remote
+//@Remote
 public interface JsoupBean {
     List<ObjForJson> getNews();
 }

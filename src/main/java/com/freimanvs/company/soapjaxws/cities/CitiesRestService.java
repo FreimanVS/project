@@ -3,6 +3,7 @@ package com.freimanvs.company.soapjaxws.cities;
 import com.freimanvs.company.soapjaxws.cities.beans.interfaces.Provider;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -10,7 +11,8 @@ import javax.ws.rs.core.Response;
 @Path("/v1/countries")
 public class CitiesRestService {
 
-    @EJB
+//    @EJB
+    @Inject
     private Provider provider;
 
     @Path("/{countryname}/cities")

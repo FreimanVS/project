@@ -1,14 +1,22 @@
 package com.freimanvs.company.rest.clients.beans;
 
+import com.freimanvs.company.interceptors.bindings.Measurable;
 import com.freimanvs.company.rest.clients.beans.interfaces.CompareServletToJerseyBean;
+import com.freimanvs.company.rest.clients.beans.qualifiers.CompareEnum;
+import com.freimanvs.company.rest.clients.beans.qualifiers.CompareQualifier;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Default;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-@Stateless
+//@Stateless
+@Measurable
+@CompareQualifier(value = CompareEnum.JERSEY)
+@Dependent
 public class CompareServletToJerseyBeanImpl implements CompareServletToJerseyBean {
 
     public String compare(String host, String port, String contextPath) {

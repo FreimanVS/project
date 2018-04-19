@@ -3,6 +3,7 @@ package com.freimanvs.company.html;
 import com.freimanvs.company.html.beans.interfaces.NashornBean;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,8 @@ import java.io.PrintWriter;
 @WebServlet("/js")
 public class NashornServlet extends HttpServlet {
 
-    @EJB
+//    @EJB
+    @Inject
     private NashornBean nashornBean;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

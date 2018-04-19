@@ -1,9 +1,14 @@
 package com.freimanvs.company.rest.clients;
 
 
+import com.freimanvs.company.rest.clients.beans.CompareServletToJerseyBeanImpl;
 import com.freimanvs.company.rest.clients.beans.interfaces.CompareServletToJerseyBean;
+import com.freimanvs.company.rest.clients.beans.qualifiers.CompareEnum;
+import com.freimanvs.company.rest.clients.beans.qualifiers.CompareQualifier;
 
 import javax.ejb.EJB;
+import javax.enterprise.inject.spi.CDI;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +20,12 @@ import java.io.PrintWriter;
 @WebServlet("/compare")
 public class CompareServlet extends HttpServlet {
 
-    @EJB
-    private CompareServletToJerseyBean compareServletToJerseyBean;
+//    @EJB
+    @Inject
+    @CompareQualifier(value = CompareEnum.JERSEY)
+    private CompareServletToJerseyBean compareServletToJerseyBean
+//        = CDI.current().select(CompareServletToJerseyBeanImpl.class).get()
+        ;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

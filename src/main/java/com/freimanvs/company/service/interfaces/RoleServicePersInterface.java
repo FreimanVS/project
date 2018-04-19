@@ -5,6 +5,6 @@ import com.freimanvs.company.service.Service;
 
 import javax.ejb.Remote;
 
-@Remote
+//@Remote
 public interface RoleServicePersInterface extends Service<Role> {
 }

@@ -1,12 +1,16 @@
 package com.freimanvs.company.soapjaxws.bank.beans;
 
+import com.freimanvs.company.interceptors.bindings.Measurable;
 import com.freimanvs.company.soapjaxws.bank.beans.interfaces.TaxCalculatorBean;
 import com.freimanvs.company.soapjaxws.bank.fromwsdl.TaxCalculatorService;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.Dependent;
 import java.net.URL;
 
-@Stateless
+//@Stateless
+@Measurable
+@Dependent
 public class TaxCalculatorBeanImpl implements TaxCalculatorBean {
 
     private Double d0;

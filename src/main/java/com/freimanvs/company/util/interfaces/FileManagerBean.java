@@ -4,8 +4,8 @@ import javax.ejb.Remote;
 import java.io.*;
 import java.nio.file.Path;
 
-@Remote
-public interface FileManagerBean {
+//@Remote
+public interface FileManagerBean extends Serializable {
     void objectToXml(Object obj, String path);
 
     void objectToXml(Object obj, Path path);

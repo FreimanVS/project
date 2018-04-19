@@ -9,7 +9,8 @@
     <link rel="stylesheet" media="all" type="text/css" href="<%= request.getContextPath() %>/jsp/css/style.css" />
     <link id="contextPathHolder" data-contextPath="${pageContext.request.contextPath}"/>
     <title>Скидки</title>
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
+    <%--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>--%>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
     <script src="<%= request.getContextPath() %>/jsp/js/sidebar.js" type="text/javascript"></script>
 </head>
 <body>

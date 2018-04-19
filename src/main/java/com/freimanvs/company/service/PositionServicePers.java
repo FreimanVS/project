@@ -2,16 +2,21 @@ package com.freimanvs.company.service;
 
 import com.freimanvs.company.dao.interfaces.PositionDAOPersInterface;
 import com.freimanvs.company.entities.Position;
+import com.freimanvs.company.interceptors.bindings.Measurable;
 import com.freimanvs.company.service.interfaces.PositionServicePersInterface;
 
 import javax.ejb.*;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import java.util.List;
 
-@Stateless
+//@Stateless
+@Measurable
+@Dependent
 public class PositionServicePers implements PositionServicePersInterface {
 
     @EJB
-    PositionDAOPersInterface positionDAO;
+    private PositionDAOPersInterface positionDAO;
 
     public PositionServicePers() {
     }

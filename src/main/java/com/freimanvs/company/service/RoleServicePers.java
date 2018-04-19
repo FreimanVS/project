@@ -2,16 +2,20 @@ package com.freimanvs.company.service;
 
 import com.freimanvs.company.dao.interfaces.RoleDAOPersInterface;
 import com.freimanvs.company.entities.Role;
+import com.freimanvs.company.interceptors.bindings.Measurable;
 import com.freimanvs.company.service.interfaces.RoleServicePersInterface;
 
 import javax.ejb.*;
+import javax.enterprise.context.Dependent;
 import java.util.List;
 
-@Stateless
+//@Stateless
+@Measurable
+@Dependent
 public class RoleServicePers implements RoleServicePersInterface {
 
     @EJB
-    RoleDAOPersInterface roleDAO;
+    private RoleDAOPersInterface roleDAO;
 
     public RoleServicePers() {
     }

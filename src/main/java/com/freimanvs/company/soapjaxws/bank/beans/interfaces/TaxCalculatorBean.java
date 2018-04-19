@@ -3,7 +3,7 @@ package com.freimanvs.company.soapjaxws.bank.beans.interfaces;
 import javax.ejb.Remote;
 import java.net.URL;
 
-@Remote
+//@Remote
 public interface TaxCalculatorBean {
     Double exec(URL url);
     Double calculate();

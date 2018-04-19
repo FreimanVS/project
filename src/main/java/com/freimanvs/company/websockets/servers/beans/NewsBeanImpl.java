@@ -7,6 +7,8 @@ import com.google.gson.GsonBuilder;
 
 import javax.annotation.Resource;
 import javax.ejb.*;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.websocket.Session;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Singleton
+//@Dependent
 public class NewsBeanImpl implements NewsBean {
 
     private final Gson JSON = new GsonBuilder().setPrettyPrinting().create();
@@ -21,7 +24,8 @@ public class NewsBeanImpl implements NewsBean {
     private String cache;
     private long sleepTime;
 
-    @EJB
+//    @EJB
+    @Inject
     private JsoupBean jsoupBean;
 
     @Resource

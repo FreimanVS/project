@@ -3,6 +3,7 @@ package com.freimanvs.company.websockets.servers;
 import com.freimanvs.company.websockets.servers.beans.interfaces.NewsBean;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.IOException;
 public class JsoupServerEndpoint {
 
     @EJB
+//    @Inject
     private NewsBean newsBean;
 
     @OnMessage

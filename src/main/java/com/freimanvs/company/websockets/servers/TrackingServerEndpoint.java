@@ -4,6 +4,7 @@ package com.freimanvs.company.websockets.servers;
 import com.freimanvs.company.websockets.servers.beans.interfaces.TrackingBean;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.io.IOException;
 public class TrackingServerEndpoint {
 
     @EJB
+//    @Inject
     private TrackingBean trackingBean;
 
     @OnMessage

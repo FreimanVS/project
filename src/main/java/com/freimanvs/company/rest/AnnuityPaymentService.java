@@ -1,9 +1,12 @@
 package com.freimanvs.company.rest;
 
+import com.freimanvs.company.rest.beans.CalculateAnnuityBeanImpl;
 import com.freimanvs.company.rest.beans.interfaces.CalculateAnnuityBean;
 import io.swagger.annotations.*;
 
 import javax.ejb.EJB;
+import javax.enterprise.inject.spi.CDI;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -12,8 +15,9 @@ import javax.ws.rs.core.Response;
 @Path("/bank/v2/calculations")
 public class AnnuityPaymentService implements Calculator {
 
-    @EJB
-    CalculateAnnuityBean calculateAnnuityBean;
+//    @EJB
+//    @Inject
+    private CalculateAnnuityBean calculateAnnuityBean = CDI.current().select(CalculateAnnuityBeanImpl.class).get();
 
     @ApiOperation(value = "calcuate")
     @ApiResponses({

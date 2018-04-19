@@ -1,9 +1,12 @@
 package com.freimanvs.company.rest;
 
+import com.freimanvs.company.rest.beans.CalculateDifferentialBeanImpl;
 import com.freimanvs.company.rest.beans.interfaces.CalculateDifferentialBean;
 import io.swagger.annotations.*;
 
 import javax.ejb.EJB;
+import javax.enterprise.inject.spi.CDI;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -12,8 +15,9 @@ import javax.ws.rs.core.Response;
 @Path("/bank/v1/calculations")
 public class DifferentialPaymentService implements Calculator {
 
-    @EJB
-    CalculateDifferentialBean calculateDifferentialBean;
+//    @EJB
+//    @Inject
+    private CalculateDifferentialBean calculateDifferentialBean = CDI.current().select(CalculateDifferentialBeanImpl.class).get();
 
     @ApiOperation(value = "calcuate")
     @ApiResponses({

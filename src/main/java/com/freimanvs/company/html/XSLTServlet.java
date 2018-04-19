@@ -3,6 +3,7 @@ import com.freimanvs.company.util.interfaces.FileManagerBean;
 import com.freimanvs.company.websockets.models.Valcurs;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,8 @@ import java.net.URL;
 @WebServlet("/xslt")
 public class XSLTServlet extends HttpServlet {
 
-    @EJB
+//    @EJB
+    @Inject
     private FileManagerBean fileManagerBean;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

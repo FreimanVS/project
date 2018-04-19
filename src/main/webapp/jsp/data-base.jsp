@@ -9,9 +9,11 @@
     <link rel="stylesheet" media="all" type="text/css" href="<%= request.getContextPath() %>/jsp/css/style.css" />
     <link id="contextPathHolder" data-contextPath="${pageContext.request.contextPath}"/>
     <title>База данных</title>
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
+    <%--<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>--%>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
     <script src="<%= request.getContextPath() %>/jsp/js/sidebar.js" type="text/javascript"></script>
     <script src="<%= request.getContextPath() %>/jsp/js/get-all-employees.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/jsp/js/get-all-performance.js" type="text/javascript"></script>
 </head>
 <body>
 <header>
@@ -98,6 +100,10 @@
             <p>
                 <a href="${pageContext.request.contextPath}/compare">click to find out the result</a>
             </p>
+        </article>
+        <article>
+            <h2>PERFORMANCE TABLE</h2>
+            <p class="allPerformance"></p>
         </article>
     </section>
 </main>

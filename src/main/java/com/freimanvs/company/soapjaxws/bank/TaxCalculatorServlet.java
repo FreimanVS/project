@@ -4,6 +4,7 @@ package com.freimanvs.company.soapjaxws.bank;
 import com.freimanvs.company.soapjaxws.bank.beans.interfaces.TaxCalculatorBean;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,8 @@ import java.net.URL;
 @WebServlet("/taxcalc")
 public class TaxCalculatorServlet extends HttpServlet {
 
-    @EJB
+//    @EJB
+    @Inject
     private TaxCalculatorBean taxCalculatorBean;
 
     @Override

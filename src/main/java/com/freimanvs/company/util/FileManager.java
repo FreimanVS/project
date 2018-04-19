@@ -1,8 +1,12 @@
 package com.freimanvs.company.util;
 
+import com.freimanvs.company.interceptors.bindings.Measurable;
 import com.freimanvs.company.util.interfaces.FileManagerBean;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Observes;
 import javax.json.bind.JsonbBuilder;
 import javax.json.bind.JsonbConfig;
 import javax.xml.bind.JAXBContext;
@@ -14,7 +18,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Stateless
+//@Stateless
+@Dependent
 public class FileManager implements FileManagerBean {
 
     public void objectToXml(Object obj, String path) {
@@ -44,10 +49,12 @@ public class FileManager implements FileManagerBean {
         return obj;
     }
 
+    @Measurable
     public String xmlToJSON(String path, Class<?> cl) {
         return xmlToJSON(Paths.get(path), cl);
     }
 
+    @Measurable
     public String xmlToJSON(Path path, Class<?> cl) {
         Object obj = null;
         try {
@@ -63,10 +70,12 @@ public class FileManager implements FileManagerBean {
                         .toJson(obj, cl);
     }
 
+    @Measurable
     public void writeToFile(String what, String where) {
         writeToFile(what, Paths.get(where));
     }
 
+    @Measurable
     public void writeToFile(String what, Path where) {
         try (BufferedWriter bw = Files.newBufferedWriter(where)) {
             bw.write(what);
@@ -83,10 +92,12 @@ public class FileManager implements FileManagerBean {
         }*/
     }
 
+    @Measurable
     public void readFromFile(String path) {
         readFromFile(Paths.get(path));
     }
 
+    @Measurable
     public void readFromFile(Path path) {
         try (BufferedReader br = Files.newBufferedReader(path)) {
             br.lines().forEach(System.out::println);
@@ -95,6 +106,7 @@ public class FileManager implements FileManagerBean {
         }
     }
 
+    @Measurable
     public void writeToFile(String what, File where) {
         createNewFile(where);
         try(OutputStream outputStream = new FileOutputStream(where);
@@ -107,6 +119,7 @@ public class FileManager implements FileManagerBean {
         }
     }
 
+    @Measurable
     private void createNewFile(File file) {
         if(!file.exists()){
             try {

@@ -1,13 +1,17 @@
 package com.freimanvs.company.security.beans;
 
+import com.freimanvs.company.interceptors.bindings.Measurable;
 import com.freimanvs.company.security.beans.interfaces.SecurityBean;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.Dependent;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-@Stateless
+//@Stateless
+@Measurable
+@Dependent
 public class SecurityBeanImpl implements SecurityBean {
 
     @Override

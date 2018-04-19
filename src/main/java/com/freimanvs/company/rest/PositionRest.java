@@ -1,10 +1,13 @@
 package com.freimanvs.company.rest;
 
 import com.freimanvs.company.entities.Position;
+import com.freimanvs.company.service.PositionServicePers;
 import com.freimanvs.company.service.interfaces.PositionServicePersInterface;
 import io.swagger.annotations.*;
 
 import javax.ejb.EJB;
+import javax.enterprise.inject.spi.CDI;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -37,11 +40,14 @@ import java.util.List;
 @Api(tags = "Position Resource Swagger-generated API", produces = MediaType.APPLICATION_JSON)
 public class PositionRest implements RestCrud<Position> {
 
-    @EJB
-    PositionServicePersInterface positionService;
+//    @EJB
+//    @Inject
+    private PositionServicePersInterface positionService =
+        CDI.current().select(PositionServicePers.class).get()
+        ;
 
     @Context
-    UriInfo info;
+    private UriInfo info;
 
     @ApiOperation(value = "Get all positions",
             notes = "Get all positions",

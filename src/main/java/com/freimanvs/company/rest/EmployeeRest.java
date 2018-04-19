@@ -1,10 +1,13 @@
 package com.freimanvs.company.rest;
 
 import com.freimanvs.company.entities.Employee;
+import com.freimanvs.company.service.EmployeeServicePers;
 import com.freimanvs.company.service.interfaces.EmployeeServicePersInterface;
 import io.swagger.annotations.*;
 
 import javax.ejb.EJB;
+import javax.enterprise.inject.spi.CDI;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.List;
@@ -34,11 +37,15 @@ import java.util.List;
 @Api(tags = "Employee Resource Swagger-generated API", produces = MediaType.APPLICATION_JSON)
 public class EmployeeRest implements RestCrud<Employee> {
 
-    @EJB
-    EmployeeServicePersInterface employeeService;
+//    @EJB
+//    @Inject
+//    @EmployeeService(value = EmployeeServiceEnum.PERS)
+    private EmployeeServicePersInterface employeeService
+        = CDI.current().select(EmployeeServicePers.class).get()
+        ;
 
     @Context
-    UriInfo info;
+    private UriInfo info;
 
     @ApiOperation(value = "Get all employees",
             notes = "Get all employees",

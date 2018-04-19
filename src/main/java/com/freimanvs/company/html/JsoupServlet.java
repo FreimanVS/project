@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +18,8 @@ import java.util.List;
 @WebServlet("/jsoup")
 public class JsoupServlet extends HttpServlet {
 
-    @EJB
+//    @EJB
+    @Inject
     private JsoupBean jsoupBean;
 
     private static final Gson JSON = new GsonBuilder().setPrettyPrinting().create();

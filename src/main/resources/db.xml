@@ -1,97 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <company>
     <employee id="1">
-        <age>30</age>
-        <city>Ivanovo</city>
-        <department>Administration</department>
-        <email>admin@company.com</email>
-        <fio>GennadiY_I.V.</fio>
-        <login>admin</login>
-        <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
-        <phoneNumber>+73723482347</phoneNumber>
-        <positions id="4">
-            <name>Accounter</name>
-        </positions>
-        <positions id="3">
-            <name>Director</name>
-        </positions>
-        <roles id="2">
-            <name>user</name>
-        </roles>
-        <roles id="1">
-            <name>admin</name>
-        </roles>
-        <salary>50000.0</salary>
-    </employee>
-    <employee id="2">
-        <age>29</age>
-        <city>New-York</city>
-        <department>Marketing</department>
-        <email>login10@company.com</email>
-        <fio>Alferov_S.Z.</fio>
-        <login>login10</login>
-        <password>f68ec41cde16f6b806d7b04c705766b7318fbb1d</password>
-        <phoneNumber>+237472341</phoneNumber>
-        <positions id="2">
-            <name>worker</name>
-        </positions>
-        <roles id="2">
-            <name>user</name>
-        </roles>
-        <salary>34897.7</salary>
-    </employee>
-    <employee id="3">
-        <age>26</age>
-        <city>Astana</city>
-        <department>Customer_Service</department>
-        <email>login7@company.com</email>
-        <fio>Vasiliev_I.I.</fio>
-        <login>login7</login>
-        <password>330ba60e243186e9fa258f9992d8766ea6e88bc1</password>
-        <phoneNumber>+342348382</phoneNumber>
-        <positions id="2">
-            <name>worker</name>
-        </positions>
-        <roles id="2">
-            <name>user</name>
-        </roles>
-        <salary>9535656.2</salary>
-    </employee>
-    <employee id="4">
-        <age>23</age>
-        <city>NizhniiNovgorod</city>
-        <department>I.T.</department>
-        <email>login4@company.com</email>
-        <fio>Durova_S.A.</fio>
-        <login>login4</login>
-        <password>a1d7584daaca4738d499ad7082886b01117275d8</password>
-        <phoneNumber>+128347383</phoneNumber>
-        <positions id="2">
-            <name>worker</name>
-        </positions>
-        <roles id="2">
-            <name>user</name>
-        </roles>
-        <salary>183.25</salary>
-    </employee>
-    <employee id="5">
-        <age>21</age>
-        <city>Saint-Petersburg</city>
-        <department>Marketing</department>
-        <email>login2@company.com</email>
-        <fio>Smirnova_B.C.</fio>
-        <login>login2</login>
-        <password>2aa60a8ff7fcd473d321e0146afd9e26df395147</password>
-        <phoneNumber>+7192348128</phoneNumber>
-        <positions id="2">
-            <name>worker</name>
-        </positions>
-        <roles id="2">
-            <name>user</name>
-        </roles>
-        <salary>342.5</salary>
-    </employee>
-    <employee id="6">
         <age>24</age>
         <city>Saratov</city>
         <department>Maintenance</department>
@@ -100,15 +9,38 @@
         <login>login5</login>
         <password>edba955d0ea15fdef4f61726ef97e5af507430c0</password>
         <phoneNumber>+98234783</phoneNumber>
-        <positions id="2">
+        <positions id="4">
             <name>worker</name>
         </positions>
-        <roles id="2">
+        <roles id="1">
             <name>user</name>
         </roles>
         <salary>3434347.0</salary>
     </employee>
-    <employee id="7">
+    <employee id="2">
+        <age>30</age>
+        <city>Ivanovo</city>
+        <department>Administration</department>
+        <email>admin@company.com</email>
+        <fio>GennadiY_I.V.</fio>
+        <login>admin</login>
+        <password>d033e22ae348aeb5660fc2140aec35850c4da997</password>
+        <phoneNumber>+73723482347</phoneNumber>
+        <positions id="1">
+            <name>Accounter</name>
+        </positions>
+        <positions id="3">
+            <name>Director</name>
+        </positions>
+        <roles id="1">
+            <name>user</name>
+        </roles>
+        <roles id="2">
+            <name>admin</name>
+        </roles>
+        <salary>50000.0</salary>
+    </employee>
+    <employee id="3">
         <age>25</age>
         <city>Arhangelsk</city>
         <department>Sales</department>
@@ -117,49 +49,15 @@
         <login>login6</login>
         <password>6d749e8a378a34cf19b4c02f7955f57fdba130a5</password>
         <phoneNumber>+823492374</phoneNumber>
-        <positions id="2">
+        <positions id="4">
             <name>worker</name>
         </positions>
-        <roles id="2">
+        <roles id="1">
             <name>user</name>
         </roles>
         <salary>342217.1</salary>
     </employee>
-    <employee id="8">
-        <age>22</age>
-        <city>Ekaterinburg</city>
-        <department>Research_and_Development</department>
-        <email>login3@company.com</email>
-        <fio>Evegniev_H.E.</fio>
-        <login>login3</login>
-        <password>1119cfd37ee247357e034a08d844eea25f6fd20f</password>
-        <phoneNumber>+4872488234</phoneNumber>
-        <positions id="2">
-            <name>worker</name>
-        </positions>
-        <roles id="2">
-            <name>user</name>
-        </roles>
-        <salary>34147.0</salary>
-    </employee>
-    <employee id="9">
-        <age>20</age>
-        <city>Moscow</city>
-        <department>Human_Resources</department>
-        <email>login1@company.com</email>
-        <fio>Petrosyan_A.A.</fio>
-        <login>login1</login>
-        <password>e38ad214943daad1d64c102faec29de4afe9da3d</password>
-        <phoneNumber>+71234567890</phoneNumber>
-        <positions id="2">
-            <name>worker</name>
-        </positions>
-        <roles id="2">
-            <name>user</name>
-        </roles>
-        <salary>123.05</salary>
-    </employee>
-    <employee id="10">
+    <employee id="4">
         <age>27</age>
         <city>Minsk</city>
         <department>Finance</department>
@@ -168,30 +66,132 @@
         <login>login8</login>
         <password>3a340fe3599746234ef89591e372d4dd8b590053</password>
         <phoneNumber>+23498239472</phoneNumber>
-        <positions id="2">
+        <positions id="4">
             <name>worker</name>
         </positions>
-        <roles id="2">
+        <roles id="1">
             <name>user</name>
         </roles>
         <salary>323547.4</salary>
     </employee>
-    <roles id="1">
+    <employee id="5">
+        <age>20</age>
+        <city>Moscow</city>
+        <department>Human_Resources</department>
+        <email>login1@company.com</email>
+        <fio>Petrosyan_A.A.</fio>
+        <login>login1</login>
+        <password>e38ad214943daad1d64c102faec29de4afe9da3d</password>
+        <phoneNumber>+71234567890</phoneNumber>
+        <positions id="4">
+            <name>worker</name>
+        </positions>
+        <roles id="1">
+            <name>user</name>
+        </roles>
+        <salary>123.05</salary>
+    </employee>
+    <employee id="6">
+        <age>23</age>
+        <city>NizhniiNovgorod</city>
+        <department>I.T.</department>
+        <email>login4@company.com</email>
+        <fio>Durova_S.A.</fio>
+        <login>login4</login>
+        <password>a1d7584daaca4738d499ad7082886b01117275d8</password>
+        <phoneNumber>+128347383</phoneNumber>
+        <positions id="4">
+            <name>worker</name>
+        </positions>
+        <roles id="1">
+            <name>user</name>
+        </roles>
+        <salary>183.25</salary>
+    </employee>
+    <employee id="7">
+        <age>26</age>
+        <city>Astana</city>
+        <department>Customer_Service</department>
+        <email>login7@company.com</email>
+        <fio>Vasiliev_I.I.</fio>
+        <login>login7</login>
+        <password>330ba60e243186e9fa258f9992d8766ea6e88bc1</password>
+        <phoneNumber>+342348382</phoneNumber>
+        <positions id="4">
+            <name>worker</name>
+        </positions>
+        <roles id="1">
+            <name>user</name>
+        </roles>
+        <salary>9535656.2</salary>
+    </employee>
+    <employee id="8">
+        <age>21</age>
+        <city>Saint-Petersburg</city>
+        <department>Marketing</department>
+        <email>login2@company.com</email>
+        <fio>Smirnova_B.C.</fio>
+        <login>login2</login>
+        <password>2aa60a8ff7fcd473d321e0146afd9e26df395147</password>
+        <phoneNumber>+7192348128</phoneNumber>
+        <positions id="4">
+            <name>worker</name>
+        </positions>
+        <roles id="1">
+            <name>user</name>
+        </roles>
+        <salary>342.5</salary>
+    </employee>
+    <employee id="9">
+        <age>29</age>
+        <city>New-York</city>
+        <department>Marketing</department>
+        <email>login10@company.com</email>
+        <fio>Alferov_S.Z.</fio>
+        <login>login10</login>
+        <password>f68ec41cde16f6b806d7b04c705766b7318fbb1d</password>
+        <phoneNumber>+237472341</phoneNumber>
+        <positions id="4">
+            <name>worker</name>
+        </positions>
+        <roles id="1">
+            <name>user</name>
+        </roles>
+        <salary>34897.7</salary>
+    </employee>
+    <employee id="10">
+        <age>22</age>
+        <city>Ekaterinburg</city>
+        <department>Research_and_Development</department>
+        <email>login3@company.com</email>
+        <fio>Evegniev_H.E.</fio>
+        <login>login3</login>
+        <password>1119cfd37ee247357e034a08d844eea25f6fd20f</password>
+        <phoneNumber>+4872488234</phoneNumber>
+        <positions id="4">
+            <name>worker</name>
+        </positions>
+        <roles id="1">
+            <name>user</name>
+        </roles>
+        <salary>34147.0</salary>
+    </employee>
+    <roles id="2">
         <name>admin</name>
     </roles>
-    <roles id="2">
+    <roles id="1">
         <name>user</name>
     </roles>
-    <positions id="4">
+    <positions id="1">
         <name>Accounter</name>
     </positions>
     <positions id="3">
         <name>Director</name>
     </positions>
-    <positions id="1">
+    <positions id="2">
         <name>HR</name>
     </positions>
-    <positions id="2">
+    <positions id="4">
         <name>worker</name>
     </positions>
 </company>

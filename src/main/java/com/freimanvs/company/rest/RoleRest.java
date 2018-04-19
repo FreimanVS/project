@@ -1,10 +1,13 @@
 package com.freimanvs.company.rest;
 
 import com.freimanvs.company.entities.Role;
+import com.freimanvs.company.service.RoleServicePers;
 import com.freimanvs.company.service.interfaces.RoleServicePersInterface;
 import io.swagger.annotations.*;
 
 import javax.ejb.EJB;
+import javax.enterprise.inject.spi.CDI;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -37,11 +40,15 @@ import java.util.List;
 @Api(tags = "Role Resource Swagger-generated API", produces = MediaType.APPLICATION_JSON)
 public class RoleRest implements RestCrud<Role> {
 
-    @EJB
-    private RoleServicePersInterface roleService;
+//    @EJB
+//    @Inject
+    private RoleServicePersInterface roleService =
+//        CDI.current().select(RoleServicePers.class).get()
+        CDI.current().select(RoleServicePersInterface.class).get()
+        ;
 
     @Context
-    UriInfo info;
+    private UriInfo info;
 
     @ApiOperation(value = "Get all roles",
             notes = "Get all roles",

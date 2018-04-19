@@ -5,6 +5,7 @@ import com.freimanvs.company.soapjaxws.bank.beans.interfaces.TaxCalculatorBean;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -14,7 +15,8 @@ import javax.jws.WebService;
         endpointInterface = "com.freimanvs.company.soapjaxws.bank.TaxCalculatorPort")
 public class TaxCalculatorService implements TaxCalculatorPort {
 
-    @EJB
+//    @EJB
+    @Inject
     private TaxCalculatorBean taxCalculatorBean;
 
     @PostConstruct
