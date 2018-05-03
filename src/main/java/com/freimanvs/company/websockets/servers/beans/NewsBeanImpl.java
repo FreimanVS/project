@@ -4,10 +4,10 @@ import com.freimanvs.company.html.beans.interfaces.JsoupBean;
 import com.freimanvs.company.websockets.servers.beans.interfaces.NewsBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
 import javax.ejb.*;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.websocket.Session;
 import java.io.IOException;
@@ -16,15 +16,15 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Singleton
-//@Dependent
 public class NewsBeanImpl implements NewsBean {
+
+    private static final Logger LOGGER = Logger.getLogger(NewsBeanImpl.class);
 
     private final Gson JSON = new GsonBuilder().setPrettyPrinting().create();
     private Queue<Session> queue = new ConcurrentLinkedQueue<>();
     private String cache;
     private long sleepTime;
 
-//    @EJB
     @Inject
     private JsoupBean jsoupBean;
 
@@ -46,7 +46,7 @@ public class NewsBeanImpl implements NewsBean {
     @Timeout
 //    @Schedule(hour = "*", minute = "*", second = "*/3", info = "Every 3 seconds timer")
     public void timeout() {
-        System.out.println("News websocket bean, SLEEPTIME: " + sleepTime);
+        LOGGER.info("News websocket bean, SLEEPTIME: " + sleepTime);
         try {
             if(queue != null) {
                 ArrayList<Session> closedSessions = new ArrayList<>();

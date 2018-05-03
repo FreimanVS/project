@@ -8,6 +8,7 @@ import com.freimanvs.company.service.interfaces.EmployeeServicePersInterface;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import java.security.Principal;
 import java.util.List;
 
 @Measurable
@@ -19,6 +20,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Inject
     private SecurityBean securityBean;
+
+    @Inject
+    private Principal principal;
 
     @Override
     public boolean isAuthorized(String login, String password) {

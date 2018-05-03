@@ -10,7 +10,6 @@ import javax.inject.Inject;
 @Decorator
 public abstract class AuthorizationDecorator implements AuthorizationService {
 
-
     @Inject
     @Delegate
     @Any

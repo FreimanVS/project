@@ -4,6 +4,9 @@ import com.freimanvs.company.analytics.beans.interfaces.AnalyticsBean;
 import com.freimanvs.company.analytics.model.Analytics;
 
 import javax.annotation.Resource;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -12,10 +15,12 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.Cookie;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import javax.ws.rs.core.Context;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
+@PermitAll
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)
 public class AnalyticsBeanImpl implements AnalyticsBean {
@@ -25,6 +30,9 @@ public class AnalyticsBeanImpl implements AnalyticsBean {
 
     @Resource
     private UserTransaction transaction;
+
+//    @Context
+//    private SessionContext sessionContext;
 
     public String cookiesToString(Cookie[] cookie) {
         StringBuilder sb = new StringBuilder("[");

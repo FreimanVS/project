@@ -13,7 +13,7 @@
     <nav>
         <ul>
             <li><a href="<%= request.getContextPath() %>/">ГЛАВНАЯ</a></li>
-            <li><a href="<%= request.getContextPath() %>/login">ВХОД</a></li>
+            <%--<li><a href="<%= request.getContextPath() %>/login">ВХОД</a></li>--%>
             <li><a href="<%= request.getContextPath() %>/discounts">СКИДКИ</a></li>
             <li><a href="<%= request.getContextPath() %>/admin">АДМИНСКАЯ</a></li>
             <li><a href="<%= request.getContextPath() %>/contact">КОНТАКТЫ</a></li>

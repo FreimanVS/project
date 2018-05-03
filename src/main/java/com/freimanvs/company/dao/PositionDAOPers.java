@@ -2,8 +2,10 @@ package com.freimanvs.company.dao;
 
 import com.freimanvs.company.dao.interfaces.PositionDAOPersInterface;
 import com.freimanvs.company.entities.Position;
+import com.freimanvs.company.interceptors.bindings.Logging;
 import org.hibernate.Hibernate;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
+@Logging
 public class PositionDAOPers implements PositionDAOPersInterface {
 
     @PersistenceContext(unitName = "mysqlejb")

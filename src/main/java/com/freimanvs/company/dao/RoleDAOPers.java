@@ -2,8 +2,10 @@ package com.freimanvs.company.dao;
 
 import com.freimanvs.company.dao.interfaces.RoleDAOPersInterface;
 import com.freimanvs.company.entities.Role;
+import com.freimanvs.company.interceptors.bindings.Logging;
 import org.hibernate.Hibernate;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
+@Logging
 public class RoleDAOPers implements RoleDAOPersInterface {
 
     @PersistenceContext(unitName = "mysqlejb")
@@ -61,6 +64,23 @@ public class RoleDAOPers implements RoleDAOPersInterface {
         objFromDB.setName(obj.getName());
         objFromDB.setEmpls(obj.getEmpls());
         em.flush();
+    }
+
+    @Override
+    public Role getByUnique(String uniqParam, String value) {
+
+        TypedQuery<Role> query = em.createQuery("select DISTINCT r from Role r"
+                +" WHERE r." + uniqParam + " = :theValue", Role.class)
+                .setParameter("theValue", value);
+
+        List<Role> list = query.getResultList();
+
+        if (list != null && !list.isEmpty()) {
+            list.forEach(this::initialize);
+            return list.get(0);
+        } else {
+            return null;
+        }
     }
 
     private void initialize(Role r) {

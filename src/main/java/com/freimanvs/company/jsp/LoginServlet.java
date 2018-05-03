@@ -1,5 +1,6 @@
 package com.freimanvs.company.jsp;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +10,13 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
+        if ("true".equals(req.getParameter("logout"))) {
+            req.logout();
+            String prevLink = req.getHeader("referer");
+            resp.sendRedirect(prevLink);
+        }
     }
 }

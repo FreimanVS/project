@@ -323,6 +323,9 @@
           <property value="fileRealm" name="jaas-context" />
         </auth-realm>
         <auth-realm classname="com.sun.enterprise.security.auth.realm.certificate.CertificateRealm" name="certificate" />
+          <auth-realm classname="com.freimanvs.company.security.MyRealm" name="myRealm">
+              <property name="jaas-context" value="myRealm"></property>
+          </auth-realm>
         <jacc-provider policy-configuration-factory-provider="com.sun.enterprise.security.provider.PolicyConfigurationFactoryImpl" policy-provider="com.sun.enterprise.security.provider.PolicyWrapper" name="default">
           <property value="${com.sun.aas.instanceRoot}/generated/policy" name="repository" />
         </jacc-provider>

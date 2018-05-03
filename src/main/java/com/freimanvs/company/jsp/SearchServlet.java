@@ -8,6 +8,8 @@ import javax.ejb.EJB;
 import javax.enterprise.concurrent.ManagedScheduledExecutorService;
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpMethodConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,9 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@ServletSecurity(httpMethodConstraints = {
+        @HttpMethodConstraint(rolesAllowed = {"admin"}, value = "POST")
+})
 @WebServlet(urlPatterns = {"/search"}, name = "searchServlet", asyncSupported = true)
 public class SearchServlet extends HttpServlet {
 

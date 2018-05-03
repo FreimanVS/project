@@ -1,6 +1,8 @@
 package com.freimanvs.company.rest;
 
 import com.freimanvs.company.entities.Employee;
+import com.freimanvs.company.interceptors.bindings.Logging;
+import com.freimanvs.company.rest.interceptors.NotFoundInterceptor;
 import com.freimanvs.company.service.EmployeeServicePers;
 import com.freimanvs.company.service.interfaces.EmployeeServicePersInterface;
 import io.swagger.annotations.*;
@@ -8,11 +10,13 @@ import io.swagger.annotations.*;
 import javax.ejb.EJB;
 import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.List;
 
 @Path("/v1/employees")
+@Logging
 @SwaggerDefinition(
         info = @Info(
                 title = "Employee Resource Swagger-generated API",
@@ -91,15 +95,13 @@ public class EmployeeRest implements RestCrud<Employee> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Override
     public Response getById(@PathParam("id") long id) {
         Employee employee = employeeService.getById(id);
-
-        if (employee == null)
-            throw new NotFoundException();
 
         return Response.ok(employee).build();
     }
@@ -114,15 +116,11 @@ public class EmployeeRest implements RestCrud<Employee> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @DELETE
     @Path("/{id}")
     @Override
     public Response delete(@PathParam("id") long id) {
-
-        Employee employee = employeeService.getById(id);
-
-        if (employee == null)
-            throw new NotFoundException();
 
         employeeService.deleteById(id);
         return Response.noContent().build();
@@ -140,17 +138,13 @@ public class EmployeeRest implements RestCrud<Employee> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Override
     public Response update(@PathParam("id") long id,
                            Employee obj) {
-
-        Employee employee = employeeService.getById(id);
-
-        if (employee == null)
-            throw new NotFoundException();
 
         employeeService.updateById(id, obj);
         return Response.created(info.getAbsolutePath()).build();

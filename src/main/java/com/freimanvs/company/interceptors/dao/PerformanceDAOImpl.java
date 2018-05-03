@@ -1,5 +1,6 @@
 package com.freimanvs.company.interceptors.dao;
 
+import com.freimanvs.company.interceptors.bindings.Logging;
 import com.freimanvs.company.interceptors.dao.interfaces.PerformanceDAO;
 import com.freimanvs.company.interceptors.models.Performance;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
+@Logging
 public class PerformanceDAOImpl implements PerformanceDAO {
 
     @PersistenceContext(unitName = "mysqlejb")

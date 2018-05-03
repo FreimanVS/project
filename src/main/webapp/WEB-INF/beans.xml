@@ -8,6 +8,7 @@
 
     <interceptors>
         <class>com.freimanvs.company.interceptors.MeasureTimeInterceptor</class>
+        <class>com.freimanvs.company.interceptors.LoggerInterceptor</class>
     </interceptors>
     <decorators>
         <class>com.freimanvs.company.decorators.AuthorizationDecorator</class>

@@ -7,4 +7,5 @@ import javax.ejb.Remote;
 
 @Remote
 public interface RoleDAOPersInterface extends DAO<Role> {
+    Role getByUnique(String uniqParam, String value);
 }

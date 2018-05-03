@@ -3,6 +3,7 @@ package com.freimanvs.company.interceptors;
 import com.freimanvs.company.interceptors.bindings.Measurable;
 import com.freimanvs.company.interceptors.dao.interfaces.PerformanceDAO;
 import com.freimanvs.company.interceptors.models.Performance;
+import org.apache.log4j.Logger;
 
 import javax.annotation.Priority;
 import javax.ejb.EJB;
@@ -17,6 +18,8 @@ import javax.interceptor.InvocationContext;
 @Dependent
 public class MeasureTimeInterceptor {
 
+//    private static final Logger LOGGER = Logger.getLogger(MeasureTimeInterceptor.class);
+
     @EJB
     private PerformanceDAO performanceDAO;
 
@@ -30,7 +33,7 @@ public class MeasureTimeInterceptor {
         Long ms = System.currentTimeMillis() - start;
         String name = ic.getMethod().toString();
 
-//        System.out.println("Execution of " + name +
+//        LOGGER.info("Execution of " + name +
 //                ", time is " + ms + " ms.");
 
         performanceDAO.add(new Performance(name, ms));

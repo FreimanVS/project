@@ -16,7 +16,8 @@ public class MyFilter implements ContainerRequestFilter, ContainerResponseFilter
     private HttpHeaders headers;
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException { // pre-match filter
+    public void filter(ContainerRequestContext requestContext) throws IOException {
+        // pre-match filter
 
     }
 

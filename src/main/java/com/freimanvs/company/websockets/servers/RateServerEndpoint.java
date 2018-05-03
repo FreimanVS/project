@@ -3,8 +3,8 @@ package com.freimanvs.company.websockets.servers;
 import com.freimanvs.company.util.interfaces.FileManagerBean;
 import com.freimanvs.company.websockets.models.Valcurs;
 import com.freimanvs.company.websockets.servers.config.ServletAwareConfig;
+import org.apache.log4j.Logger;
 
-import javax.ejb.*;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -25,7 +25,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @ServerEndpoint(value = "/rateserver", configurator=ServletAwareConfig.class)
 public class RateServerEndpoint {
 
-//    @EJB
+    private static final Logger LOGGER = Logger.getLogger(RateServerEndpoint.class);
+
     @Inject
     private FileManagerBean fileManagerBean;
 
@@ -40,7 +41,7 @@ public class RateServerEndpoint {
                 if(queue != null) {
                     ArrayList<Session> closedSessions = new ArrayList<>();
                     String result = getRate();
-                    System.out.println("VALUTE RATE, SLEEP_TIME: " + sleepTime);
+                    LOGGER.info("VALUTE RATE, SLEEP_TIME: " + sleepTime);
                     if (!result.equals(cache)) {
                         for (Session session : queue) {
                             if(!session.isOpen()) {
@@ -102,14 +103,12 @@ public class RateServerEndpoint {
 
     @OnMessage
     public void onMessage(Session session, String msg) {
-        System.out.println("received msg " + msg + " from " + session.getId());
     }
 
     @OnOpen
     public void onOpen(Session session, EndpointConfig config) {
         this.config = config;
         queue.add(session);
-        System.out.println("New session is opened: "+session.getId());
 
         try {
             session.getBasicRemote().sendText(getRate());
@@ -123,12 +122,10 @@ public class RateServerEndpoint {
     @OnError
     public void onError(Session session, Throwable t) {
         queue.remove(session);
-        System.err.println("Error on session " + session.getId() + ": " + t.getLocalizedMessage());
     }
 
     @OnClose
     public void onClose(Session session) {
         queue.remove(session);
-        System.out.println("New session is closed: "+session.getId());
     }
 }

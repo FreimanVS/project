@@ -44,5 +44,6 @@ public class RestApplication extends Application {
         resources.add(RoleRest.class);
         resources.add(GeoIPRestService.class);
         resources.add(CitiesRestService.class);
+        resources.add(LoginRest.class);
     }
 }

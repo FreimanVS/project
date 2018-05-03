@@ -23,7 +23,7 @@ public class SearchBeanImpl implements SearchBean {
                                  int ageFrom, int ageTo) {
 
         TypedQuery<Employee> query = em.createQuery("select DISTINCT e from Employee e join e.positions p"
-                +" WHERE e.login LIKE :login"
+                +" WHERE e.user.login LIKE :login"
                 + " AND e.fio LIKE :fio"
                 + " AND p.name LIKE :positions"
                 + " AND e.city LIKE :city"

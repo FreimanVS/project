@@ -11,7 +11,7 @@
 
   <context-param>
     <param-name>DB_XML_location</param-name>
-    <param-value>file:///K:/opera_downloads/project-master/src/main/resources/db.xml</param-value>
+    <param-value>file:///K:/opera_downloads/project-master2/src/main/resources/db.xml</param-value>
     <!--<param-value>file:///usr/local/tomcat/webapps/company/WEB-INF/classes/db.xml</param-value>-->
   </context-param>
 
@@ -26,6 +26,7 @@
     <cookie-config>
       <max-age>600</max-age> <!-- seconds, has higher priority than session-timeout -->
     </cookie-config>
+    <tracking-mode>COOKIE</tracking-mode>
   </session-config>
 
   <jsp-config>
@@ -34,6 +35,124 @@
       <page-encoding>UTF-8</page-encoding>
     </jsp-property-group>
   </jsp-config>
+
+
+
+
+
+  <!--form auth-->
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>myRealm</realm-name>
+    <form-login-config>
+      <form-login-page>/WEB-INF/jsp/login.jsp</form-login-page>
+      <form-error-page>/WEB-INF/jsp/error.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>admin</web-resource-name>
+      <url-pattern>/admin</url-pattern>
+      <url-pattern>/admin/*</url-pattern>
+      <url-pattern>/search</url-pattern>
+      <url-pattern>/tracking</url-pattern>
+      <url-pattern>/jsp/data-base.jsp</url-pattern>
+      <url-pattern>/jsp/admin-page.jsp</url-pattern>
+      <url-pattern>/ftl/analytics.ftl</url-pattern>
+      <url-pattern>/jsp/swagger.html</url-pattern>
+      <url-pattern>/api/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>allowed</web-resource-name>
+      <url-pattern>/api/v1/auth/login</url-pattern>
+      <url-pattern>/api/v1/auth/principal</url-pattern>
+      <url-pattern>/api/v1/auth/logout</url-pattern>
+    </web-resource-collection>
+  </security-constraint>
+
+  <security-role>
+    <description/>
+    <role-name>admin</role-name>
+  </security-role>
+  <security-role>
+    <description/>
+    <role-name>user</role-name>
+  </security-role>
+
+  <error-page>
+    <error-code>403</error-code>
+    <location>/WEB-INF/jsp/accessDenied.jsp</location>
+  </error-page>
+
+  <!--rest basic-->
+  <!--<security-constraint>-->
+    <!--<web-resource-collection>-->
+      <!--<web-resource-name>rest</web-resource-name>-->
+      <!--<url-pattern>/api/*</url-pattern>-->
+    <!--</web-resource-collection>-->
+    <!--<auth-constraint>-->
+      <!--<role-name>admin</role-name>-->
+    <!--</auth-constraint>-->
+  <!--</security-constraint>-->
+
+  <!--<login-config>-->
+    <!--<auth-method>DIGEST/BASIC</auth-method>-->
+    <!--<realm-name>myRealm</realm-name>-->
+  <!--</login-config>-->
+  <!--<security-constraint>-->
+    <!--<web-resource-collection>-->
+      <!--<web-resource-name>restAllowed</web-resource-name>-->
+      <!--<url-pattern>/api/v1/auth/login</url-pattern>-->
+    <!--</web-resource-collection>-->
+  <!--</security-constraint>-->
+
+  <!--rest form-->
+  <!--<security-constraint>-->
+    <!--<web-resource-collection>-->
+      <!--<web-resource-name>rest</web-resource-name>-->
+      <!--<url-pattern>/api/*</url-pattern>-->
+    <!--</web-resource-collection>-->
+    <!--<auth-constraint>-->
+      <!--<role-name>admin</role-name>-->
+    <!--</auth-constraint>-->
+  <!--</security-constraint>-->
+  <!--<login-config>-->
+    <!--<auth-method>FORM</auth-method>-->
+    <!--<realm-name>myRealm</realm-name>-->
+    <!--<form-login-config>-->
+      <!--<form-login-page>/WEB-INF/jsp/login.jsp</form-login-page>-->
+      <!--<form-error-page>/WEB-INF/jsp/error.jsp</form-error-page>-->
+    <!--</form-login-config>-->
+  <!--</login-config>-->
+
+  <!--rest programmatic-->
+  <!--<security-constraint>-->
+    <!--<web-resource-collection>-->
+      <!--<web-resource-name>rest</web-resource-name>-->
+      <!--<url-pattern>/api/*</url-pattern>-->
+    <!--</web-resource-collection>-->
+    <!--<auth-constraint>-->
+      <!--<role-name>admin</role-name>-->
+    <!--</auth-constraint>-->
+  <!--</security-constraint>-->
+
+  <!--<security-constraint>-->
+    <!--<web-resource-collection>-->
+      <!--<web-resource-name>restLogin</web-resource-name>-->
+      <!--<url-pattern>/api/v1/auth/login</url-pattern>-->
+    <!--</web-resource-collection>-->
+  <!--</security-constraint>-->
+
+
+
+
 
   <!-- <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
@@ -192,4 +311,79 @@
       <!-- Nobody is allowed to visit these directly. -->
     </auth-constraint>
   </security-constraint>
+
+
+
+
+
+
+  <!--SPRING SECURITY-->
+  <!--<context-param>-->
+  <!--<param-name>contextConfigLocation</param-name>-->
+  <!--<param-value>-->
+  <!--/WEB-INF/security.xml-->
+  <!--</param-value>-->
+  <!--</context-param>-->
+
+  <!--<filter>-->
+  <!--<filter-name>springSecurityFilterChain</filter-name>-->
+  <!--<filter-class>-->
+  <!--org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+  <!--</filter>-->
+
+  <!--<filter-mapping>-->
+  <!--<filter-name>springSecurityFilterChain</filter-name>-->
+  <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <!--<listener>-->
+  <!--<listener-class>-->
+  <!--org.springframework.web.context.ContextLoaderListener-->
+  <!--</listener-class>-->
+  <!--</listener>-->
+
+
+
+
+  <!--PROMETHEUS-->
+  <servlet>
+    <servlet-name>MetricsServlet</servlet-name>
+    <servlet-class>io.prometheus.client.exporter.MetricsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MetricsServlet</servlet-name>
+    <url-pattern>/metrics</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>prometheusFilter</filter-name>
+    <filter-class>io.prometheus.client.filter.MetricsFilter</filter-class>
+    <async-supported>true</async-supported>
+    <init-param>
+      <param-name>metric-name</param-name>
+      <param-value>webapp_metrics_filter</param-value>
+    </init-param>
+    <init-param>
+      <param-name>help</param-name>
+      <param-value>This is the help for your metrics filter</param-value>
+    </init-param>
+    <init-param>
+      <param-name>buckets</param-name>
+      <param-value>0.005,0.01,0.025,0.05,0.075,0.1,0.25,0.5,0.75,1,2.5,5,7.5,10</param-value>
+    </init-param>
+    <!-- Optionally override path components; anything less than 1 (1 is the default)
+         means full granularity -->
+    <init-param>
+      <param-name>path-components</param-name>
+      <param-value>1</param-value>
+    </init-param>
+  </filter>
+
+  <!-- You will most likely want this to be the first filter in the chain
+  (therefore the first <filter-mapping> in the web.xml file), so that you can get
+  the most accurate measurement of latency. -->
+  <filter-mapping>
+    <filter-name>prometheusFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>

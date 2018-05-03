@@ -1,4 +1,14 @@
     <article>
+        <div style='margin-left:40px;' >
+            <c:choose>
+                <c:when test="${pageContext.request.userPrincipal ne null}">
+                    <c:out value="Hello, ${pageContext.request.userPrincipal.name}!" escapeXml="true"></c:out>
+                    <a href = "<c:url value = "/login?logout=true"/>">выйти</a>
+                </c:when>
+            </c:choose>
+        </div>
+    </article>
+    <article>
         <h2>Курс валют</h2>
         <div id="curs">БЛОК ДЛЯ КУРСА ВАЛЮТ</div>
     </article>

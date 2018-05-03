@@ -4,6 +4,7 @@ import com.freimanvs.company.analytics.beans.interfaces.AnalyticsBean;
 import com.freimanvs.company.websockets.servers.beans.interfaces.TrackingBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
 import javax.ejb.*;
@@ -15,8 +16,9 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Singleton
-//@Dependent
 public class TrackingBeanImpl implements TrackingBean {
+
+    private static final Logger LOGGER = Logger.getLogger(TrackingBeanImpl.class);
 
     @EJB
     private AnalyticsBean analyticsBean;
@@ -49,7 +51,7 @@ public class TrackingBeanImpl implements TrackingBean {
     @Timeout
     public void timeOut() {
         try {
-            System.out.println("TRACKING");
+            LOGGER.info("TRACKING...");
             if(queue != null) {
                 ArrayList<Session> closedSessions = new ArrayList<>();
 

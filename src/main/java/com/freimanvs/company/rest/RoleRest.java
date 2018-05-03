@@ -1,6 +1,8 @@
 package com.freimanvs.company.rest;
 
 import com.freimanvs.company.entities.Role;
+import com.freimanvs.company.interceptors.bindings.Logging;
+import com.freimanvs.company.rest.interceptors.NotFoundInterceptor;
 import com.freimanvs.company.service.RoleServicePers;
 import com.freimanvs.company.service.interfaces.RoleServicePersInterface;
 import io.swagger.annotations.*;
@@ -8,6 +10,7 @@ import io.swagger.annotations.*;
 import javax.ejb.EJB;
 import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -16,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @Path("/v1/roles")
+@Logging
 @SwaggerDefinition(
         info = @Info(
                 title = "Role Resource Swagger-generated API",
@@ -94,15 +98,13 @@ public class RoleRest implements RestCrud<Role> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Override
     public Response getById(@PathParam("id") long id) {
         Role role = roleService.getById(id);
-
-        if (role == null)
-            throw new NotFoundException();
 
         return Response.ok(role).build();
     }
@@ -117,13 +119,11 @@ public class RoleRest implements RestCrud<Role> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @DELETE
     @Path("/{id}")
     @Override
     public Response delete(@PathParam("id") long id) {
-
-        if (roleService.getById(id) == null)
-            throw new NotFoundException();
 
         roleService.deleteById(id);
         return Response.noContent().build();
@@ -141,15 +141,13 @@ public class RoleRest implements RestCrud<Role> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Override
     public Response update(@PathParam("id") long id,
                            Role obj) {
-
-        if (roleService.getById(id) == null)
-            throw new NotFoundException();
 
         roleService.updateById(id, obj);
         return Response.created(info.getAbsolutePath()).build();

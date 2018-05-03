@@ -3,6 +3,7 @@
 <%@ taglib prefix="custom" uri="/tld" %>
 <%@ taglib prefix="counter" uri="/custom" %>
 <%@ taglib prefix="userInfo" uri="/userInfo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ru">

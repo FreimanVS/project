@@ -2,15 +2,19 @@ package com.freimanvs.company.dao;
 
 import com.freimanvs.company.dao.interfaces.EmployeeDAOPersInterface;
 import com.freimanvs.company.entities.Employee;
+import com.freimanvs.company.interceptors.bindings.Logging;
 import org.hibernate.Hibernate;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
+@Logging
 public class EmployeeDAOPers implements EmployeeDAOPersInterface {
 
     @PersistenceContext(unitName = "mysqlejb")
@@ -43,6 +47,31 @@ public class EmployeeDAOPers implements EmployeeDAOPersInterface {
         Employee emp = em.find(Employee.class, id);
         initialize(emp);
         return emp;
+    }
+
+    @Override
+    public Employee getByUnique(String uniqParam, String value) {
+
+        TypedQuery<Employee> query;
+
+        if ("login".equals(uniqParam)) {
+            query = em.createQuery("select DISTINCT e from Employee e"
+                    +" WHERE e.user.login = :theValue", Employee.class)
+                    .setParameter("theValue", value);
+        } else {
+            query = em.createQuery("select DISTINCT e from Employee e"
+                    +" WHERE e." + uniqParam + " = :theValue", Employee.class)
+                    .setParameter("theValue", value);
+        }
+
+        List<Employee> list = query.getResultList();
+
+        if (list != null && !list.isEmpty()) {
+            list.forEach(this::initialize);
+            return list.get(0);
+        } else {
+            return null;
+        }
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)

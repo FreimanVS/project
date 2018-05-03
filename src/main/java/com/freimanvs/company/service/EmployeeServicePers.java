@@ -11,6 +11,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
+import java.security.Principal;
 import java.util.List;
 
 //@Stateless
@@ -24,6 +25,9 @@ public class EmployeeServicePers implements EmployeeServicePersInterface {
 //    @EJB
     @Inject
     private SecurityBean securityBean;
+
+    @Inject
+    private Principal principal;
 
     public EmployeeServicePers() {
     }

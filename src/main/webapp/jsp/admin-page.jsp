@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="userInfo" uri="/userInfo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -20,6 +22,12 @@
 </header>
 <main>
     <section>
+        <article>
+            <h2>database control</h2>
+            <p>
+                <a href="${pageContext.request.contextPath}/jsp/data-base.jsp">database control</a>
+            </p>
+        </article>
         <article>
             <h2>Скрипт для запуска:</h2>
             <p>

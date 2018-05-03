@@ -1,6 +1,8 @@
 package com.freimanvs.company.rest;
 
 import com.freimanvs.company.entities.Position;
+import com.freimanvs.company.interceptors.bindings.Logging;
+import com.freimanvs.company.rest.interceptors.NotFoundInterceptor;
 import com.freimanvs.company.service.PositionServicePers;
 import com.freimanvs.company.service.interfaces.PositionServicePersInterface;
 import io.swagger.annotations.*;
@@ -8,6 +10,7 @@ import io.swagger.annotations.*;
 import javax.ejb.EJB;
 import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -16,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @Path("/v1/positions")
+@Logging
 @SwaggerDefinition(
         info = @Info(
                 title = "Position Resource Swagger-generated API",
@@ -93,6 +97,7 @@ public class PositionRest implements RestCrud<Position> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
@@ -100,8 +105,6 @@ public class PositionRest implements RestCrud<Position> {
     public Response getById(@PathParam("id") long id) {
         Position position = positionService.getById(id);
 
-        if (position == null)
-            throw new NotFoundException();
 
         return Response.ok(position).build();
     }
@@ -116,13 +119,11 @@ public class PositionRest implements RestCrud<Position> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @DELETE
     @Path("/{id}")
     @Override
     public Response delete(@PathParam("id") long id) {
-
-        if (positionService.getById(id) == null)
-            throw new NotFoundException();
 
         positionService.deleteById(id);
         return Response.noContent().build();
@@ -140,15 +141,13 @@ public class PositionRest implements RestCrud<Position> {
     })
     @ApiImplicitParam(name = "id", value = "id", dataType = "long", paramType = "path")
 
+    @Interceptors({NotFoundInterceptor.class})
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @Override
     public Response update(@PathParam("id") long id,
                            Position obj) {
-
-        if (positionService.getById(id) == null)
-            throw new NotFoundException();
 
         positionService.updateById(id, obj);
         return Response.created(info.getAbsolutePath()).build();

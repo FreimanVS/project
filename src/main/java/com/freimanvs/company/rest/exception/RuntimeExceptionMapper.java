@@ -22,6 +22,8 @@ public class RuntimeExceptionMapper implements ExceptionMapper<Throwable> {
             status = Response.Status.METHOD_NOT_ALLOWED;
         else if (exception instanceof NotAcceptableException)
             status = Response.Status.NOT_ACCEPTABLE;
+        else if (exception instanceof NotAuthorizedException)
+            status = Response.Status.UNAUTHORIZED;
         else
             status = Response.Status.SEE_OTHER;
 

@@ -24,10 +24,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name = "employee", schema = "company",
-        uniqueConstraints={
-                @UniqueConstraint(columnNames={"login"})
-        })
+@Table(name = "employee", schema = "company"
+//        ,
+//        uniqueConstraints={
+//                @UniqueConstraint(columnNames={"login"})
+//        }
+        )
 public class Employee implements Serializable {
 
     @ApiParam(value = "id")
@@ -36,17 +38,19 @@ public class Employee implements Serializable {
     @Column(name="id")
     private long id;
 
-    @ApiParam(value = "login", required = true)
-    @NotBlank
-    @Size(min = 5)
-    @Column(name="login", unique = true)
-    private String login;
+//    @ApiParam(value = "login", required = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="login")
+//    @NotBlank
+//    @Size(min = 5)
+//    @Column(name="user", unique = true)
+    private User user = new User();
 
-    @ApiParam(value = "password", required = true)
-    @NotBlank
-    @Size(min = 5)
-    @Column(name="password")
-    private String password;
+//    @ApiParam(value = "password", required = true)
+//    @NotBlank
+//    @Size(min = 5)
+//    @Column(name="password")
+//    private String password;
 
     @ApiParam(value = "fio", required = true)
     @NotBlank
@@ -106,8 +110,8 @@ public class Employee implements Serializable {
 
     public Employee(String login, String password, String fio, String department, String city,
                     double salary, String phoneNumber, String email) {
-        this.login = login;
-        this.password = password;
+        this.user.setLogin(login);
+        this.user.setPassword(password);
         this.fio = fio;
         this.department = department;
         this.city = city;
@@ -118,8 +122,8 @@ public class Employee implements Serializable {
 
     public Employee(String login, String password, String fio, String department, String city, double salary,
                     String phoneNumber, String email, int age) {
-        this.login = login;
-        this.password = password;
+        this.user.setLogin(login);
+        this.user.setPassword(password);
         this.fio = fio;
         this.department = department;
         this.city = city;
@@ -139,7 +143,7 @@ public class Employee implements Serializable {
     }
 
     public String getLogin() {
-        return login;
+        return this.user.getLogin();
     }
 
 
@@ -154,16 +158,16 @@ public class Employee implements Serializable {
 
     @XmlElement(required = true)
     public void setLogin(String login) {
-        this.login = login;
+        this.user.setLogin(login);
     }
 
     public String getPassword() {
-        return password;
+        return this.user.getPassword();
     }
 
     @XmlElement()
     public void setPassword(String password) {
-        this.password = password;
+        this.user.setPassword(password);
     }
 
 
@@ -238,13 +242,21 @@ public class Employee implements Serializable {
         this.roles = roles;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append( "Employee{" +
                 "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
+                ", login='" + this.user.getLogin() + '\'' +
+                ", password='" + this.user.getPassword() + '\'' +
                 ", fio='" + fio + '\'' +
                 ", department='" + department + '\'' +
                 ", city='" + city + '\'' +

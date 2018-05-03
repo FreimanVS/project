@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="userInfo" uri="/userInfo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -71,6 +73,23 @@
             </form>
         </article>
         <article>
+            <h2>Управление ролями</h2>
+            <div style="color:red;text-align: center";>${noLogin}</div>
+            <form action="${pageContext.request.contextPath}/admin" method="POST">
+                <label for="login1">Login: </label>
+                <input id="login1" name="login" type="text" required="required" size="25" minlength="5" maxlength="15"/>
+
+                <label for="roles1">Roles: </label>
+                <select id="roles1" name="roles">
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                    <option value="user&admin">user & admin</option>
+                </select>
+                <button>Отправить</button>
+
+            </form>
+        </article>
+        <article>
             <h2>Tracking</h2>
             <p>
                 <form method="GET" action="${pageContext.request.contextPath}/tracking">
@@ -82,28 +101,6 @@
         </article>
         <article>
             <a href="${pageContext.request.contextPath}/tracking?db=true"><h2>Полная информация о tracking</h2></a>
-        </article>
-        <article>
-            <h2>SWAGGER</h2>
-            <p>
-                <a href="${pageContext.request.contextPath}/jsp/swagger.html">to a swagger page</a>
-            </p>
-        </article>
-        <article>
-            <h2>PAYMENTS</h2>
-            <p>
-                <a href="${pageContext.request.contextPath}/jsp/calculate.jsp">to a payment page</a>
-            </p>
-        </article>
-        <article>
-            <h2>COMPARE JERSEY TO SERVLET</h2>
-            <p>
-                <a href="${pageContext.request.contextPath}/compare">click to find out the result</a>
-            </p>
-        </article>
-        <article>
-            <h2>PERFORMANCE TABLE</h2>
-            <p class="allPerformance"></p>
         </article>
     </section>
 </main>

@@ -4,6 +4,8 @@ import com.freimanvs.company.entities.Company;
 import com.freimanvs.company.entities.Employee;
 import com.freimanvs.company.entities.Position;
 import com.freimanvs.company.entities.Role;
+import com.freimanvs.company.interceptors.InitDbInterceptor;
+import com.freimanvs.company.interceptors.bindings.Logging;
 import com.freimanvs.company.service.interfaces.EmployeeServicePersInterface;
 import com.freimanvs.company.service.interfaces.PositionServicePersInterface;
 import com.freimanvs.company.service.interfaces.RoleServicePersInterface;
@@ -12,6 +14,7 @@ import com.freimanvs.company.util.interfaces.FileManagerBean;
 
 import javax.ejb.*;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.nio.file.Path;
@@ -19,6 +22,7 @@ import java.util.List;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
+@Logging
 public class InitDataBase implements DbXMLBean {
 
 //    private static final Path XMLPATH = Paths.get("./company.xml");
@@ -43,6 +47,7 @@ public class InitDataBase implements DbXMLBean {
     @Inject
     private PositionServicePersInterface positionService;
 
+    @Interceptors(InitDbInterceptor.class)
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void xmlToDB(Path xmlpath) {
         //XML to DB
@@ -60,6 +65,7 @@ public class InitDataBase implements DbXMLBean {
         employees.forEach(em::merge);
     }
 
+    @Interceptors(InitDbInterceptor.class)
     public void dbToXml(Path xmlpath) {
         save(xmlpath);
 //        deleteAll();
@@ -71,20 +77,25 @@ public class InitDataBase implements DbXMLBean {
         em.createNativeQuery("CREATE SCHEMA IF NOT EXISTS company;").executeUpdate();
         em.createNativeQuery("USE company;").executeUpdate();
 
+        em.createNativeQuery("CREATE TABLE IF NOT EXISTS company.user (\n" +
+                "login VARCHAR(100) NOT NULL PRIMARY KEY,\n" +
+                "password VARCHAR(100) NOT NULL\n" +
+                ");").executeUpdate();
+
         em.createNativeQuery("CREATE TABLE IF NOT EXISTS company.employee (\n" +
-                    "                id BIGINT NOT NULL AUTO_INCREMENT,\n" +
-                    "                login VARCHAR(100) NOT NULL,\n" +
-                    "                password VARCHAR(100) NOT NULL,\n" +
-                    "                fio VARCHAR(100) NOT NULL,\n" +
-                    "                department VARCHAR(100) NOT NULL,\n" +
-                    "                city VARCHAR(100) NOT NULL,\n" +
-                    "                salary DOUBLE NOT NULL,\n" +
-                    "                phoneNumber VARCHAR(50) NOT NULL,\n" +
-                    "                email VARCHAR(100) NOT NULL,\n" +
-                    "                age INTEGER NOT NULL,\n" +
-                    "                PRIMARY KEY (id),\n" +
-                    "                CONSTRAINT uniqEmployee UNIQUE (login)\n" +
-                    "        );").executeUpdate();
+                "id BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                "login VARCHAR(100) NOT NULL,\n" +
+                "fio VARCHAR(100) NOT NULL,\n" +
+                "department VARCHAR(100) NOT NULL,\n" +
+                "city VARCHAR(100) NOT NULL,\n" +
+                "salary DOUBLE NOT NULL,\n" +
+                "phoneNumber VARCHAR(50) NOT NULL,\n" +
+                "email VARCHAR(100) NOT NULL,\n" +
+                "age INTEGER NOT NULL,\n" +
+                "PRIMARY KEY (id),\n" +
+                "CONSTRAINT uniqEmployee UNIQUE (login),\n" +
+                "CONSTRAINT fk_employee_login_user FOREIGN KEY (login) REFERENCES user(login)\n" +
+                ");").executeUpdate();
 
         em.createNativeQuery("CREATE TABLE IF NOT EXISTS company.role (\n" +
                     "                id BIGINT NOT NULL AUTO_INCREMENT,\n" +
@@ -181,6 +192,7 @@ public class InitDataBase implements DbXMLBean {
         em.createNativeQuery("DROP TABLE IF EXISTS company.role;").executeUpdate();
         em.createNativeQuery("DROP TABLE IF EXISTS company.analytics;").executeUpdate();
         em.createNativeQuery("DROP TABLE IF EXISTS company.performance;").executeUpdate();
+        em.createNativeQuery("DROP TABLE IF EXISTS company.user;").executeUpdate();
 
         em.createNativeQuery("DROP PROCEDURE IF EXISTS company.with_max_salary;").executeUpdate();
         em.createNativeQuery("DROP PROCEDURE IF EXISTS company.avg_salary;").executeUpdate();

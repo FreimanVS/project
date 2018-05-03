@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 <%@ taglib prefix="userInfo" uri="/userInfo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -23,7 +24,7 @@
             <h2>чат</h2>
             <p>
                 <div>
-                    <textarea id="messages" rows="20" cols="150" readonly="readonly" style="resize: none"></textarea>
+                    <textarea id="messages" rows="20" cols="120" readonly="readonly" style="resize: none"></textarea>
                 </div>
 
                 <form name="message" onclick="return false;">
