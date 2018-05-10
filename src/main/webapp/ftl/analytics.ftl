@@ -17,6 +17,22 @@
 <main>
     <section>
         <article>
+            <p>
+                <a href="${fw.contextPath}/report?report=analytics&format=pdf">
+                    <img src="http://www.devona.ru/upload/medialibrary/9a1/9a11a476e0fb4211ed50ebb03e591918.png"
+                         alt="pdf-download" style="width:40px;height:40px;border:0;">
+                </a>
+                <a href="${fw.contextPath}/mail?report=analytics&format=pdf">
+                    send pdf to email
+                </a>
+                <a href="${fw.contextPath}/report?report=analytics&format=xml">
+                    <img src="https://cdn0.iconfinder.com/data/icons/file-formats-flat-colorful-1/2048/1754_-_XML-512.png"
+                         alt="xml-download" style="width:40px;height:40px;border:0;">
+                </a>
+                <a href="${fw.contextPath}/mail?report=analytics&format=xml">
+                    send xml to email
+                </a>
+            </p>
             <h2>Analytics</h2>
             <p id="trackingdb"></p>
         </article>

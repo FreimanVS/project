@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employee" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0032d1e4-9c7f-492c-a823-1c9cea947221">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<parameter name="USER" class="java.lang.String">
+		<defaultValueExpression><![CDATA["guest"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM company.employee]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="login" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="login"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="fio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="department" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="department"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="city" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="city"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="salary" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="salary"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="phoneNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="phoneNumber"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<field name="age" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
+	<group name="id">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+	</group>
+	<group name="login">
+		<groupExpression><![CDATA[$F{login}]]></groupExpression>
+	</group>
+	<group name="fio">
+		<groupExpression><![CDATA[$F{fio}]]></groupExpression>
+	</group>
+	<group name="department">
+		<groupExpression><![CDATA[$F{department}]]></groupExpression>
+	</group>
+	<group name="city">
+		<groupExpression><![CDATA[$F{city}]]></groupExpression>
+	</group>
+	<group name="salary">
+		<groupExpression><![CDATA[$F{salary}]]></groupExpression>
+	</group>
+	<group name="phoneNumber">
+		<groupExpression><![CDATA[$F{phoneNumber}]]></groupExpression>
+	</group>
+	<group name="email">
+		<groupExpression><![CDATA[$F{email}]]></groupExpression>
+	</group>
+	<group name="age">
+		<groupExpression><![CDATA[$F{age}]]></groupExpression>
+	</group>
+	<title>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="180" y="0" width="200" height="46" uuid="ce38fd25-546f-4166-b949-306075640388"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="60" height="46" uuid="9ed8cf52-53b0-4ad8-8830-20fee71a9736"/>
+				<imageExpression><![CDATA["http://www.logologo.com/logos/tree-logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="-11" y="10" width="20" height="20" uuid="39e3494e-00d4-4445-9c6e-e52122165494"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="10" width="70" height="20" uuid="8b52c24c-5fe4-4aa7-9785-f7c1db83676a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[login]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="10" width="60" height="20" uuid="1e31ad2e-cfa0-4a1c-8b79-f055f2aa44d2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[FIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="10" width="60" height="20" uuid="8e3175c6-dc2e-4257-93fc-1cbc5050b7f3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="10" width="60" height="20" uuid="0699323e-7103-4251-82c5-37fa8f61c7e6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[city]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="10" width="50" height="20" uuid="b09b47fc-fddb-464a-bfd5-5897da1c1854"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[salary]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="10" width="70" height="20" uuid="172ea689-1710-4cab-9730-5e91eaa764fd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[phone number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="10" width="80" height="20" uuid="386765ad-dd73-40dc-89b2-0ed2585ebcc8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="540" y="10" width="35" height="20" uuid="8ec00742-4656-4d2e-ba1e-dd43f3b9dad6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[age]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="0" width="70" height="50" uuid="ba70d3b5-2c91-4032-b54e-ec47ea3e40c8"/>
+				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-10" y="0" width="20" height="50" uuid="35fecc74-ed08-40d7-85b6-5caae1ab0031"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="60" height="50" uuid="1634794d-23b9-4551-8c46-1ce5c0435682"/>
+				<textFieldExpression><![CDATA[$F{fio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="60" height="50" uuid="df8d9794-fbd7-4b83-9c1e-1b5aee16efd7"/>
+				<textFieldExpression><![CDATA[$F{department}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="60" height="50" uuid="fe16564e-2e49-4d6a-85b3-4b5ff90086ed"/>
+				<textFieldExpression><![CDATA[$F{city}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="0" width="50" height="50" uuid="2cd42599-b6c6-4118-bcc8-d39b74d983b4"/>
+				<textFieldExpression><![CDATA[$F{salary}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="70" height="50" uuid="407bb7c1-5044-45fa-a735-a0aa9d90903b"/>
+				<textFieldExpression><![CDATA[$F{phoneNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="80" height="50" uuid="54835acc-5780-424a-be74-b82fff811c08"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="0" width="35" height="50" uuid="a60a4b4e-8a63-432a-9b4c-b941c4390f96"/>
+				<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="0" width="100" height="20" uuid="5e2ac7ae-054c-487c-8bd6-f42d44858baf"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="0" width="100" height="20" uuid="64fafd98-33c6-403a-ab93-6e82cab74c28"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="353">
+			<textField pattern="HH:mm">
+				<reportElement x="280" y="330" width="100" height="20" uuid="eb83997a-310a-4b79-9ec0-7b9dd138aa80"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="180" y="330" width="100" height="20" uuid="4e1111b6-42c7-4181-a221-de8d92c8760b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="-20" y="20" width="590" height="290" uuid="56b49bce-2da8-4c62-8710-2a3613c1694b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset incrementType="Group" incrementGroup="login"/>
+					<categorySeries>
+						<seriesExpression><![CDATA["Salary"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{login}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{salary}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<componentElement>
+				<reportElement x="442" y="315" width="97" height="38" uuid="5df84afe-7370-463e-a8b0-80e42d7c5f23"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[new java.util.Date() + " " + $P{USER}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</lastPageFooter>
+</jasperReport>

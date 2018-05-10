@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="performance" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="85192209-b505-4c52-aac5-4e574137d248">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<parameter name="USER" class="java.lang.String">
+		<defaultValueExpression><![CDATA["guest"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM company.performance]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="performance"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="performance"/>
+	</field>
+	<field name="ms" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="ms"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="performance"/>
+	</field>
+	<group name="id">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+	</group>
+	<group name="name">
+		<groupExpression><![CDATA[$F{name}]]></groupExpression>
+	</group>
+	<group name="ms">
+		<groupExpression><![CDATA[$F{ms}]]></groupExpression>
+	</group>
+	<title>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="180" y="0" width="200" height="46" uuid="a2900b8b-e279-4d98-902a-31f749bfdac8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="60" height="46" uuid="c2996ca3-38c8-4a55-8ce1-c29bfdbb0063"/>
+				<imageExpression><![CDATA["http://www.logologo.com/logos/tree-logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="7" width="170" height="20" uuid="e3d13aee-e17e-4faa-9025-62252552318b"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="10" width="190" height="20" uuid="494e308a-7d4f-4121-ac6e-1d84fe1a9d39"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="10" width="190" height="20" uuid="09296724-2e45-4650-b791-c71b974deb10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[ms]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="74" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="10" width="40" height="50" uuid="c57200c9-844f-4f12-b80b-73863472f197"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="12" width="470" height="50" uuid="16950e50-b91c-4177-97ba-cb3529f8c53f"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="10" width="40" height="50" uuid="16dd717d-c79c-46bc-af45-c1ee856b4759"/>
+				<textFieldExpression><![CDATA[$F{ms}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="0" width="100" height="20" uuid="a9c4480e-9209-4304-94ae-4f7131a2fc67"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="20" uuid="1a62bedd-6dd7-44ab-b6f3-8cfbfdb53a0e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="328">
+			<textField pattern="HH:mm">
+				<reportElement x="280" y="300" width="100" height="20" uuid="dbeffa54-7f47-416c-98c0-69d56db81c56"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="180" y="300" width="100" height="20" uuid="745d2a85-ffe6-4164-a2c1-3a93b170bd53"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<xyLineChart>
+				<chart evaluationTime="Report">
+					<reportElement x="-20" y="10" width="590" height="280" uuid="80d7d833-e16e-4194-b01e-0c7af6651bad"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<xyDataset>
+					<dataset incrementType="Group" incrementGroup="name"/>
+					<xySeries>
+						<seriesExpression><![CDATA["performance"]]></seriesExpression>
+						<xValueExpression><![CDATA[$F{id}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{ms}]]></yValueExpression>
+					</xySeries>
+				</xyDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</linePlot>
+			</xyLineChart>
+			<componentElement>
+				<reportElement x="447" y="290" width="97" height="37" uuid="e8475743-0c26-43cd-9f23-1584511bd1ad"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[new java.util.Date() + " " + $P{USER}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</lastPageFooter>
+</jasperReport>

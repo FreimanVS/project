@@ -351,6 +351,51 @@
       <artifactId>simpleclient_servlet</artifactId>
       <version>${prometheus.client.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports</artifactId>
+      <version>6.5.1</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>commons-logging</artifactId>
+          <groupId>commons-logging</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
+      <version>1.6.1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.barcode4j</groupId>
+      <artifactId>barcode4j</artifactId>
+      <version>2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-bridge</artifactId>
+      <version>1.8</version>
+    </dependency>
+
+    <!--Also, if you check JasperReports' pom.xml-->
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports-fonts</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/xmlgraphics-commons -->
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>xmlgraphics-commons</artifactId>
+      <version>1.5</version>
+    </dependency>
+
+
+
   </dependencies>
 
   <build>
@@ -420,42 +465,42 @@
         <!--</configuration>-->
       <!--</plugin>-->
 
-      <!--<plugin>-->
-        <!--<groupId>org.codehaus.mojo</groupId>-->
-        <!--<artifactId>aspectj-maven-plugin</artifactId>-->
-        <!--<version>1.7</version>-->
-        <!--<configuration>-->
-          <!--<complianceLevel>1.8</complianceLevel>-->
-          <!--<source>1.8</source>-->
-          <!--<target>1.8</target>-->
-          <!--<showWeaveInfo>true</showWeaveInfo>-->
-          <!--<verbose>true</verbose>-->
-          <!--<Xlint>ignore</Xlint>-->
-          <!--<encoding>UTF-8</encoding>-->
-          <!--<sources>-->
-            <!--<source>-->
-              <!--<basedir>src/main/java</basedir>-->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
+        <version>1.7</version>
+        <configuration>
+          <complianceLevel>1.8</complianceLevel>
+          <source>1.8</source>
+          <target>1.8</target>
+          <showWeaveInfo>true</showWeaveInfo>
+          <verbose>true</verbose>
+          <Xlint>ignore</Xlint>
+          <encoding>UTF-8</encoding>
+          <sources>
+            <source>
+              <basedir>src/main/java</basedir>
               <!--<includes>-->
                 <!--<include>**/SomeClass.java</include>-->
                 <!--<include>**/SomeAspect.aj</include>-->
               <!--</includes>-->
-              <!--<excludes>-->
-                <!--<exclude>**/*.java</exclude>-->
-              <!--</excludes>-->
-            <!--</source>-->
-          <!--</sources>-->
-        <!--</configuration>-->
-        <!--<executions>-->
-          <!--<execution>-->
-            <!--<goals>-->
-              <!--&lt;!&ndash; use this goal to weave all your main classes &ndash;&gt;-->
-              <!--<goal>compile</goal>-->
-              <!--&lt;!&ndash; use this goal to weave all your test classes &ndash;&gt;-->
-              <!--<goal>test-compile</goal>-->
-            <!--</goals>-->
-          <!--</execution>-->
-        <!--</executions>-->
-      <!--</plugin>-->
+              <excludes>
+                <exclude>**/*.xsd</exclude>
+              </excludes>
+            </source>
+          </sources>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <!-- use this goal to weave all your main classes -->
+              <goal>compile</goal>
+              <!-- use this goal to weave all your test classes -->
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.0.0</version>

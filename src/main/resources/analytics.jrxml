@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="analytics" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="9f0bc781-729b-4eb8-a9b7-ee105679e83d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<parameter name="USER" class="java.lang.String">
+		<defaultValueExpression><![CDATA["guest"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT * from company.analytics]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="marker_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="marker_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="jsp_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jsp_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="ip" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ip"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="browser_info" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="browser_info"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="client_time" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="client_time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="server_time" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="server_time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="login" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="login"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="cookie" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cookie"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<field name="prev_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="prev_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="analytics"/>
+	</field>
+	<group name="id">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+	</group>
+	<group name="marker_name">
+		<groupExpression><![CDATA[$F{marker_name}]]></groupExpression>
+	</group>
+	<group name="jsp_name">
+		<groupExpression><![CDATA[$F{jsp_name}]]></groupExpression>
+	</group>
+	<group name="ip">
+		<groupExpression><![CDATA[$F{ip}]]></groupExpression>
+	</group>
+	<group name="browser_info">
+		<groupExpression><![CDATA[$F{browser_info}]]></groupExpression>
+	</group>
+	<group name="client_time">
+		<groupExpression><![CDATA[$F{client_time}]]></groupExpression>
+	</group>
+	<group name="server_time">
+		<groupExpression><![CDATA[$F{server_time}]]></groupExpression>
+	</group>
+	<group name="login">
+		<groupExpression><![CDATA[$F{login}]]></groupExpression>
+	</group>
+	<group name="cookie">
+		<groupExpression><![CDATA[$F{cookie}]]></groupExpression>
+	</group>
+	<group name="prev_id">
+		<groupExpression><![CDATA[$F{prev_id}]]></groupExpression>
+	</group>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="ContainerHeight" x="180" y="0" width="200" height="46" uuid="09a9564b-0178-4281-ac23-34955241913a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Analytics]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="60" height="46" uuid="a4c8e002-17d1-4d23-b0d3-30080bd477eb"/>
+				<imageExpression><![CDATA["http://www.logologo.com/logos/tree-logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="-10" y="11" width="10" height="27" uuid="b92515f3-b621-48e1-8a69-e15b12da2758"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="11" width="70" height="30" uuid="43c3b7a4-f49b-40ae-8422-910615dbe02a"/>
+				<text><![CDATA[marker_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="10" width="60" height="30" uuid="de18aa6d-92e4-4547-8cba-b20eaf347713"/>
+				<text><![CDATA[jsp_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="9" width="90" height="30" uuid="1a81f5a1-c44c-480a-8412-5dacd00f5824"/>
+				<text><![CDATA[ip]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="11" width="90" height="30" uuid="541fa9dc-3cd8-443e-996d-6b1e58991630"/>
+				<text><![CDATA[client_time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="10" width="86" height="30" uuid="0b1fb08a-967f-4365-9ecd-aca94e3e5521"/>
+				<text><![CDATA[server_time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="13" width="70" height="26" uuid="c9fda936-fbcc-4302-94da-42d20f749e13"/>
+				<text><![CDATA[login]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="11" width="55" height="30" uuid="d46432de-b81b-43b0-b1f3-9f563e72263d"/>
+				<text><![CDATA[prev id]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="41" width="595" height="4" uuid="f1206d51-e799-4d28-aa72-659a00d16ee8"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="117" splitType="Stretch">
+			<textField>
+				<reportElement x="-11" y="0" width="20" height="30" uuid="c0c047b2-929b-4150-9f8d-8eaae37b7e2e"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="0" width="70" height="30" uuid="49bf288c-5a80-400f-a907-df3dcf676c47"/>
+				<textFieldExpression><![CDATA[$F{marker_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="60" height="30" uuid="9613d764-d361-47ec-b945-5430fba2f3b8"/>
+				<textFieldExpression><![CDATA[$F{jsp_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="90" height="30" uuid="61e2873a-05f7-44e4-a6e9-1ec9fdaa361a"/>
+				<textFieldExpression><![CDATA[$F{ip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="40" width="485" height="30" uuid="a8649b96-e9c5-4d3e-890d-aebe3e9ce899"/>
+				<textFieldExpression><![CDATA[$F{browser_info}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="90" height="30" uuid="edb4af4e-fde5-4678-94e5-896ffbdeac07"/>
+				<textFieldExpression><![CDATA[$F{client_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="86" height="30" uuid="3501aca7-ac90-4f2a-8afe-bca7a8ca8a1d"/>
+				<textFieldExpression><![CDATA[$F{server_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="70" height="30" uuid="1edd4568-d010-4f13-8ff7-c9c97012e940"/>
+				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="70" width="495" height="30" uuid="33a36e1d-28b7-4453-b2c1-c43ea541415d"/>
+				<textFieldExpression><![CDATA[$F{cookie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="520" y="0" width="55" height="30" uuid="a37ddfa8-dd59-4c0a-84d1-7e0a25a10535"/>
+				<textFieldExpression><![CDATA[$F{prev_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-10" y="40" width="90" height="30" uuid="9e80254d-21b5-445c-9042-0dfbee1c9ed3"/>
+				<text><![CDATA[browser info:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="70" width="90" height="30" uuid="e32f7151-402d-481e-806f-367c2bb0e75e"/>
+				<text><![CDATA[cookie:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="110" width="595" height="4" uuid="d41f6ddf-f244-426f-83a1-cbe3041ab6c5"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25">
+			<textField>
+				<reportElement x="180" y="0" width="100" height="20" uuid="52695f3b-9b94-40bf-a6ff-adda537b38f7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="0" width="100" height="20" uuid="749e3fdb-8bbb-4c7d-b84f-f5d303558063"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="400">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="180" y="370" width="100" height="30" uuid="906b305f-6fea-4d8b-b9e4-769ebc9129b2"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="280" y="370" width="100" height="30" uuid="a0cc47f6-e0fe-4b9d-9ae0-3e1dc8f5ab0c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<lineChart>
+				<chart evaluationTime="Report">
+					<reportElement x="-20" y="10" width="595" height="350" uuid="d4e6c570-032c-4191-8842-958da718e380"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset incrementType="Group" incrementGroup="login"/>
+					<categorySeries>
+						<seriesExpression><![CDATA["all pages"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{login}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{id}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<componentElement>
+				<reportElement x="430" y="360" width="97" height="40" uuid="3bc54911-6c65-42ef-a6e7-212cff155bad"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[new java.util.Date() + " " + $P{USER}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</lastPageFooter>
+</jasperReport>

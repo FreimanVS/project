@@ -34,7 +34,8 @@ public class AnalitycServlet extends HttpServlet {
         String browser_info = req.getHeader("User-Agent");
         Timestamp client_time = new Timestamp(time);
         Timestamp server_time = Timestamp.from(Calendar.getInstance().toInstant());
-        String login = req.getSession().getAttribute("login") == null ? null : (String) req.getSession().getAttribute("login");
+        String login = req.getUserPrincipal() != null ? req.getUserPrincipal().getName() : "";
+//                req.getSession().getAttribute("login") == null ? null : (String) req.getSession().getAttribute("login");
 
         String cookie = analyticsBean.cookiesToString(req.getCookies());
 

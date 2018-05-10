@@ -5,9 +5,7 @@ import com.freimanvs.company.rest.clients.beans.interfaces.CompareServletToJerse
 import com.freimanvs.company.rest.clients.beans.qualifiers.CompareEnum;
 import com.freimanvs.company.rest.clients.beans.qualifiers.CompareQualifier;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Default;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -51,6 +49,7 @@ public class CompareServletToJerseyBeanImpl implements CompareServletToJerseyBea
         }
         return sb.toString();
     }
+
 
     private String jersey(String host, String port, String contextPath) throws IOException {
         final URL url = new URL("http://" + host + ":" + port + contextPath + "/api/v1/employees");

@@ -21,7 +21,7 @@ public class WebSocketLogger {
                 session = (Session) param;
         }
 
-        System.out.println("New session is opened: " + session.getId());
+        LOGGER.info("New session is opened: " + session.getId());
         return pjp.proceed();
     }
 

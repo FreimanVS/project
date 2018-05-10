@@ -273,12 +273,29 @@
       <property name="ClobberStreamingResults" value="false"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="MySQLPool" jndi-name="jdbc/MySQLDS"></jdbc-resource>
+      <mail-resource debug="true" host="smtp.gmail.com" from="ii5557261@gmail.com" user="ii5557261" jndi-name="mail/Gmail">
+          <property name="mail.from" value="ii5557261@gmail.com"></property>
+          <property name="mail-smtp-host" value="smtp.gmail.com"></property>
+          <property name="mail-smtp-port" value="587"></property>
+          <property name="mail-smtp-starttls-enable" value="true"></property>
+          <property name="mail-smtp-auth" value="true"></property>
+          <property name="mail-smtp-password" value="Testii5557261"></property>
+      </mail-resource>
+      <mail-resource host="imap.mail.ru" from="ii5557261@mail.ru" user="ii5557261" jndi-name="mail/MailRu">
+          <property name="mail-imap-ssl-enable" value="true"></property>
+          <property name="mail-store-protocol" value="imaps"></property>
+          <property name="mail-imap-password" value="Test5557"></property>
+          <property name="mail-imap-host" value="imap.mail.ru"></property>
+          <property name="mail-imap-login" value="ii5557261@mail.ru"></property>
+      </mail-resource>
   </resources>
   <servers>
     <server name="server" config-ref="server-config">
       <resource-ref ref="jdbc/__TimerPool" />
       <resource-ref ref="jdbc/__default" />
       <resource-ref ref="jdbc/MySQLDS"></resource-ref>
+      <resource-ref ref="mail/Gmail"></resource-ref>
+      <resource-ref ref="mail/MailRu"></resource-ref>
     </server>
   </servers>
   <nodes>
