@@ -26,7 +26,7 @@ public class JsoupServerWebSocketClient {
         Session session = null;
         try {
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            session = container.connectToServer(JsoupServerWebSocketClient.class, URI.create("ws://localhost:8080/jsoupserver"));
+            session = container.connectToServer(JsoupServerWebSocketClient.class, URI.create("ws://localhost:8080/company/jsoupserver"));
             wait4TerminateSignal();
         } finally{
             if(session != null){

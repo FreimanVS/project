@@ -8,6 +8,9 @@ MAINTAINER VIACHESLAV
 ENV JAVA_OPTS -Dfile.encoding=UTF8 -Duser.language=ru -Duser.region=RU -Djavax.xml.parsers.DocumentBuilderFactory=com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl -Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl
 ENV SLEEP_TIME_JAVA 3000
 ENV MARKER_NAME testJava
+ENV JAVA_BASE_URI http://192.168.99.100
+ENV JAVA_PORT 8081
+ENV JAVA_CONTEXT_PATH /company
 
 #COPY ./target/company /usr/local/tomcat/webapps/company
 #COPY ./dockerfiles/tomcat /usr/local/tomcat

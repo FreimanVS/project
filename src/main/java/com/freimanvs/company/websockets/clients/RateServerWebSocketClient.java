@@ -26,7 +26,7 @@ public class RateServerWebSocketClient {
         Session session = null;
         try {
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            session = container.connectToServer(RateServerWebSocketClient.class, URI.create("ws://localhost:8080/rateserver"));
+            session = container.connectToServer(RateServerWebSocketClient.class, URI.create("ws://localhost:8080/company/rateserver"));
             wait4TerminateSignal();
         } finally{
             if(session != null){

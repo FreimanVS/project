@@ -26,7 +26,7 @@ public class TrackingServerWebSocketClient {
         Session session = null;
         try {
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            session = container.connectToServer(TrackingServerWebSocketClient.class, URI.create("ws://localhost:8080/trackingserver"));
+            session = container.connectToServer(TrackingServerWebSocketClient.class, URI.create("ws://localhost:8080/company/trackingserver"));
             wait4TerminateSignal();
         } finally{
             if(session != null){
